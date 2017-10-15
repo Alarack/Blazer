@@ -1,0 +1,61 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class PlayerAbilityManager : AbilityManager {
+
+
+    private List<PlayerAbilityContainer> playerAbilities = new List<PlayerAbilityContainer>();
+
+
+
+    public override void Initialize(Entity source) {
+        base.Initialize(source);
+
+
+        for (int i = 0; i < abilities.Count; i++) {
+            PlayerAbilityContainer newAbility = new PlayerAbilityContainer(abilities[i], (i + 1));
+            playerAbilities.Add(newAbility);
+        }
+
+    }
+
+
+
+    private void Update() {
+
+        for (int i = 0; i < playerAbilities.Count; i++) {
+            if (Input.GetButtonDown("Fire" + (i + 1))) {
+                ActivatePlayerAbility(i + 1);
+            }
+        }
+    }
+
+
+
+    public void ActivatePlayerAbility(int abilityKey) {
+        for (int i = 0; i < playerAbilities.Count; i++) {
+            if(playerAbilities[i].abilityKey == abilityKey) {
+                playerAbilities[i].ability.Activate();
+            }
+        }
+    }
+
+
+
+    [System.Serializable]
+    public class PlayerAbilityContainer {
+        public SpecialAbility ability;
+        public int abilityKey;
+
+        public PlayerAbilityContainer(SpecialAbility ability, int abilityKey) {
+            this.ability = ability;
+            this.abilityKey = abilityKey;
+        }
+
+    }
+
+
+
+}
