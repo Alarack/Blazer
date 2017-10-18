@@ -11,7 +11,7 @@ public class Constants {
         MoveSpeed = 3,
         JumpForce = 4,
         CritChance = 5,
-        CritDamage = 6,
+        CritMultiplier = 6,
         AttackSpeed = 7,
     }
 
@@ -39,6 +39,7 @@ public class Constants {
     public enum GameEvent {
         None = 0,
         AbilityActivated = 1,
+        StatChanged = 2,
 
     }
 

@@ -7,23 +7,37 @@ using UnityEngine;
 public class SpecialAbilityData : ScriptableObject {
 
     public string abilityName;
-    public List<Constants.SpecialAbilityEffectType> effects = new List<Constants.SpecialAbilityEffectType>();
+    public List<Constants.SpecialAbilityEffectType> effectTypes = new List<Constants.SpecialAbilityEffectType>();
+    public Constants.SpecialAbilityRecoveryType recoveryType;
 
-    public SpecialAbilityRecovery recoveryMethod;
+    public AbilityRecoveryManager recoveryManager = new AbilityRecoveryManager();
 
-    //public List<Effect> testEffects = new List<Effect>();
     public EffectHolder effectHolder = new EffectHolder();
 
+
+    public List<SpecialAbilityRecovery> GetAllRecoveryMechanics() {
+        List<SpecialAbilityRecovery> results = new List<SpecialAbilityRecovery>();
+
+        for(int i = 0; i < recoveryManager.recoveryTypes.Count; i++) {
+            results.Add(recoveryManager.GetRecoveryMethodByType(recoveryManager.recoveryTypes[i]));
+        }
+
+        return results;
+    }
+
+    public SpecialAbilityRecovery GetRecoveryMechanic() {
+
+        SpecialAbilityRecovery result = ObjectCopier.Clone(recoveryManager.GetRecoveryMethodByType(recoveryType)) as SpecialAbilityRecovery;
+
+        return result;
+    }
 
 
     public List<Effect> GetAllEffects() {
         List<Effect> results = new List<Effect>();
-
-        for(int i = 0; i < effects.Count; i++) {
-            results.AddRange(effectHolder.GetEffectSet(effects[i]).effects);
+        for(int i = 0; i < effectTypes.Count; i++) {
+            results.AddRange(effectHolder.GetEffectSet(effectTypes[i]).effects);
         }
-
-
         return results;
     }
 
@@ -51,8 +65,6 @@ public class SpecialAbilityData : ScriptableObject {
             }
         }
     }
-
-
 
     [System.Serializable]
     public class EffectSet {

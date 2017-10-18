@@ -5,9 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Entity))]
 public abstract class EntityMovement : MonoBehaviour {
 
-    [Header("Basic Movement Stats")]
-    public float maxSpeed;
-    public float jumpForce;
+    //[Header("Basic Movement Stats")]
+    protected float maxSpeed;
+    protected float jumpForce;
 
     [Header("GroundCheck")]
     public Transform groundCheck;
@@ -26,7 +26,11 @@ public abstract class EntityMovement : MonoBehaviour {
         //mySprite = GetComponentInChildren<SpriteRenderer>();
     }
 
+    public void Initialize() {
+        maxSpeed = owner.stats.GetStatCurrentValue(Constants.EntityStat.MoveSpeed);
+        jumpForce = owner.stats.GetStatCurrentValue(Constants.EntityStat.JumpForce);
 
+    }
     
 
     protected virtual void FixedUpdate() {

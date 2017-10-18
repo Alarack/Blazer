@@ -18,11 +18,17 @@ public class AbilityManager : MonoBehaviour {
     public virtual void Initialize(Entity source) {
         this.source = source;
 
-
         for(int i = 0; i < abilityData.Count; i++) {
             SpecialAbility newAbility = new SpecialAbility();
             newAbility.Initialize(source, abilityData[i]);
             abilities.Add(newAbility);
+        }
+
+    }
+
+    protected virtual void Update() {
+        for(int i = 0; i < abilities.Count; i++) {
+            abilities[i].ManagedUpdate();
         }
 
     }

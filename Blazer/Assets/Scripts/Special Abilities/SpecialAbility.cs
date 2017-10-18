@@ -7,7 +7,8 @@ public class SpecialAbility {
 
     public string abilityName;
     public Entity source;
-    public SpecialAbilityRecovery recoveryMethod;
+    //public List<SpecialAbilityRecovery> recoveryMethods = new List<SpecialAbilityRecovery>();
+    protected SpecialAbilityRecovery recoveryMethod;
 
     public List<Effect> effects = new List<Effect>();
 
@@ -26,24 +27,46 @@ public class SpecialAbility {
 
         effects = abilitydata.GetAllEffects();
 
-        for (int i = 0; i < effects.Count; i++) {
-            effects[i].Initialize(source, this);
-        }
-        
+        recoveryMethod = abilitydata.GetRecoveryMechanic();
 
+        if(recoveryMethod != null) {
+            recoveryMethod.Initialize(this);
+            //Debug.Log(recoveryMethod.recoveryType.ToString());
+        }
+
+
+
+        for (int i = 0; i < effects.Count; i++) {
+            effects[i].Initialize(this);
+        }
     }
 
 
 
     public virtual void Activate() {
-        //if (!recoveryMethod.Ready)
-        //    return;
+        if (!recoveryMethod.Ready)
+            return;
 
         //Debug.Log(abilityName + " has been activated");
 
         for (int i = 0; i < effects.Count; i++) {
             effects[i].Apply();
         }
+
+        if(recoveryMethod != null) {
+            recoveryMethod.Trigger();
+        }
+
+    }
+
+    public virtual void ManagedUpdate() {
+
+        if(recoveryMethod != null)
+            recoveryMethod.ManagedUpdate();
+
+        //for(int i = 0; i < recoveryMethods.Count; i++) {
+        //    recoveryMethods[i].ManagedUpdate();
+        //}
 
     }
 

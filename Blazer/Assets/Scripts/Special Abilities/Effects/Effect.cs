@@ -7,12 +7,12 @@ public class Effect  {
 
     public Constants.SpecialAbilityEffectType effectType;
 
-    protected Entity source;
+    [System.NonSerialized]
     protected SpecialAbility parentAbility;
 
 
-    public virtual void Initialize(Entity source, SpecialAbility parentAbility) {
-        this.source = source;
+
+    public virtual void Initialize(SpecialAbility parentAbility) {
         this.parentAbility = parentAbility;
     }
 

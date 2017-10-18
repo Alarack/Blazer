@@ -23,12 +23,18 @@ public class SpecialAbilityDataEditor : Editor {
 
         EditorGUILayout.Separator();
 
-        _abilityData.effects = EditorHelper.DrawList("Effects", _abilityData.effects, true, Constants.SpecialAbilityEffectType.None, true, DrawSpecialAbilityTypes);
+        _abilityData.recoveryType = EditorHelper.EnumPopup("Recvery Type", _abilityData.recoveryType);
+
+        DrawRecoveryMethod(_abilityData.recoveryManager, _abilityData.recoveryType);
 
         EditorGUILayout.Separator();
 
-        for (int i = 0; i < _abilityData.effects.Count; i++) {
-            ShowEffectOfType(_abilityData.effects[i], _abilityData.effectHolder);
+        _abilityData.effectTypes = EditorHelper.DrawList("Effects", _abilityData.effectTypes, true, Constants.SpecialAbilityEffectType.None, true, DrawSpecialAbilityTypes);
+
+        EditorGUILayout.Separator();
+
+        for (int i = 0; i < _abilityData.effectTypes.Count; i++) {
+            ShowEffectOfType(_abilityData.effectTypes[i], _abilityData.effectHolder);
         }
 
 
@@ -72,6 +78,17 @@ public class SpecialAbilityDataEditor : Editor {
         if (entry is EffectRayCastAttack) {
             EffectRayCastAttack rayAttack = entry as EffectRayCastAttack;
             rayAttack.effectType = Constants.SpecialAbilityEffectType.RayCastAttack;
+
+            rayAttack.baseDamage = EditorGUILayout.IntField("Base Damage", rayAttack.baseDamage);
+            rayAttack.burstAttack = EditorGUILayout.Toggle("Burst?", rayAttack.burstAttack);
+            EditorGUILayout.Separator();
+
+            if (rayAttack.burstAttack) {
+                rayAttack.burstInterval = EditorGUILayout.FloatField("Delay between shots", rayAttack.burstInterval);
+                rayAttack.burstNumber = EditorGUILayout.IntField("Number of shots", rayAttack.burstNumber);
+            }
+
+            EditorGUILayout.Separator();
             rayAttack.fireEffectName = EditorGUILayout.TextField("Fire Effect Name", rayAttack.fireEffectName);
             rayAttack.impactEffectName = EditorGUILayout.TextField("Impact Effect Name", rayAttack.impactEffectName);
             rayAttack.targetingMethod = EditorHelper.EnumPopup("Targeting Method", rayAttack.targetingMethod);
@@ -83,6 +100,25 @@ public class SpecialAbilityDataEditor : Editor {
 
 
         return entry;
+    }
+
+
+    private void DrawRecoveryMethod(AbilityRecoveryManager entry, Constants.SpecialAbilityRecoveryType recoveryType) {
+        switch (recoveryType) {
+            case Constants.SpecialAbilityRecoveryType.Timed:
+                entry.recoveryCooldown.cooldown = EditorGUILayout.FloatField("Cooldown", entry.recoveryCooldown.cooldown);
+                entry.recoveryCooldown.recoveryType = Constants.SpecialAbilityRecoveryType.Timed;
+                break;
+
+
+        }
+
+
+
+        //if (entry is RecoveryCooldown) {
+        //    RecoveryCooldown cooldown = entry as RecoveryCooldown;
+        //    cooldown.cooldown = EditorGUILayout.FloatField("Cooldown", cooldown.cooldown);
+        //}
     }
 
 

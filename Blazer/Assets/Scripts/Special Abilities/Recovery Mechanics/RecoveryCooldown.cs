@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class RecoveryCooldown : SpecialAbilityRecovery {
 
     public float cooldown;
@@ -9,7 +10,7 @@ public class RecoveryCooldown : SpecialAbilityRecovery {
     private float _timer;
 
     public override void Recover() {
-        base.Recover();
+        //base.Recover();
 
         if (!Ready) {
             IncrementTimer();
@@ -20,6 +21,8 @@ public class RecoveryCooldown : SpecialAbilityRecovery {
     private void IncrementTimer() {
         if (_timer < cooldown) {
             _timer += Time.deltaTime;
+
+            //Debug.Log("an ability: " + parentAbility.abilityName + " has a cooldown actively running at: " + _timer + " seconds");
         }
     }
 

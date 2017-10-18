@@ -23,7 +23,9 @@ public class PlayerAbilityManager : AbilityManager {
 
 
 
-    private void Update() {
+    protected override void Update() {
+        base.Update();
+
 
         for (int i = 0; i < playerAbilities.Count; i++) {
             if (Input.GetButtonDown("Fire" + (i + 1))) {

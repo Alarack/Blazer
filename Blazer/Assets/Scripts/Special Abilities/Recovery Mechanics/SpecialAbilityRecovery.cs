@@ -3,14 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class SpecialAbilityRecovery {
+public abstract class SpecialAbilityRecovery {
 
     public Constants.SpecialAbilityRecoveryType recoveryType;
     public bool Ready { get; protected set; }
 
+    [System.NonSerialized]
+    protected SpecialAbility parentAbility;
 
-    public virtual void Recover() {
+    public virtual void Initialize(SpecialAbility parentAbility) {
+       this.parentAbility = parentAbility;
+        Ready = true;
+    }
 
+
+    public virtual void ManagedUpdate() {
+
+        switch (recoveryType) {
+            case Constants.SpecialAbilityRecoveryType.Timed:
+                Recover();
+                break;
+
+        }
+
+    }
+
+    public abstract void Recover();
+
+    
+
+    public virtual void Trigger() {
+        Ready = false;
     }
 
 

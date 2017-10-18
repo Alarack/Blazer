@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class EffectRayCastAttack : Effect {
+public class EffectRayCastAttack : EffectAttack {
 
     public enum TargetingMethod {
         None = 0,
@@ -13,33 +13,51 @@ public class EffectRayCastAttack : Effect {
 
     public TargetingMethod targetingMethod = TargetingMethod.StraightLeftRight;
     public LayerMask layerMask;
-    public string impactEffectName;
-    public string fireEffectName;
+
 
 
     private Vector2 shootDirection;
-    private Vector2 shotOrigin;
+
 
     public override void Apply() {
         base.Apply();
 
-        TryShootRay();
+        if (burstAttack) {
+            parentAbility.source.StartCoroutine(BurstFire(burstInterval, burstNumber));
+        }
+        else {
+            Fire();
+        }
+
+
+        //TryShootRay();
     }
 
+    protected override IEnumerator BurstFire(float delay, int number) {
 
+        for(int i = 0; i < number; i++) {
+            TryShootRay();
+            yield return new WaitForSeconds(delay);
+        }
+
+    }
+
+    protected override void Fire() {
+        TryShootRay();
+    }
 
 
     private void ConfigureRay() {
 
         switch (targetingMethod) {
             case TargetingMethod.StraightLeftRight:
-                if (source.Facing == Constants.EntityFacing.Left) {
+                if (parentAbility.source.Facing == Constants.EntityFacing.Left) {
                     shootDirection = Vector2.left;
-                    shotOrigin = source.leftShotOrigin.position;
+                    shotOrigin = parentAbility.source.leftShotOrigin.position;
                 }
                 else {
                     shootDirection = Vector2.right;
-                    shotOrigin = source.rightShotOrigin.position;
+                    shotOrigin = parentAbility.source.rightShotOrigin.position;
                 }
                 break;
         }
@@ -68,9 +86,11 @@ public class EffectRayCastAttack : Effect {
 
             GameObject hitPrefab = Resources.Load(impactEffectName) as GameObject;
 
-            GameObject hitEffect = VisualEffectManager.CreateVisualEffect(hitPrefab, hit.point, rot); //Instantiate(hitPrefab, hit.point, rot) as GameObject;
+            /*GameObject hitEffect = */VisualEffectManager.CreateVisualEffect(hitPrefab, hit.point, rot); //Instantiate(hitPrefab, hit.point, rot) as GameObject;
 
             hit.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(-rayDir * 150f);
+
+            Debug.Log(parentAbility.abilityName + " deals " + (baseDamage + parentAbility.source.stats.GetStatCurrentValue(Constants.EntityStat.BaseDamage) + " points of damage"));
 
         }
 
