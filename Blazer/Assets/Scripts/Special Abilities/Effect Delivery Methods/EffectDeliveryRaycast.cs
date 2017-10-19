@@ -39,6 +39,10 @@ public class EffectDeliveryRaycast : EffectDeliveryMethod {
 
     private void ConfigureRay() {
 
+        if (range == 0)
+            range = Mathf.Infinity;
+
+
         switch (targetingMethod) {
             case TargetingMethod.StraightLeftRight:
                 if (parentAbility.source.Facing == Constants.EntityFacing.Left) {

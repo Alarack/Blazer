@@ -54,7 +54,7 @@ public class SpecialAbilityData : ScriptableObject {
     [System.Serializable]
     public class EffectHolder {
 
-        public List<EffectRayCastAttack> rayCastAttacks = new List<EffectRayCastAttack>();
+        public List<EffectAttack> attacks = new List<EffectAttack>();
 
 
 
@@ -62,7 +62,7 @@ public class SpecialAbilityData : ScriptableObject {
         public EffectSet GetEffectSet(Constants.SpecialAbilityEffectType effectType) {
             switch (effectType) {
                 case Constants.SpecialAbilityEffectType.AttackEffect:
-                    EffectSet raycastAttacks = new EffectSet(effectType, rayCastAttacks.ConvertAll<Effect>(b => (Effect)b));
+                    EffectSet raycastAttacks = new EffectSet(effectType, attacks.ConvertAll<Effect>(b => (Effect)b));
 
                     return raycastAttacks;
 

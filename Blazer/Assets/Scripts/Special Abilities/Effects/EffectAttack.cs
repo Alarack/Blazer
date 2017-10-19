@@ -16,7 +16,7 @@ public class EffectAttack : Effect {
 
     public string impactEffectName;
     public string fireEffectName;
-    public float range;
+    //public float range;
 
     public bool penetrate;
     public int numPenetrations;

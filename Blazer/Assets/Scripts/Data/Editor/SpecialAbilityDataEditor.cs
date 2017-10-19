@@ -63,7 +63,7 @@ public class SpecialAbilityDataEditor : Editor {
             case Constants.SpecialAbilityEffectType.AttackEffect:
                 EditorGUILayout.Separator();
 
-                effects.rayCastAttacks = EditorHelper.DrawExtendedList("RayCast Attacks", effects.rayCastAttacks, "Raycast", DrawEffectList);
+                effects.attacks = EditorHelper.DrawExtendedList("Attacks", effects.attacks, "Attack", DrawEffectList);
 
                 break;
 
@@ -113,7 +113,7 @@ public class SpecialAbilityDataEditor : Editor {
             }
             EditorGUILayout.Separator();
 
-            attackEffect.range = EditorGUILayout.FloatField("Max Range", attackEffect.range);
+            //attackEffect.range = EditorGUILayout.FloatField("Max Range", attackEffect.range);
             attackEffect.burstAttack = EditorGUILayout.Toggle("Burst?", attackEffect.burstAttack);
             EditorGUILayout.Separator();
 
@@ -124,9 +124,9 @@ public class SpecialAbilityDataEditor : Editor {
 
             EditorGUILayout.Separator();
 
-            attackEffect.penetrate = EditorGUILayout.Toggle("Penetrating", attackEffect.penetrate);
+            attackEffect.penetrate = EditorGUILayout.Toggle("Penetrating?", attackEffect.penetrate);
             if (attackEffect.penetrate) {
-                attackEffect.numPenetrations = EditorGUILayout.IntField("Number of Penetrations", attackEffect.numPenetrations);
+                attackEffect.numPenetrations = EditorGUILayout.IntField("Number of Penetrations (0 = INF)", attackEffect.numPenetrations);
             }
 
 
@@ -172,7 +172,7 @@ public class SpecialAbilityDataEditor : Editor {
         switch (effect.deliveryMethod) {
             case Constants.EffectDeliveryMethod.Raycast:
                 effect.rayCastDelivery.targetingMethod = EditorHelper.EnumPopup("Targeting Method", effect.rayCastDelivery.targetingMethod);
-                effect.rayCastDelivery.range = EditorGUILayout.FloatField("Max Range", effect.rayCastDelivery.range);
+                effect.rayCastDelivery.range = EditorGUILayout.FloatField("Max Range (0 = INF)", effect.rayCastDelivery.range);
                 effect.rayCastDelivery.layerMask = EditorHelper.LayerMaskField("Layer Mask", effect.rayCastDelivery.layerMask);
                 break;
         }
