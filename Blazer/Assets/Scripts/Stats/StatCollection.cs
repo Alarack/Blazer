@@ -7,12 +7,12 @@ public class StatCollection {
 
 
     private List<BaseStat> baseStats = new List<BaseStat>();
-    private Entity owner;
+    //private Entity owner;
     private StatCollectionData statTemplate;
 
 
     public void Initialize(Entity owner, StatCollectionData statTemplate = null) {
-        this.owner = owner;
+        //this.owner = owner;
 
         if (statTemplate != null)
             this.statTemplate = statTemplate;

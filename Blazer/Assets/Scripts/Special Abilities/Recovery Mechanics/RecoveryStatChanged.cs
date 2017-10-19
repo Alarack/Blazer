@@ -15,7 +15,7 @@ public class RecoveryStatChanged : SpecialAbilityRecovery {
 
     private int currentNumber;
 
-    private void RegisterListeners() {
+    protected override void RegisterListeners() {
         Grid.EventManager.RegisterListener(Constants.GameEvent.StatChanged, OnStatChanged);
 
     }
@@ -37,9 +37,9 @@ public class RecoveryStatChanged : SpecialAbilityRecovery {
 
     private void OnStatChanged(EventData data) {
         Constants.EntityStat stat = (Constants.EntityStat)data.GetInt("Stat");
-        int value = data.GetInt("Value");
+        float value = data.GetFloat("Value");
         Entity target = data.GetMonoBehaviour("Target") as Entity;
-        Entity cause = data.GetMonoBehaviour("cause") as Entity;
+        Entity cause = data.GetMonoBehaviour("Cause") as Entity;
 
         if (stat != this.stat)
             return;

@@ -29,6 +29,19 @@ public class SpecialAbilityDataEditor : Editor {
 
         EditorGUILayout.Separator();
 
+        //List<Effect> allEffects = _abilityData.GetAllEffects();
+
+        //for (int i = 0; i < allEffects.Count; i++) {
+        //    if (allEffects[i] != null) {
+        //        allEffects[i].effectType = EditorHelper.EnumPopup("Effect Delivery Method", allEffects[i].effectType);
+        //    }
+
+
+
+        //}
+
+        EditorGUILayout.Separator();
+
         _abilityData.effectTypes = EditorHelper.DrawList("Effects", _abilityData.effectTypes, true, Constants.SpecialAbilityEffectType.None, true, DrawSpecialAbilityTypes);
 
         EditorGUILayout.Separator();
@@ -47,7 +60,7 @@ public class SpecialAbilityDataEditor : Editor {
     private void ShowEffectOfType(Constants.SpecialAbilityEffectType effectType, SpecialAbilityData.EffectHolder effects) {
 
         switch (effectType) {
-            case Constants.SpecialAbilityEffectType.RayCastAttack:
+            case Constants.SpecialAbilityEffectType.AttackEffect:
                 EditorGUILayout.Separator();
 
                 effects.rayCastAttacks = EditorHelper.DrawExtendedList("RayCast Attacks", effects.rayCastAttacks, "Raycast", DrawEffectList);
@@ -67,6 +80,13 @@ public class SpecialAbilityDataEditor : Editor {
     //    }
     //}
 
+    //private T DrawDeliveryMethodList<T>(T deliveryMethod) where T : EffectDeliveryMethod {
+
+
+    //    return (T)DrawDeliveryMethod(deliveryMethod);
+    //}
+
+
 
 
     private T DrawEffectList<T>(T effect) where T : Effect {
@@ -75,26 +95,50 @@ public class SpecialAbilityDataEditor : Editor {
     }
 
     private Effect DrawEffect(Effect entry) {
-        if (entry is EffectRayCastAttack) {
-            EffectRayCastAttack rayAttack = entry as EffectRayCastAttack;
-            rayAttack.effectType = Constants.SpecialAbilityEffectType.RayCastAttack;
 
-            rayAttack.baseDamage = EditorGUILayout.IntField("Base Damage", rayAttack.baseDamage);
-            rayAttack.burstAttack = EditorGUILayout.Toggle("Burst?", rayAttack.burstAttack);
+        entry.deliveryMethod = EditorHelper.EnumPopup("Delivery method", entry.deliveryMethod);
+
+        DrawDeliveryMethod(entry);
+
+
+        if (entry is EffectAttack) {
+            EffectAttack attackEffect = entry as EffectAttack;
+            attackEffect.effectType = Constants.SpecialAbilityEffectType.AttackEffect;
+
+            attackEffect.effectDamage = EditorGUILayout.IntField("Efect Base Damage", attackEffect.effectDamage);
+
+            attackEffect.scaleFromBaseDamage = EditorGUILayout.Toggle("Scale From Entity base damage?", attackEffect.scaleFromBaseDamage);
+            if (attackEffect.scaleFromBaseDamage) {
+                attackEffect.percentOfBaseDamage = EditorHelper.PercentFloatField("Percent of base damage", attackEffect.percentOfBaseDamage);
+            }
             EditorGUILayout.Separator();
 
-            if (rayAttack.burstAttack) {
-                rayAttack.burstInterval = EditorGUILayout.FloatField("Delay between shots", rayAttack.burstInterval);
-                rayAttack.burstNumber = EditorGUILayout.IntField("Number of shots", rayAttack.burstNumber);
+            attackEffect.range = EditorGUILayout.FloatField("Max Range", attackEffect.range);
+            attackEffect.burstAttack = EditorGUILayout.Toggle("Burst?", attackEffect.burstAttack);
+            EditorGUILayout.Separator();
+
+            if (attackEffect.burstAttack) {
+                attackEffect.burstInterval = EditorGUILayout.FloatField("Delay between shots", attackEffect.burstInterval);
+                attackEffect.burstNumber = EditorGUILayout.IntField("Number of shots", attackEffect.burstNumber);
             }
 
             EditorGUILayout.Separator();
-            rayAttack.fireEffectName = EditorGUILayout.TextField("Fire Effect Name", rayAttack.fireEffectName);
-            rayAttack.impactEffectName = EditorGUILayout.TextField("Impact Effect Name", rayAttack.impactEffectName);
-            rayAttack.targetingMethod = EditorHelper.EnumPopup("Targeting Method", rayAttack.targetingMethod);
-            //rayAttack.layerMask = EditorGUILayout.MaskField()
 
-            rayAttack.layerMask = EditorHelper.LayerMaskField("Layer Mask", rayAttack.layerMask);
+            attackEffect.penetrate = EditorGUILayout.Toggle("Penetrating", attackEffect.penetrate);
+            if (attackEffect.penetrate) {
+                attackEffect.numPenetrations = EditorGUILayout.IntField("Number of Penetrations", attackEffect.numPenetrations);
+            }
+
+
+            EditorGUILayout.Separator();
+            attackEffect.fireEffectName = EditorGUILayout.TextField("Fire Effect Name", attackEffect.fireEffectName);
+            attackEffect.impactEffectName = EditorGUILayout.TextField("Impact Effect Name", attackEffect.impactEffectName);
+
+
+            //rayAttack.targetingMethod = EditorHelper.EnumPopup("Targeting Method", rayAttack.targetingMethod);
+            ////rayAttack.layerMask = EditorGUILayout.MaskField()
+
+            //rayAttack.layerMask = EditorHelper.LayerMaskField("Layer Mask", rayAttack.layerMask);
 
         }
 
@@ -121,7 +165,20 @@ public class SpecialAbilityDataEditor : Editor {
         //}
     }
 
+    private void DrawDeliveryMethod(Effect effect) {
 
+        EditorGUILayout.Separator();
+
+        switch (effect.deliveryMethod) {
+            case Constants.EffectDeliveryMethod.Raycast:
+                effect.rayCastDelivery.targetingMethod = EditorHelper.EnumPopup("Targeting Method", effect.rayCastDelivery.targetingMethod);
+                effect.rayCastDelivery.range = EditorGUILayout.FloatField("Max Range", effect.rayCastDelivery.range);
+                effect.rayCastDelivery.layerMask = EditorHelper.LayerMaskField("Layer Mask", effect.rayCastDelivery.layerMask);
+                break;
+        }
+
+        EditorGUILayout.Separator();
+    }
 
 
     private Constants.SpecialAbilityEffectType DrawSpecialAbilityTypes(List<Constants.SpecialAbilityEffectType> list, int index) {

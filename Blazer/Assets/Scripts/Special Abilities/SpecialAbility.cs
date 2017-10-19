@@ -50,7 +50,7 @@ public class SpecialAbility {
         //Debug.Log(abilityName + " has been activated");
 
         for (int i = 0; i < effects.Count; i++) {
-            effects[i].Apply();
+            effects[i].Activate();
         }
 
         if(recoveryMethod != null) {

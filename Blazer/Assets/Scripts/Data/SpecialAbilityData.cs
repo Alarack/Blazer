@@ -36,7 +36,13 @@ public class SpecialAbilityData : ScriptableObject {
     public List<Effect> GetAllEffects() {
         List<Effect> results = new List<Effect>();
         for(int i = 0; i < effectTypes.Count; i++) {
-            results.AddRange(effectHolder.GetEffectSet(effectTypes[i]).effects);
+
+            EffectSet holder = effectHolder.GetEffectSet(effectTypes[i]);
+
+            if(holder != null) {
+                results.AddRange(holder.effects);
+            }
+
         }
         return results;
     }
@@ -55,7 +61,7 @@ public class SpecialAbilityData : ScriptableObject {
 
         public EffectSet GetEffectSet(Constants.SpecialAbilityEffectType effectType) {
             switch (effectType) {
-                case Constants.SpecialAbilityEffectType.RayCastAttack:
+                case Constants.SpecialAbilityEffectType.AttackEffect:
                     EffectSet raycastAttacks = new EffectSet(effectType, rayCastAttacks.ConvertAll<Effect>(b => (Effect)b));
 
                     return raycastAttacks;

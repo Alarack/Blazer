@@ -32,8 +32,15 @@ public class Constants {
 
     public enum SpecialAbilityEffectType {
         None = 0,
-        RayCastAttack = 1,
+        AttackEffect = 1,
         SelfBuff = 2,
+    }
+
+    public enum EffectDeliveryMethod {
+        None = 0,
+        Raycast = 1,
+        Projectile = 2
+
     }
 
     public enum GameEvent {
