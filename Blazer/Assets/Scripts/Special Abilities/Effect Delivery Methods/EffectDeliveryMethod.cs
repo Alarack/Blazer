@@ -5,10 +5,22 @@ using UnityEngine;
 [System.Serializable]
 public class EffectDeliveryMethod {
 
+    public enum TargetingMethod {
+        None = 0,
+        StraightLeftRight = 1,
+    }
+
+
     public Constants.EffectDeliveryMethod deliveryMethodType;
+    public TargetingMethod targetingMethod = TargetingMethod.StraightLeftRight;
+    public LayerMask layerMask;
+
+
 
 
     public float range;
+
+    protected Vector2 shootDirection;
 
     [System.NonSerialized]
     protected SpecialAbility parentAbility;

@@ -21,21 +21,16 @@ public abstract class SpecialAbilityRecovery {
 
     }
 
-
     public virtual void ManagedUpdate() {
 
         switch (recoveryType) {
             case Constants.SpecialAbilityRecoveryType.Timed:
                 Recover();
                 break;
-
         }
-
     }
 
     public abstract void Recover();
-
-    
 
     public virtual void Trigger() {
         Ready = false;

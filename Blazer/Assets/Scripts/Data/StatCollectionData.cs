@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using EntityStat = Constants.EntityStat;
+using BaseStatType = Constants.BaseStatType;
 
 [CreateAssetMenu(menuName = "Stat Set")]
 [System.Serializable]
@@ -17,7 +17,7 @@ public class StatCollectionData : ScriptableObject {
 
     [System.Serializable]
     public class StatDisplay {
-        public EntityStat stat;
+        public BaseStatType stat;
         public float maxValue;
     }
 

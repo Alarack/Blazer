@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Constants {
 
-    public enum EntityStat {
+    public enum BaseStatType {
         None = 0,
         Health = 1,
         BaseDamage = 2,
@@ -13,6 +13,8 @@ public class Constants {
         CritChance = 5,
         CritMultiplier = 6,
         AttackSpeed = 7,
+        RotateSpeed = 8,
+        Lifetime = 9,
     }
 
     public enum EntityFacing {

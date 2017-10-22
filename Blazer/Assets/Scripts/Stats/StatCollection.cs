@@ -11,7 +11,7 @@ public class StatCollection {
     private StatCollectionData statTemplate;
 
 
-    public void Initialize(Entity owner, StatCollectionData statTemplate = null) {
+    public void Initialize(StatCollectionData statTemplate = null) {
         //this.owner = owner;
 
         if (statTemplate != null)
@@ -22,7 +22,7 @@ public class StatCollection {
         InitializeDefaultStats();
     }
 
-    public float GetStatCurrentValue(Constants.EntityStat statType) {
+    public float GetStatCurrentValue(Constants.BaseStatType statType) {
         for(int i = 0; i < baseStats.Count; i++) {
             if(baseStats[i].statType == statType) {
                 return baseStats[i].CurrentValue;
@@ -33,7 +33,7 @@ public class StatCollection {
     }
 
 
-    public void AlterStat(Constants.EntityStat statType, float value, Entity source) {
+    public void AlterStat(Constants.BaseStatType statType, float value, Entity source) {
         BaseStat targetStat = GetStat(statType);
         targetStat.ModifyStat(value);
     }
@@ -42,14 +42,14 @@ public class StatCollection {
     private void InitializeDefaultStats() {
         for(int i = 0; i < statTemplate.stats.Count; i++) {
             BaseStat newStat = new BaseStat(statTemplate.stats[i].stat, statTemplate.stats[i].maxValue, statTemplate.stats[i].maxValue);
-            //Debug.Log("Adding " + newStat.statType.ToString() + " to " + owner.entityName + " with a value of " + newStat.MaxValue);
+            //Debug.Log("Adding " + newStat.statType.ToString() + " with a value of " + newStat.MaxValue);
             baseStats.Add(newStat);
         }
     }
 
 
 
-    private BaseStat GetStat(Constants.EntityStat statType) {
+    private BaseStat GetStat(Constants.BaseStatType statType) {
         for (int i = 0; i < baseStats.Count; i++) {
             if (baseStats[i].statType == statType) {
                 return baseStats[i];
@@ -63,11 +63,11 @@ public class StatCollection {
 
     [System.Serializable]
     public class BaseStat {
-        public Constants.EntityStat statType;
+        public Constants.BaseStatType statType;
         public float CurrentValue { get; private set; }
         public float MaxValue { get; private set; }
 
-        public BaseStat(Constants.EntityStat statType, float currentValue, float maxValue) {
+        public BaseStat(Constants.BaseStatType statType, float currentValue, float maxValue) {
             this.statType = statType;
             CurrentValue = currentValue;
             MaxValue = maxValue;

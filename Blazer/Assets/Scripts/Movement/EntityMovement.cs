@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Entity))]
-public abstract class EntityMovement : MonoBehaviour {
+[RequireComponent(typeof(Rigidbody2D))]
+public abstract class EntityMovement : BaseMovement {
 
-    //[Header("Basic Movement Stats")]
-    protected float maxSpeed;
+
     protected float jumpForce;
 
     [Header("GroundCheck")]
@@ -14,29 +14,30 @@ public abstract class EntityMovement : MonoBehaviour {
     public float groundCheckRadius = 0.01f;
     public LayerMask whatIsGround;
 
-    protected Rigidbody2D myBody;
-    protected Entity owner;
-    //protected SpriteRenderer mySprite;
-    protected float currentSpeed;
     protected bool isGrounded;
+    protected Entity owner;
 
-    protected virtual void Awake () {
-        myBody = GetComponent<Rigidbody2D>();
+
+
+
+
+    protected override void Awake () {
+        base.Awake();
         owner = GetComponent<Entity>();
-        //mySprite = GetComponentInChildren<SpriteRenderer>();
     }
 
-    public void Initialize() {
-        maxSpeed = owner.stats.GetStatCurrentValue(Constants.EntityStat.MoveSpeed);
-        jumpForce = owner.stats.GetStatCurrentValue(Constants.EntityStat.JumpForce);
+    public override void Initialize() {
+        base.Initialize();
+
+        maxSpeed = owner.stats.GetStatCurrentValue(Constants.BaseStatType.MoveSpeed);
+        jumpForce = owner.stats.GetStatCurrentValue(Constants.BaseStatType.JumpForce);
 
     }
     
 
-    protected virtual void FixedUpdate() {
-        if (maxSpeed != 0f)
-            Move();
-
+    protected override void FixedUpdate() {
+        base.FixedUpdate();
+        
         CheckGround();
     }
 
@@ -62,5 +63,5 @@ public abstract class EntityMovement : MonoBehaviour {
         }
     }
 
-    protected abstract void Move();
+
 }

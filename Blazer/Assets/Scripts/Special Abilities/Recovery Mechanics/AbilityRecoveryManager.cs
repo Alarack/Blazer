@@ -6,12 +6,7 @@ using UnityEngine;
 public class AbilityRecoveryManager  {
 
     public List<Constants.SpecialAbilityRecoveryType> recoveryTypes = new List<Constants.SpecialAbilityRecoveryType>();
-
-
     public RecoveryCooldown recoveryCooldown = new RecoveryCooldown();
-
-
-
 
 
     public SpecialAbilityRecovery GetRecoveryMethodByType(Constants.SpecialAbilityRecoveryType recoveryType) {
@@ -24,11 +19,7 @@ public class AbilityRecoveryManager  {
                 return null;
         }
 
-
     }
-
-
-
 
     [System.Serializable]
     public class RecoverySet {

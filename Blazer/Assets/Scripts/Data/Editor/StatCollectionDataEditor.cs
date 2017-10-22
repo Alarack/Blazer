@@ -32,14 +32,14 @@ public class StatCollectionDataEditor : Editor {
         entry.stat = EditorHelper.EnumPopup("Stat Type", entry.stat);
 
         switch (entry.stat) {
-            case Constants.EntityStat.CritChance:
+            case Constants.BaseStatType.CritChance:
                 entry.maxValue = EditorHelper.PercentFloatField("Crit Chance", entry.maxValue);
                 break;
-            case Constants.EntityStat.CritMultiplier:
+            case Constants.BaseStatType.CritMultiplier:
                 entry.maxValue = EditorHelper.PercentFloatField("Crit Multiplier", entry.maxValue);
                 break;
 
-            case Constants.EntityStat.AttackSpeed:
+            case Constants.BaseStatType.AttackSpeed:
                 entry.maxValue = EditorHelper.PercentFloatField("Attack Speed", entry.maxValue);
                 break;
 

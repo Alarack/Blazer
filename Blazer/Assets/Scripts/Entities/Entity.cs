@@ -6,8 +6,8 @@ using UnityEngine;
 public class Entity : MonoBehaviour {
     [Header("Basic Info")]
     public string entityName;
-    //public EntityData entityData;
 
+    [Header("Attack Origin Points")]
     public Transform leftShotOrigin;
     public Transform rightShotOrigin;
 
@@ -26,32 +26,16 @@ public class Entity : MonoBehaviour {
         Initialize();
     }
 
-
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.G)) {
-            Debug.Log(stats.GetStatCurrentValue(Constants.EntityStat.Health));
-        }
-
-    }
-
-
     public void Initialize() {
         stats = new StatCollection();
-        stats.Initialize(this, statTemplate);
+        stats.Initialize(statTemplate);
         //this.entityData = entityData;
         SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         abilityManager = GetComponent<AbilityManager>();
         abilityManager.Initialize(this);
         movement = GetComponent<EntityMovement>();
         movement.Initialize();
-
-
-
-    }
-
-
-    public void SetUpEntity() {
-
+        GameManager.RegisterEntity(this);
 
 
     }

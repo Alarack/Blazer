@@ -20,7 +20,7 @@ public class CombatManager : MonoBehaviour {
 
 
 
-    public static void AlterStat(Entity causeOfChagne, Entity targetOfChagnge, Constants.EntityStat stat, float value) {
+    public static void AlterStat(Entity causeOfChagne, Entity targetOfChagnge, Constants.BaseStatType stat, float value) {
 
         targetOfChagnge.stats.AlterStat(stat, value, causeOfChagne);
 

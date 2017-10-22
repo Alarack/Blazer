@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class RecoveryStatChanged : SpecialAbilityRecovery {
 
-    public Constants.EntityStat stat;
+    public Constants.BaseStatType stat;
     public bool gained;
     public bool sourceCausedChange;
     public bool sourceWasChanged;
@@ -36,7 +36,7 @@ public class RecoveryStatChanged : SpecialAbilityRecovery {
 
 
     private void OnStatChanged(EventData data) {
-        Constants.EntityStat stat = (Constants.EntityStat)data.GetInt("Stat");
+        Constants.BaseStatType stat = (Constants.BaseStatType)data.GetInt("Stat");
         float value = data.GetFloat("Value");
         Entity target = data.GetMonoBehaviour("Target") as Entity;
         Entity cause = data.GetMonoBehaviour("Cause") as Entity;

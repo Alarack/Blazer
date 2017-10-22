@@ -12,6 +12,7 @@ public class Effect  {
     protected SpecialAbility parentAbility;
 
     public EffectDeliveryRaycast rayCastDelivery = new EffectDeliveryRaycast();
+    public EffectDeliveryProjectile projectileDelivery = new EffectDeliveryProjectile();
 
 
 
@@ -19,35 +20,29 @@ public class Effect  {
         this.parentAbility = parentAbility;
     }
 
-
-
     public virtual void Activate() {
-
         Debug.Log("An effect of type " + effectType.ToString() + " on the ability " + parentAbility.abilityName + " is being activated");
-
-        Debug.Log(deliveryMethod + " is my delivery method");
+        //Debug.Log(deliveryMethod + " is my delivery method");
     }
-
 
     public virtual void BeginDelivery() {
         switch (deliveryMethod) {
             case Constants.EffectDeliveryMethod.Raycast:
                 rayCastDelivery.Deliver();
                 break;
+
+            case Constants.EffectDeliveryMethod.Projectile:
+                projectileDelivery.Deliver();
+                break;
         }
-
-
     }
 
     public virtual void Apply(GameObject target) {
 
     }
 
-
-
     public virtual void Remove() {
 
     }
-
 
 }

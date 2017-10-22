@@ -5,15 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class EffectDeliveryRaycast : EffectDeliveryMethod {
 
-    public enum TargetingMethod {
-        None = 0,
-        StraightLeftRight = 1,
-    }
 
-    public TargetingMethod targetingMethod = TargetingMethod.StraightLeftRight;
-    public LayerMask layerMask;
 
-    private Vector2 shootDirection;
+
+
 
     
 
@@ -35,13 +30,9 @@ public class EffectDeliveryRaycast : EffectDeliveryMethod {
 
     }
 
-
-
     private void ConfigureRay() {
-
         if (range == 0)
             range = Mathf.Infinity;
-
 
         switch (targetingMethod) {
             case TargetingMethod.StraightLeftRight:

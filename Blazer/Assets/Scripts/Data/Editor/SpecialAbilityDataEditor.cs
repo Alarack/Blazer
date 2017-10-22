@@ -115,14 +115,15 @@ public class SpecialAbilityDataEditor : Editor {
 
             //attackEffect.range = EditorGUILayout.FloatField("Max Range", attackEffect.range);
             attackEffect.burstAttack = EditorGUILayout.Toggle("Burst?", attackEffect.burstAttack);
-            EditorGUILayout.Separator();
+
 
             if (attackEffect.burstAttack) {
                 attackEffect.burstInterval = EditorGUILayout.FloatField("Delay between shots", attackEffect.burstInterval);
                 attackEffect.burstNumber = EditorGUILayout.IntField("Number of shots", attackEffect.burstNumber);
+                EditorGUILayout.Separator();
             }
 
-            EditorGUILayout.Separator();
+
 
             attackEffect.penetrate = EditorGUILayout.Toggle("Penetrating?", attackEffect.penetrate);
             if (attackEffect.penetrate) {
@@ -174,6 +175,22 @@ public class SpecialAbilityDataEditor : Editor {
                 effect.rayCastDelivery.targetingMethod = EditorHelper.EnumPopup("Targeting Method", effect.rayCastDelivery.targetingMethod);
                 effect.rayCastDelivery.range = EditorGUILayout.FloatField("Max Range (0 = INF)", effect.rayCastDelivery.range);
                 effect.rayCastDelivery.layerMask = EditorHelper.LayerMaskField("Layer Mask", effect.rayCastDelivery.layerMask);
+                break;
+
+            case Constants.EffectDeliveryMethod.Projectile:
+                effect.projectileDelivery.targetingMethod = EditorHelper.EnumPopup("Targeting Method", effect.projectileDelivery.targetingMethod);
+                effect.projectileDelivery.layerMask = EditorHelper.LayerMaskField("Layer Mask", effect.projectileDelivery.layerMask);
+                effect.projectileDelivery.projectileType = EditorHelper.EnumPopup("Projectile Type", effect.projectileDelivery.projectileType);
+                effect.projectileDelivery.prefabName = EditorGUILayout.TextField("Projectile Prefab Name", effect.projectileDelivery.prefabName);
+
+                effect.projectileDelivery.kickBack = EditorGUILayout.Toggle("Kickback?", effect.projectileDelivery.kickBack);
+
+                if (effect.projectileDelivery.kickBack) {
+                    effect.projectileDelivery.kickStrength = EditorGUILayout.FloatField("Kick Strength", effect.projectileDelivery.kickStrength);
+                }
+
+                effect.projectileDelivery.error = EditorGUILayout.FloatField("Inacuraccy", effect.projectileDelivery.error);
+
                 break;
         }
 

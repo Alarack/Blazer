@@ -27,7 +27,17 @@ public class EffectAttack : Effect {
 
     public override void Initialize(SpecialAbility parentAbility) {
         base.Initialize(parentAbility);
-        rayCastDelivery.Initialize(parentAbility, this);
+
+        switch (deliveryMethod) {
+            case Constants.EffectDeliveryMethod.Raycast:
+                rayCastDelivery.Initialize(parentAbility, this);
+                break;
+
+            case Constants.EffectDeliveryMethod.Projectile:
+                projectileDelivery.Initialize(parentAbility, this);
+                break;
+        }
+
 
     }
 
@@ -70,7 +80,7 @@ public class EffectAttack : Effect {
 
         float damage;
         if (scaleFromBaseDamage)
-            damage = effectDamage + (parentAbility.source.stats.GetStatCurrentValue(Constants.EntityStat.BaseDamage) * percentOfBaseDamage);
+            damage = effectDamage + (parentAbility.source.stats.GetStatCurrentValue(Constants.BaseStatType.BaseDamage) * percentOfBaseDamage);
         else
             damage = effectDamage;
 
