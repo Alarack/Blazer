@@ -7,6 +7,8 @@ using UnityEngine;
 public class SpecialAbilityData : ScriptableObject {
 
     public string abilityName;
+    public float useDuration;
+    public bool overrideOtherAbilities;
     public List<Constants.SpecialAbilityEffectType> effectTypes = new List<Constants.SpecialAbilityEffectType>();
     public Constants.SpecialAbilityRecoveryType recoveryType;
 

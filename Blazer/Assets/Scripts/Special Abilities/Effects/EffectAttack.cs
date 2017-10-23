@@ -24,7 +24,6 @@ public class EffectAttack : Effect {
     protected Vector2 shotOrigin;
 
 
-
     public override void Initialize(SpecialAbility parentAbility) {
         base.Initialize(parentAbility);
 
@@ -36,15 +35,17 @@ public class EffectAttack : Effect {
             case Constants.EffectDeliveryMethod.Projectile:
                 projectileDelivery.Initialize(parentAbility, this);
                 break;
+
+            case Constants.EffectDeliveryMethod.Melee:
+                meleeDelivery.Initialize(parentAbility, this);
+                break;
         }
-
-
     }
 
     public override void Activate() {
         base.Activate();
 
-        Debug.Log("Activating an attack");
+        //Debug.Log("Activating an attack");
 
         if (burstAttack) {
             parentAbility.source.StartCoroutine(BurstFire(burstInterval, burstNumber));
@@ -52,8 +53,6 @@ public class EffectAttack : Effect {
         else {
             Fire();
         }
-
-
     }
 
     protected virtual IEnumerator BurstFire(float delay, int number) {
@@ -62,21 +61,14 @@ public class EffectAttack : Effect {
             BeginDelivery();
             yield return new WaitForSeconds(delay);
         }
-
     }
 
     protected virtual void Fire() {
         BeginDelivery();
     }
 
-
     public override void Apply(GameObject target) {
         base.Apply(target);
-
-
-        Debug.Log(target.name + " was hit");
-
-        //target.GetComponent<Rigidbody2D>().AddForce(-rayDir * 150f);
 
         float damage;
         if (scaleFromBaseDamage)
@@ -84,11 +76,7 @@ public class EffectAttack : Effect {
         else
             damage = effectDamage;
 
-
         Debug.Log(parentAbility.abilityName + " deals " + damage + " points of damage to " + target.gameObject.name);
-
-
     }
-
 
 }

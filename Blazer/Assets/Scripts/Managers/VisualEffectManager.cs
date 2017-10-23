@@ -14,4 +14,18 @@ public class VisualEffectManager : MonoBehaviour {
 
     }
 
+
+
+    public static void SetParticleEffectLayer(GameObject hitEffect, GameObject target) {
+
+
+        ParticleSystem[] ps = hitEffect.GetComponentsInChildren<ParticleSystem>();
+        SpriteRenderer hitSprite =target.GetComponentInChildren<SpriteRenderer>();
+
+        for (int i = 0; i < ps.Length; i++) {
+            ps[i].GetComponent<ParticleSystemRenderer>().sortingOrder = hitSprite.sortingOrder;
+        }
+
+    }
+
 }

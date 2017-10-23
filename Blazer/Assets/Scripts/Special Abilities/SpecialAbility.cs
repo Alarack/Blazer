@@ -7,8 +7,13 @@ public class SpecialAbility {
 
     public string abilityName;
     public Entity source;
-    //public List<SpecialAbilityRecovery> recoveryMethods = new List<SpecialAbilityRecovery>();
+    public float useDuration;
+    public bool overrideOtherAbilities;
+
+    public bool InUse { get; protected set; }
+
     protected SpecialAbilityRecovery recoveryMethod;
+    protected float useTimer;
 
     public List<Effect> effects = new List<Effect>();
 
@@ -24,17 +29,15 @@ public class SpecialAbility {
     private void SetUpAbility() {
 
         abilityName = abilitydata.abilityName;
-
         effects = abilitydata.GetAllEffects();
-
         recoveryMethod = abilitydata.GetRecoveryMechanic();
+        useDuration = abilitydata.useDuration;
+        overrideOtherAbilities = abilitydata.overrideOtherAbilities;
 
         if(recoveryMethod != null) {
             recoveryMethod.Initialize(this);
             //Debug.Log(recoveryMethod.recoveryType.ToString());
         }
-
-
 
         for (int i = 0; i < effects.Count; i++) {
             effects[i].Initialize(this);
@@ -57,6 +60,8 @@ public class SpecialAbility {
             recoveryMethod.Trigger();
         }
 
+        InUse = true;
+
     }
 
     public virtual void ManagedUpdate() {
@@ -64,10 +69,18 @@ public class SpecialAbility {
         if(recoveryMethod != null)
             recoveryMethod.ManagedUpdate();
 
-        //for(int i = 0; i < recoveryMethods.Count; i++) {
-        //    recoveryMethods[i].ManagedUpdate();
-        //}
+        AbilityInUse();
+    }
 
+
+    protected void AbilityInUse() {
+        if (InUse) {
+            useTimer += Time.deltaTime;
+            if(useTimer >= useDuration) {
+                InUse = false;
+                useTimer = 0f;
+            }
+        }
     }
 
 }

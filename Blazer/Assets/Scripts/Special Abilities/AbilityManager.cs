@@ -33,5 +33,15 @@ public class AbilityManager : MonoBehaviour {
 
     }
 
+    protected bool IsAbilityInUse() {
+
+        for(int i = 0; i < abilities.Count; i++) {
+            if (abilities[i].InUse)
+                return true;
+        }
+
+        return false;
+    }
+
 
 }

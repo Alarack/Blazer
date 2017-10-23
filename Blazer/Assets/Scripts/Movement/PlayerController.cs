@@ -15,6 +15,15 @@ public class PlayerController : EntityMovement {
 
     private void Update() {
         currentSpeed = Input.GetAxisRaw("Horizontal") * maxSpeed * Time.deltaTime;
+
+        if (currentSpeed != 0f && !owner.MyAnimator.GetBool("Walking")) {
+            owner.MyAnimator.SetBool("Walking", true);
+        }
+        else if (currentSpeed == 0f && owner.MyAnimator.GetBool("Walking")) {
+            owner.MyAnimator.SetBool("Walking", false);
+        }
+
+
         CheckFacing();
         TryJump();
     }

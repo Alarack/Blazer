@@ -14,6 +14,11 @@ public abstract class EntityMovement : BaseMovement {
     public float groundCheckRadius = 0.01f;
     public LayerMask whatIsGround;
 
+    [Header("Sprite Pivot Hack")]
+    public bool useSpritePivotHack;
+
+    protected Vector2 spriteOffset;
+
     protected bool isGrounded;
     protected Entity owner;
 
@@ -31,6 +36,10 @@ public abstract class EntityMovement : BaseMovement {
 
         maxSpeed = owner.stats.GetStatCurrentValue(Constants.BaseStatType.MoveSpeed);
         jumpForce = owner.stats.GetStatCurrentValue(Constants.BaseStatType.JumpForce);
+
+        float spriteOffsetX = owner.SpriteRenderer.bounds.size.x;
+
+        spriteOffset = new Vector2(spriteOffsetX, 0f);
 
     }
     
@@ -55,11 +64,25 @@ public abstract class EntityMovement : BaseMovement {
 
         if (currentSpeed > 0 && owner.SpriteRenderer.flipX) {
             owner.SpriteRenderer.flipX = false;
+            //owner.SpriteRenderer.transform.localScale = Vector3.one;
             owner.Facing = Constants.EntityFacing.Right;
+            //Debug.Log("Flipping right " + owner.SpriteRenderer.flipX);
+
+            if (useSpritePivotHack) {
+                owner.SpriteRenderer.gameObject.transform.localPosition -= (Vector3)spriteOffset;
+            }
+
         }
         else if (currentSpeed < 0 && !owner.SpriteRenderer.flipX) {
             owner.SpriteRenderer.flipX = true;
+            //owner.SpriteRenderer.transform.localScale = new Vector3(-1f, 1f, 1f);
             owner.Facing = Constants.EntityFacing.Left;
+
+            if (useSpritePivotHack) {
+                owner.SpriteRenderer.gameObject.transform.localPosition += (Vector3)spriteOffset;
+            }
+
+            //Debug.Log("Flipping Left " + owner.SpriteRenderer.flipX);
         }
     }
 

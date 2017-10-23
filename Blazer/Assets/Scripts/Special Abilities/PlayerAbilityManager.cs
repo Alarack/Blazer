@@ -39,7 +39,15 @@ public class PlayerAbilityManager : AbilityManager {
     public void ActivatePlayerAbility(int abilityKey) {
         for (int i = 0; i < playerAbilities.Count; i++) {
             if(playerAbilities[i].abilityKey == abilityKey) {
+
+                if (IsAbilityInUse() && !playerAbilities[i].ability.overrideOtherAbilities) {
+                    Debug.LogError("another ability is current in use");
+                    return;
+                }
+
+
                 playerAbilities[i].ability.Activate();
+
             }
         }
     }

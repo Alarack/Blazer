@@ -96,12 +96,15 @@ public class EffectDeliveryRaycast : EffectDeliveryMethod {
         GameObject hitPrefab = Resources.Load(((EffectAttack)parentEffect).impactEffectName) as GameObject;
         GameObject hitEffect = VisualEffectManager.CreateVisualEffect(hitPrefab, hit.point, impactRotation);
 
-        ParticleSystem[] ps = hitEffect.GetComponentsInChildren<ParticleSystem>();
-        SpriteRenderer hitSprite = hit.collider.gameObject.GetComponentInChildren<SpriteRenderer>();
 
-        for (int i = 0; i < ps.Length; i++) {
-            ps[i].GetComponent<ParticleSystemRenderer>().sortingOrder = hitSprite.sortingOrder;
-        }
+        VisualEffectManager.SetParticleEffectLayer(hitEffect, hit.collider.gameObject);
+
+        //ParticleSystem[] ps = hitEffect.GetComponentsInChildren<ParticleSystem>();
+        //SpriteRenderer hitSprite = hit.collider.gameObject.GetComponentInChildren<SpriteRenderer>();
+
+        //for (int i = 0; i < ps.Length; i++) {
+        //    ps[i].GetComponent<ParticleSystemRenderer>().sortingOrder = hitSprite.sortingOrder;
+        //}
 
     }
 

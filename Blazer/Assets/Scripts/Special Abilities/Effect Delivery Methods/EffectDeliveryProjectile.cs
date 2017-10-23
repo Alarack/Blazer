@@ -5,9 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class EffectDeliveryProjectile : EffectDeliveryMethod {
 
-
-
-
     public Projectile.ProjectileType projectileType;
     public string prefabName;
     public float error;
@@ -24,10 +21,7 @@ public class EffectDeliveryProjectile : EffectDeliveryMethod {
         CreateProjectile();
     }
 
-
-
     private void ConfigureProjectile() {
-
         switch (targetingMethod) {
             case TargetingMethod.StraightLeftRight:
                 if (parentAbility.source.Facing == Constants.EntityFacing.Left) {
@@ -42,16 +36,11 @@ public class EffectDeliveryProjectile : EffectDeliveryMethod {
                 }
                 break;
         }
-
-
     }
 
-
-
-
     private void CreateProjectile() {
-
         ConfigureProjectile();
+        CreateFireEffect();
 
         GameObject loadedPrefab = Resources.Load("Projectiles/" + prefabName) as GameObject;
 
@@ -62,11 +51,8 @@ public class EffectDeliveryProjectile : EffectDeliveryMethod {
 
         //Quaternion rot = Quaternion.FromToRotation(effectOrigin, shootDirection);//Quaternion.LookRotation(shootDirection, Vector3.forward);
 
-
-
         GameObject shot = VisualEffectManager.CreateVisualEffect(loadedPrefab, effectOrigin, shotPos.rotation);
         Projectile shotScript = shot.GetComponent<Projectile>();
-
 
         if (error != 0f) {
             float e = Random.Range(-error, error);
@@ -79,6 +65,12 @@ public class EffectDeliveryProjectile : EffectDeliveryMethod {
             parentAbility.source.GetComponent<Rigidbody2D>().AddForce(-shotPos.up * kickStrength);
         }
 
+    }
+
+    private void CreateFireEffect() {
+
+        GameObject hitPrefab = Resources.Load(((EffectAttack)parentEffect).fireEffectName) as GameObject;
+        GameObject hitEffect = VisualEffectManager.CreateVisualEffect(hitPrefab, effectOrigin, Quaternion.identity);
 
     }
 

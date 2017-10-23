@@ -29,16 +29,9 @@ public class SpecialAbilityDataEditor : Editor {
 
         EditorGUILayout.Separator();
 
-        //List<Effect> allEffects = _abilityData.GetAllEffects();
+        _abilityData.useDuration = EditorGUILayout.FloatField("Use Duration", _abilityData.useDuration);
+        _abilityData.overrideOtherAbilities = EditorGUILayout.Toggle("Override Other Abilities?", _abilityData.overrideOtherAbilities);
 
-        //for (int i = 0; i < allEffects.Count; i++) {
-        //    if (allEffects[i] != null) {
-        //        allEffects[i].effectType = EditorHelper.EnumPopup("Effect Delivery Method", allEffects[i].effectType);
-        //    }
-
-
-
-        //}
 
         EditorGUILayout.Separator();
 
@@ -170,6 +163,8 @@ public class SpecialAbilityDataEditor : Editor {
 
         EditorGUILayout.Separator();
 
+        effect.animationTrigger = EditorGUILayout.TextField("Animation Trigger", effect.animationTrigger);
+
         switch (effect.deliveryMethod) {
             case Constants.EffectDeliveryMethod.Raycast:
                 effect.rayCastDelivery.targetingMethod = EditorHelper.EnumPopup("Targeting Method", effect.rayCastDelivery.targetingMethod);
@@ -190,6 +185,14 @@ public class SpecialAbilityDataEditor : Editor {
                 }
 
                 effect.projectileDelivery.error = EditorGUILayout.FloatField("Inacuraccy", effect.projectileDelivery.error);
+
+                break;
+
+            case Constants.EffectDeliveryMethod.Melee:
+                effect.meleeDelivery.targetingMethod = EditorHelper.EnumPopup("Targeting Method", effect.meleeDelivery.targetingMethod);
+                effect.meleeDelivery.layerMask = EditorHelper.LayerMaskField("Layer Mask", effect.meleeDelivery.layerMask);
+                effect.meleeDelivery.prefabName = EditorGUILayout.TextField("Melee Prefab Name", effect.meleeDelivery.prefabName);
+
 
                 break;
         }

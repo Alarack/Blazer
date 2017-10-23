@@ -7,13 +7,16 @@ public class Effect  {
 
     public Constants.SpecialAbilityEffectType effectType;
     public Constants.EffectDeliveryMethod deliveryMethod;
+    public string animationTrigger;
+
+    public Entity Source { get { return parentAbility.source; }  }
 
     [System.NonSerialized]
     protected SpecialAbility parentAbility;
 
     public EffectDeliveryRaycast rayCastDelivery = new EffectDeliveryRaycast();
     public EffectDeliveryProjectile projectileDelivery = new EffectDeliveryProjectile();
-
+    public EffectDeliveryMelee meleeDelivery = new EffectDeliveryMelee();
 
 
     public virtual void Initialize(SpecialAbility parentAbility) {
@@ -26,6 +29,9 @@ public class Effect  {
     }
 
     public virtual void BeginDelivery() {
+
+        parentAbility.source.MyAnimator.SetTrigger(animationTrigger);
+
         switch (deliveryMethod) {
             case Constants.EffectDeliveryMethod.Raycast:
                 rayCastDelivery.Deliver();
@@ -33,6 +39,10 @@ public class Effect  {
 
             case Constants.EffectDeliveryMethod.Projectile:
                 projectileDelivery.Deliver();
+                break;
+
+            case Constants.EffectDeliveryMethod.Melee:
+                meleeDelivery.Deliver();
                 break;
         }
     }

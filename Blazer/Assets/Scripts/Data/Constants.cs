@@ -41,7 +41,8 @@ public class Constants {
     public enum EffectDeliveryMethod {
         None = 0,
         Raycast = 1,
-        Projectile = 2
+        Projectile = 2,
+        Melee = 3,
 
     }
 

@@ -18,9 +18,11 @@ public class Entity : MonoBehaviour {
 
     public SpriteRenderer SpriteRenderer { get; protected set; }
     public Constants.EntityFacing Facing { get; set; }
+    public Animator MyAnimator { get; protected set; }
 
     protected AbilityManager abilityManager;
     protected EntityMovement movement;
+
 
     void Start() {
         Initialize();
@@ -31,10 +33,17 @@ public class Entity : MonoBehaviour {
         stats.Initialize(statTemplate);
         //this.entityData = entityData;
         SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        MyAnimator = GetComponentInChildren<Animator>();
         abilityManager = GetComponent<AbilityManager>();
-        abilityManager.Initialize(this);
+
+        if(abilityManager != null)
+            abilityManager.Initialize(this);
+
         movement = GetComponent<EntityMovement>();
-        movement.Initialize();
+
+        if(movement != null)
+            movement.Initialize();
+
         GameManager.RegisterEntity(this);
 
 
