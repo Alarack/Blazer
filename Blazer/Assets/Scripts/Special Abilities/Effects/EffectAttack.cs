@@ -75,9 +75,15 @@ public class EffectAttack : Effect {
         else
             damage = effectDamage;
 
-        Debug.Log(parentAbility.abilityName + " deals " + damage + " points of damage to " + target.gameObject.name);
+        Entity targetEntity = target.GetComponent<Entity>();
 
-        VisualEffectManager.MakeFloatingText(damage.ToString(), target.transform.position);
+        if(targetEntity != null) {
+            CombatManager.AlterStat(Source, target.GetComponent<Entity>(), Constants.BaseStatType.Health, damage);
+        }
+
+        //Debug.Log(parentAbility.abilityName + " deals " + damage + " points of damage to " + target.gameObject.name);
+
+        //VisualEffectManager.MakeFloatingText(damage.ToString(), target.transform.position);
 
         base.Apply(target);
     }

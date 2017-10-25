@@ -34,6 +34,10 @@ public class CombatManager : MonoBehaviour {
 
         Grid.EventManager.SendEvent(Constants.GameEvent.StatChanged, data);
 
+        if(stat == Constants.BaseStatType.Health && value < 0f) {
+            VisualEffectManager.MakeFloatingText(Mathf.Abs(value).ToString(), targetOfChagnge.transform.position);
+        }
+
     }
 
 

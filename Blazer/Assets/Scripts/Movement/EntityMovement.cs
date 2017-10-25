@@ -31,6 +31,32 @@ public abstract class EntityMovement : BaseMovement {
         owner = GetComponent<Entity>();
     }
 
+    protected override void RegisterListeners() {
+        base.RegisterListeners();
+
+        Grid.EventManager.RegisterListener(Constants.GameEvent.StatChanged, OnStatChanged);
+    }
+
+    protected virtual void OnStatChanged(EventData data) {
+        Constants.BaseStatType stat = (Constants.BaseStatType)data.GetInt("Stat");
+        Entity target = data.GetMonoBehaviour("Target") as Entity;
+
+        if (target != owner)
+            return;
+
+        switch (stat) {
+            case Constants.BaseStatType.MoveSpeed:
+                maxSpeed = owner.stats.GetStatCurrentValue(Constants.BaseStatType.MoveSpeed);
+                break;
+
+            case Constants.BaseStatType.JumpForce:
+                jumpForce = owner.stats.GetStatCurrentValue(Constants.BaseStatType.JumpForce);
+                break;
+        }
+
+
+    }
+
     public override void Initialize() {
         base.Initialize();
 

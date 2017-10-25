@@ -7,11 +7,6 @@ public class Status : MonoBehaviour {
 
     public Constants.StatusEffectType statusType;
 
-    //public float duration;
-    //public float interval;
-
-    //protected float _durationTimer = 0f;
-    //protected float _intervalTimer = 0f;
 
     protected Timer durationTimer;
     protected Timer intervalTimer;
@@ -33,11 +28,8 @@ public class Status : MonoBehaviour {
 
 
     protected virtual void Update() {
-        //UpdateTimer(_durationTimer, duration);
-
         durationTimer.UpdateClock();
         intervalTimer.UpdateClock();
-
     }
 
 
@@ -54,22 +46,6 @@ public class Status : MonoBehaviour {
 
         Destroy(this);
     }
-
-
-    //protected virtual void UpdateTimer(float timer, float clock) {
-    //    if(timer < clock) {
-    //        timer += Time.deltaTime;
-    //        Debug.Log(timer);
-    //        if(timer >= clock) {
-    //            timer = 0f;
-    //            Debug.Log("Tick");
-
-    //        }
-
-    //    }
-
-
-    //}
 
 
 }

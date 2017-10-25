@@ -16,12 +16,14 @@ public class Entity : MonoBehaviour {
     public StatCollection stats;
 
 
+
     public SpriteRenderer SpriteRenderer { get; protected set; }
     public Constants.EntityFacing Facing { get; set; }
     public Animator MyAnimator { get; protected set; }
 
     protected AbilityManager abilityManager;
     protected EntityMovement movement;
+    protected HealthDeathManager healthDeathManager;
 
 
     void Start() {
@@ -31,7 +33,7 @@ public class Entity : MonoBehaviour {
     public void Initialize() {
         stats = new StatCollection();
         stats.Initialize(statTemplate);
-        //this.entityData = entityData;
+
         SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         MyAnimator = GetComponentInChildren<Animator>();
         abilityManager = GetComponent<AbilityManager>();
@@ -44,8 +46,19 @@ public class Entity : MonoBehaviour {
         if(movement != null)
             movement.Initialize();
 
+        healthDeathManager = GetComponent<HealthDeathManager>();
+
+        if (healthDeathManager != null)
+            healthDeathManager.Initialize(this);
+
         GameManager.RegisterEntity(this);
 
+
+    }
+
+    public void UnregisterListeners() {
+        Grid.EventManager.RemoveMyListeners(movement);
+        Grid.EventManager.RemoveMyListeners(healthDeathManager);
 
     }
 

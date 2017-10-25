@@ -36,6 +36,16 @@ public class StatCollection {
     public void AlterStat(Constants.BaseStatType statType, float value, Entity source) {
         BaseStat targetStat = GetStat(statType);
         targetStat.ModifyStat(value);
+
+        //switch (statType) {
+        //    case Constants.BaseStatType.Health:
+        //        if(value < 0) {
+
+        //        }
+        //        break;
+        //}
+
+        
     }
 
 
@@ -46,8 +56,6 @@ public class StatCollection {
             baseStats.Add(newStat);
         }
     }
-
-
 
     private BaseStat GetStat(Constants.BaseStatType statType) {
         for (int i = 0; i < baseStats.Count; i++) {
