@@ -40,7 +40,6 @@ public abstract class EntityMovement : BaseMovement {
         float spriteOffsetX = owner.SpriteRenderer.bounds.size.x;
 
         spriteOffset = new Vector2(spriteOffsetX, 0f);
-
     }
     
 

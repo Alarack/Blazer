@@ -23,30 +23,9 @@ public class Projectile : AttackMedium {
 
 
     public override void Initialize(Effect parentEffect, LayerMask mask, float life = 0f, float damage = 0f) {
-        //this.parentEffect = parentEffect;
-        //layerMask = mask;
-        //stats = new StatCollection();
-        //stats.Initialize(statTemplate);
-        //movement.Initialize();
-
-        //if(this.parentEffect is EffectAttack) {
-        //    EffectAttack attackEffect = this.parentEffect as EffectAttack;
-        //    penetrating = attackEffect.penetrate;
-        //    numPen = attackEffect.numPenetrations;
-        //    impactEffect = attackEffect.impactEffectName;
-        //}
-
-
-        //this.life = life + stats.GetStatCurrentValue(Constants.BaseStatType.Lifetime);
-        //this.damage = damage + stats.GetStatCurrentValue(Constants.BaseStatType.BaseDamage);
-
-        //if(this.life > 0f) {
-        //    Invoke("CleanUp", this.life);
-        //}
         base.Initialize(parentEffect, mask, life, damage);
 
         movement.Initialize();
-
     }
 
     public override void CleanUp() {
@@ -100,6 +79,10 @@ public class Projectile : AttackMedium {
             }
 
         }
+        else {
+            CleanUp();
+        }
+
 
     }
 

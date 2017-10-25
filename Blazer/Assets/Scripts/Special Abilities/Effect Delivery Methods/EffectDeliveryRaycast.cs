@@ -6,13 +6,6 @@ using UnityEngine;
 public class EffectDeliveryRaycast : EffectDeliveryMethod {
 
 
-
-
-
-
-    
-
-
     public override void Deliver() {
         base.Deliver();
 

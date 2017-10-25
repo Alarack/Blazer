@@ -49,13 +49,7 @@ public abstract class AttackMedium : MonoBehaviour {
 
 
     public virtual void CleanUp() {
-        //Debug.Log("Cleaning");
-        //CancelInvoke("CleanUp");
 
-
-        //CreateImpactEffect();
-
-        //Destroy(gameObject);
 
     }
 

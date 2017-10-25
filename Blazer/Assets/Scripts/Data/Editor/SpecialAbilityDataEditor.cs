@@ -60,6 +60,11 @@ public class SpecialAbilityDataEditor : Editor {
 
                 break;
 
+            case Constants.SpecialAbilityEffectType.StatusEffect:
+                effects.statusEffects = EditorHelper.DrawExtendedList("Status Effects", effects.statusEffects, "Status", DrawEffectList);
+
+                break;
+
         }
 
     }
@@ -93,7 +98,6 @@ public class SpecialAbilityDataEditor : Editor {
 
         DrawDeliveryMethod(entry);
 
-
         if (entry is EffectAttack) {
             EffectAttack attackEffect = entry as EffectAttack;
             attackEffect.effectType = Constants.SpecialAbilityEffectType.AttackEffect;
@@ -106,9 +110,7 @@ public class SpecialAbilityDataEditor : Editor {
             }
             EditorGUILayout.Separator();
 
-            //attackEffect.range = EditorGUILayout.FloatField("Max Range", attackEffect.range);
             attackEffect.burstAttack = EditorGUILayout.Toggle("Burst?", attackEffect.burstAttack);
-
 
             if (attackEffect.burstAttack) {
                 attackEffect.burstInterval = EditorGUILayout.FloatField("Delay between shots", attackEffect.burstInterval);
@@ -116,23 +118,23 @@ public class SpecialAbilityDataEditor : Editor {
                 EditorGUILayout.Separator();
             }
 
-
-
             attackEffect.penetrate = EditorGUILayout.Toggle("Penetrating?", attackEffect.penetrate);
             if (attackEffect.penetrate) {
                 attackEffect.numPenetrations = EditorGUILayout.IntField("Number of Penetrations (0 = INF)", attackEffect.numPenetrations);
             }
 
-
             EditorGUILayout.Separator();
             attackEffect.fireEffectName = EditorGUILayout.TextField("Fire Effect Name", attackEffect.fireEffectName);
             attackEffect.impactEffectName = EditorGUILayout.TextField("Impact Effect Name", attackEffect.impactEffectName);
+        }
 
+        if(entry is EffectStatus) {
+            EffectStatus statusAttack = entry as EffectStatus;
+            statusAttack.effectType = Constants.SpecialAbilityEffectType.StatusEffect;
 
-            //rayAttack.targetingMethod = EditorHelper.EnumPopup("Targeting Method", rayAttack.targetingMethod);
-            ////rayAttack.layerMask = EditorGUILayout.MaskField()
-
-            //rayAttack.layerMask = EditorHelper.LayerMaskField("Layer Mask", rayAttack.layerMask);
+            statusAttack.statusType = EditorHelper.EnumPopup("Status Type", statusAttack.statusType);
+            statusAttack.duration = EditorGUILayout.FloatField("Duration (0 = INF)", statusAttack.duration);
+            statusAttack.interval = EditorGUILayout.FloatField("Interval Time", statusAttack.interval);
 
         }
 
@@ -163,6 +165,7 @@ public class SpecialAbilityDataEditor : Editor {
 
         EditorGUILayout.Separator();
 
+        effect.effectName = EditorGUILayout.TextField("Effect Name", effect.effectName);
         effect.animationTrigger = EditorGUILayout.TextField("Animation Trigger", effect.animationTrigger);
 
         switch (effect.deliveryMethod) {
@@ -192,7 +195,10 @@ public class SpecialAbilityDataEditor : Editor {
                 effect.meleeDelivery.targetingMethod = EditorHelper.EnumPopup("Targeting Method", effect.meleeDelivery.targetingMethod);
                 effect.meleeDelivery.layerMask = EditorHelper.LayerMaskField("Layer Mask", effect.meleeDelivery.layerMask);
                 effect.meleeDelivery.prefabName = EditorGUILayout.TextField("Melee Prefab Name", effect.meleeDelivery.prefabName);
+                break;
 
+            case Constants.EffectDeliveryMethod.Rider:
+                effect.riderTarget = EditorGUILayout.TextField("Host Effect Name", effect.riderTarget);
 
                 break;
         }

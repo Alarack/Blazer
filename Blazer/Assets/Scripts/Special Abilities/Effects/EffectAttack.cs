@@ -68,7 +68,6 @@ public class EffectAttack : Effect {
     }
 
     public override void Apply(GameObject target) {
-        base.Apply(target);
 
         float damage;
         if (scaleFromBaseDamage)
@@ -77,6 +76,10 @@ public class EffectAttack : Effect {
             damage = effectDamage;
 
         Debug.Log(parentAbility.abilityName + " deals " + damage + " points of damage to " + target.gameObject.name);
+
+        VisualEffectManager.MakeFloatingText(damage.ToString(), target.transform.position);
+
+        base.Apply(target);
     }
 
 }

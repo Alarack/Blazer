@@ -11,7 +11,7 @@ public class EffectDeliveryMethod {
     }
 
 
-    public Constants.EffectDeliveryMethod deliveryMethodType;
+    //public Constants.EffectDeliveryMethod deliveryMethodType;
     public TargetingMethod targetingMethod = TargetingMethod.StraightLeftRight;
     public LayerMask layerMask;
 

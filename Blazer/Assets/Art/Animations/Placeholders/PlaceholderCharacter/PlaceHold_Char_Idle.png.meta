@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a2c7d720f0c5e764ca4e0fbb3c0e187d
-timeCreated: 1508621015
+timeCreated: 1508906337
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -122,8 +122,8 @@ TextureImporter:
       name: PlaceHold_Char_Idle_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 2
+        y: 2
         width: 13
         height: 23
       alignment: 9

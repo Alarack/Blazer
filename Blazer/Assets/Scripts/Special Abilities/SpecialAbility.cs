@@ -42,6 +42,21 @@ public class SpecialAbility {
         for (int i = 0; i < effects.Count; i++) {
             effects[i].Initialize(this);
         }
+
+        SetupRiders();
+    }
+
+    public Effect GetEffectByName(string effectName) {
+        if (string.IsNullOrEmpty(effectName))
+            return null;
+
+        for(int i =0; i < effects.Count; i++) {
+            if (effects[i].effectName == effectName) {
+                return effects[i];
+            }
+        }
+
+        return null;
     }
 
 
@@ -69,6 +84,10 @@ public class SpecialAbility {
         if(recoveryMethod != null)
             recoveryMethod.ManagedUpdate();
 
+        for (int i = 0; i < effects.Count; i++) {
+            effects[i].ManagedUpdate();
+        }
+
         AbilityInUse();
     }
 
@@ -81,6 +100,13 @@ public class SpecialAbility {
                 useTimer = 0f;
             }
         }
+    }
+
+    protected void SetupRiders() {
+        for (int i = 0; i < effects.Count; i++) {
+            effects[i].SetUpRiders();
+        }
+
     }
 
 }

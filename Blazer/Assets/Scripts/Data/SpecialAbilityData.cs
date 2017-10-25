@@ -57,7 +57,7 @@ public class SpecialAbilityData : ScriptableObject {
     public class EffectHolder {
 
         public List<EffectAttack> attacks = new List<EffectAttack>();
-
+        public List<EffectStatus> statusEffects = new List<EffectStatus>();
 
 
 
@@ -67,6 +67,26 @@ public class SpecialAbilityData : ScriptableObject {
                     EffectSet raycastAttacks = new EffectSet(effectType, attacks.ConvertAll<Effect>(b => (Effect)b));
 
                     return raycastAttacks;
+
+                case Constants.SpecialAbilityEffectType.StatusEffect:
+
+                    //List<EffectStatus> clonedStatus = new List<EffectStatus>();
+
+                    //for(int i = 0; i < statusEffects.Count; i++) {
+
+                    //    EffectStatus statusClone = ObjectCopier.Clone(statusEffects[i]) as EffectStatus;
+
+                    //    clonedStatus.Add(statusClone);
+
+                    //}
+
+                    //EffectSet statusAttacks = new EffectSet(Constants.SpecialAbilityEffectType.StatusEffect, clonedStatus.ConvertAll(b => (Effect)b));
+
+
+
+                    EffectSet statusAttacks = new EffectSet(effectType, statusEffects.ConvertAll<Effect>(b => (Effect)b));
+
+                    return statusAttacks;
 
                 default:
                     return null;

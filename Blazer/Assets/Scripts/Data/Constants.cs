@@ -35,7 +35,14 @@ public class Constants {
     public enum SpecialAbilityEffectType {
         None = 0,
         AttackEffect = 1,
-        SelfBuff = 2,
+        StatusEffect = 2,
+    }
+
+    public enum StatusEffectType {
+        None = 0,
+        Burning = 1,
+        Stun = 2,
+        KnockBack = 3,
     }
 
     public enum EffectDeliveryMethod {
@@ -43,6 +50,8 @@ public class Constants {
         Raycast = 1,
         Projectile = 2,
         Melee = 3,
+        Rider = 4,
+        SelfTargeting = 5,
 
     }
 
