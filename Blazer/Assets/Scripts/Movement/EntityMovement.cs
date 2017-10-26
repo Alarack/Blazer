@@ -13,17 +13,13 @@ public abstract class EntityMovement : BaseMovement {
     public Transform groundCheck;
     public float groundCheckRadius = 0.01f;
     public LayerMask whatIsGround;
+    public bool Grounded { get; protected set; }
 
     [Header("Sprite Pivot Hack")]
     public bool useSpritePivotHack;
-
     protected Vector2 spriteOffset;
 
-    protected bool isGrounded;
     protected Entity owner;
-
-
-
 
 
     protected override void Awake () {
@@ -31,11 +27,25 @@ public abstract class EntityMovement : BaseMovement {
         owner = GetComponent<Entity>();
     }
 
+    public override void Initialize() {
+        base.Initialize();
+
+        maxSpeed = owner.stats.GetStatCurrentValue(Constants.BaseStatType.MoveSpeed);
+        jumpForce = owner.stats.GetStatCurrentValue(Constants.BaseStatType.JumpForce);
+
+        float spriteOffsetX = owner.SpriteRenderer.bounds.size.x;
+
+        spriteOffset = new Vector2(spriteOffsetX, 0f);
+    }
+
     protected override void RegisterListeners() {
         base.RegisterListeners();
 
         Grid.EventManager.RegisterListener(Constants.GameEvent.StatChanged, OnStatChanged);
     }
+
+
+    #region EVENTS
 
     protected virtual void OnStatChanged(EventData data) {
         Constants.BaseStatType stat = (Constants.BaseStatType)data.GetInt("Stat");
@@ -57,16 +67,9 @@ public abstract class EntityMovement : BaseMovement {
 
     }
 
-    public override void Initialize() {
-        base.Initialize();
+    #endregion
 
-        maxSpeed = owner.stats.GetStatCurrentValue(Constants.BaseStatType.MoveSpeed);
-        jumpForce = owner.stats.GetStatCurrentValue(Constants.BaseStatType.JumpForce);
 
-        float spriteOffsetX = owner.SpriteRenderer.bounds.size.x;
-
-        spriteOffset = new Vector2(spriteOffsetX, 0f);
-    }
     
 
     protected override void FixedUpdate() {
@@ -79,7 +82,7 @@ public abstract class EntityMovement : BaseMovement {
         if (groundCheck == null)
             return;
 
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+        Grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
 
     }
 

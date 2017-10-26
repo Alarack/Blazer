@@ -5,6 +5,11 @@ using UnityEngine;
 //[System.Serializable]
 public class StatCollection {
 
+    public enum StatModificationType {
+        Additive,
+        Multiplicative
+    }
+
 
     private List<BaseStat> baseStats = new List<BaseStat>();
     //private Entity owner;
@@ -36,16 +41,6 @@ public class StatCollection {
     public void AlterStat(Constants.BaseStatType statType, float value, Entity source) {
         BaseStat targetStat = GetStat(statType);
         targetStat.ModifyStat(value);
-
-        //switch (statType) {
-        //    case Constants.BaseStatType.Health:
-        //        if(value < 0) {
-
-        //        }
-        //        break;
-        //}
-
-        
     }
 
 
@@ -81,8 +76,17 @@ public class StatCollection {
             MaxValue = maxValue;
         }
 
-        public void ModifyStat(float value) {
-            CurrentValue += value;
+        public void ModifyStat(float value, StatModificationType modType = StatModificationType.Additive) {
+
+            switch (modType) {
+                case StatModificationType.Additive:
+                    CurrentValue += value;
+                    break;
+
+                case StatModificationType.Multiplicative:
+                    CurrentValue *= value;
+                    break;
+            }
 
             if (CurrentValue > MaxValue) {
                 CurrentValue = MaxValue;
