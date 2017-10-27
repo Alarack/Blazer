@@ -60,6 +60,7 @@ public class Constants {
         None = 0,
         AbilityActivated = 1,
         StatChanged = 2,
+        AnimationEvent = 3,
 
     }
 

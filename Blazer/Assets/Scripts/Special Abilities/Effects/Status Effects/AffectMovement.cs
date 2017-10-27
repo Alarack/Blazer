@@ -50,7 +50,7 @@ public class AffectMovement : Status {
 
                 //Vector2 flipped = new Vector2(-direction.x, direction.y);
 
-                Debug.Log(knockback);
+                //Debug.Log(knockback);
 
                 target.GetComponent<Rigidbody2D>().AddForce(knockback * value);
 
