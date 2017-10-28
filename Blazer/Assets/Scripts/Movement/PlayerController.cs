@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class PlayerController : EntityMovement {
 
-    //[Header("Temp Stats")]
-    ////public int maxJumps = 1;
-    //private int currentJumps;
+
     private bool isJumping = false;
 
 
@@ -36,7 +34,7 @@ public class PlayerController : EntityMovement {
 
   
     private void TryJump() {
-        if (Input.GetButtonDown("Jump") && isGrounded) {
+        if (Input.GetButtonDown("Jump") && Grounded) {
             isJumping = true;
         }
     }

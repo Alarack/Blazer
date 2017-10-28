@@ -136,6 +136,21 @@ public class SpecialAbilityDataEditor : Editor {
             statusAttack.duration = EditorGUILayout.FloatField("Duration (0 = INF)", statusAttack.duration);
             statusAttack.interval = EditorGUILayout.FloatField("Interval Time", statusAttack.interval);
 
+
+            switch (statusAttack.statusType) {
+                case Constants.StatusEffectType.AffectMovement:
+                    statusAttack.affectMoveType = EditorHelper.EnumPopup("Movement Affect Type", statusAttack.affectMoveType);
+
+                    if(statusAttack.affectMoveType != AffectMovement.AffectMovementType.Halt)
+                        statusAttack.affectMoveValue = EditorHelper.FloatField("Value", statusAttack.affectMoveValue);
+
+                    if(statusAttack.affectMoveType == AffectMovement.AffectMovementType.Knockback) {
+                        statusAttack.knocbackAngle = EditorHelper.FloatField("Angle", statusAttack.knocbackAngle);
+                    }
+
+
+                    break;
+            }
         }
 
 

@@ -43,6 +43,7 @@ public class Constants {
         Burning = 1,
         Stun = 2,
         KnockBack = 3,
+        AffectMovement = 4,
     }
 
     public enum EffectDeliveryMethod {
@@ -59,6 +60,7 @@ public class Constants {
         None = 0,
         AbilityActivated = 1,
         StatChanged = 2,
+        AnimationEvent = 3,
 
     }
 

@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class BaseMovement : MonoBehaviour {
 
+    public bool CanMove { get; set; }
+
     protected float maxSpeed;
     protected float currentSpeed;
     protected Rigidbody2D myBody;
@@ -16,6 +18,8 @@ public abstract class BaseMovement : MonoBehaviour {
     public virtual void Initialize() {
         RegisterListeners();
 
+        CanMove = true;
+
     }
 
     protected virtual void RegisterListeners() {
@@ -23,10 +27,13 @@ public abstract class BaseMovement : MonoBehaviour {
     }
 
     protected virtual void FixedUpdate() {
-        if (maxSpeed != 0f)
-            Move();
+        if (maxSpeed == 0f)
+            return;
 
-        //CheckGround();
+        if (!CanMove)
+            return;
+
+            Move();
     }
 
 
