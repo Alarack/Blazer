@@ -20,7 +20,6 @@ public class AffectMovement : Status {
     public override void Initialize(GameObject target, float duration, float interval, Constants.StatusEffectType statusType) {
         base.Initialize(target, duration, interval, statusType);
 
-
     }
 
     public void InitializeAffectMovement(AffectMovementType type, float value, Vector2 knockback) {

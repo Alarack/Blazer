@@ -11,7 +11,8 @@ public class Status : MonoBehaviour {
     protected Timer durationTimer;
     protected Timer intervalTimer;
     protected GameObject target;
-
+    protected Entity source;
+    protected Entity targetEntity;
 
     protected void Start() {
         //Initialize(gameObject);
@@ -21,6 +22,8 @@ public class Status : MonoBehaviour {
     public virtual void Initialize(GameObject target, float duration, float interval, Constants.StatusEffectType statusType) {
         this.target = target;
         this.statusType = statusType;
+
+        targetEntity = target.GetComponent<Entity>();
 
         durationTimer = new Timer("Duration", duration, false, CleanUp);
         intervalTimer = new Timer("Interval", interval, true, Tick);

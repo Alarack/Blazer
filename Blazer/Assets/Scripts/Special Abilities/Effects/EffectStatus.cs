@@ -6,10 +6,8 @@ using UnityEngine;
 [Serializable]
 public class EffectStatus : Effect {
 
-
+    //Base Stats
     public Constants.StatusEffectType statusType;
-
-
     public float duration;
     public float interval;
 
@@ -17,10 +15,15 @@ public class EffectStatus : Effect {
     public AffectMovement.AffectMovementType affectMoveType;
     public float affectMoveValue;
     public float knocbackAngle;
-
     protected Vector2 knockbackVector;
 
- 
+    //Damage Over Time
+    public bool scaleFromBaseDamage;
+    public float damagePerInterval;
+    public float percentOfBaseDamage;
+
+
+
     public override void Activate() {
         base.Activate();
         BeginDelivery();
@@ -48,7 +51,19 @@ public class EffectStatus : Effect {
 
                 newAffectMovement.Initialize(target, duration, interval, statusType);
                 newAffectMovement.InitializeAffectMovement(affectMoveType, affectMoveValue, knockbackVector);
+                break;
 
+            case Constants.StatusEffectType.DamageOverTime:
+
+                float damage;
+                if (scaleFromBaseDamage)
+                    damage = damagePerInterval + (parentAbility.source.stats.GetStatCurrentValue(Constants.BaseStatType.BaseDamage) * percentOfBaseDamage);
+                else
+                    damage = damagePerInterval;
+
+                DamageOverTime newDot = target.AddComponent<DamageOverTime>();
+                newDot.Initialize(target, duration, interval, statusType);
+                newDot.InitializeDamageOverTime(damage, parentAbility.source);
 
                 break;
         }

@@ -148,6 +148,14 @@ public class SpecialAbilityDataEditor : Editor {
                         statusAttack.knocbackAngle = EditorHelper.FloatField("Angle", statusAttack.knocbackAngle);
                     }
 
+                    break;
+
+                case Constants.StatusEffectType.DamageOverTime:
+                    statusAttack.damagePerInterval = EditorHelper.FloatField("Damage Per Interval", statusAttack.damagePerInterval);
+                    statusAttack.scaleFromBaseDamage = EditorGUILayout.Toggle("Scale from Base Damage?", statusAttack.scaleFromBaseDamage);
+
+                    if (statusAttack.scaleFromBaseDamage)
+                        statusAttack.percentOfBaseDamage = EditorHelper.PercentFloatField("Percentage of Base Damage", statusAttack.percentOfBaseDamage);
 
                     break;
             }
