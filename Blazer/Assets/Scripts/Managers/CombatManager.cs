@@ -55,9 +55,9 @@ public class CombatManager : MonoBehaviour {
     public static void RemoveTrackedStatMod(Entity targetOfChange, Constants.BaseStatType stat, StatCollection.StatModifer mod) {
         targetOfChange.stats.RemoveTrackedMod(stat, mod);
 
-        Debug.Log("Removing a mod");
+        //Debug.Log("Removing a mod");
 
-        combatManager.SendStatChangeEvent(targetOfChange, targetOfChange, stat, mod.value);
+        combatManager.SendStatChangeEvent(null, targetOfChange, stat, mod.value);
     }
 
 
@@ -69,7 +69,10 @@ public class CombatManager : MonoBehaviour {
         data.AddInt("Stat", (int)stat);
         data.AddFloat("Value", value);
 
+        //Debug.Log("Event Sent: " + stat.ToString() + " :: " + value);
         Grid.EventManager.SendEvent(Constants.GameEvent.StatChanged, data);
+
+
     }
 
 

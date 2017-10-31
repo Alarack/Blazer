@@ -24,6 +24,10 @@ public class HealthDeathManager : MonoBehaviour {
         Grid.EventManager.RegisterListener(Constants.GameEvent.StatChanged, OnStatChanged);
     }
 
+    public virtual void RemoveListeners() {
+        Grid.EventManager.RemoveMyListeners(this);
+    }
+
     protected void OnStatChanged(EventData data) {
         Constants.BaseStatType stat = (Constants.BaseStatType)data.GetInt("Stat");
         Entity target = data.GetMonoBehaviour("Target") as Entity;
@@ -32,7 +36,10 @@ public class HealthDeathManager : MonoBehaviour {
             return;
 
         if(stat == Constants.BaseStatType.Health) {
-            if(owner.stats.GetStatModifiedValue(Constants.BaseStatType.Health) <= 0f) {
+            //Debug.Log(owner.stats.GetStatModifiedValue(Constants.BaseStatType.Health) + " is the health of " + owner.gameObject.name);
+
+            if (owner.stats.GetStatModifiedValue(Constants.BaseStatType.Health) <= 0f) {
+
                 Die();
             }
         }
@@ -46,6 +53,7 @@ public class HealthDeathManager : MonoBehaviour {
         GameManager.UnregisterEntity(owner);
         owner.UnregisterListeners();
 
+        Debug.Log(owner.gameObject + " has died");
 
         Destroy(owner.gameObject);
     }

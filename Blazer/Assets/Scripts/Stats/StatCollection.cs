@@ -98,8 +98,12 @@ public class StatCollection {
         }
 
         public float GetModifiedValue() {
+            
+
             float result = BaseValue + GetTotalAddativeMod();
             result *= GetTotalMultiplier();
+
+            //Debug.Log("Getting a value of " + statType + ". Value of: " + result);
 
             if (result <= 0f)
                 result = 0f;
@@ -109,16 +113,19 @@ public class StatCollection {
 
         public float GetTotalMultiplier() {
             float totalMultiplier = 0f;
-
-            if(mods.Count < 1) {
-                return 1f;
-            }
+            List<StatModifer> allMulipliers = new List<StatModifer>();
 
             for (int i = 0; i < mods.Count; i++) {
                 if (mods[i].modType == StatModificationType.Multiplicative) {
+                    allMulipliers.Add(mods[i]);
                     totalMultiplier += mods[i].value;
                 }
             }
+
+            if (allMulipliers.Count < 1) {
+                return 1f;
+            }
+
             return totalMultiplier;
         }
 

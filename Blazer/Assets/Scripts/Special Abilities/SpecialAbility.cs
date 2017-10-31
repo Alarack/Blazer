@@ -84,7 +84,7 @@ public class SpecialAbility {
     }
 
     private void ResetSequenceIndex() {
-        Debug.Log("resetting sequence index");
+        //Debug.Log("resetting sequence index");
         sequenceIndex = 0;
     }
 
@@ -114,7 +114,7 @@ public class SpecialAbility {
             }
 
             FinishActivation();
-            Debug.Log(abilityName + " has been activated");
+            //Debug.Log(abilityName + " has been activated");
             return true;
         }
 

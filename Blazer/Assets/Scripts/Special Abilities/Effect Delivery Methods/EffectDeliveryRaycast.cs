@@ -11,7 +11,7 @@ public class EffectDeliveryRaycast : EffectDeliveryMethod {
 
         //EffectAttack attackEffect = parentEffect as EffectAttack;
 
-        Debug.Log("Deliverying a raycast");
+        //Debug.Log("Deliverying a raycast");
 
         if (parentEffect.penetrate) {
             TryShootMultiRay();

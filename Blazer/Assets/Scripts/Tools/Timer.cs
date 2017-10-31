@@ -53,8 +53,8 @@ public class Timer {
 
     public void ResetTimer() {
         _timer = 0f;
-        if (timerName == "SequenceTimer")
-            Debug.Log(timerName + " has been reset");
+        //if (timerName == "SequenceTimer")
+        //    Debug.Log(timerName + " has been reset");
     }
 
 

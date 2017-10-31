@@ -51,6 +51,8 @@ public class AffectMovement : Status {
             case AffectMovementType.AlterSpeed:
                 mod = new StatCollection.StatModifer(amount, StatCollection.StatModificationType.Multiplicative);
 
+                //Debug.Log("Applyin a mod of " + mod.value);
+
                 CombatManager.ApplyTrackedStatMod(source, targetEntity, Constants.BaseStatType.MoveSpeed, mod);
 
                 //CombatManager.ApplyUntrackedStatMod(source, target.GetComponent<Entity>(), Constants.BaseStatType.MoveSpeed, amount, StatCollection.StatModificationType.Multiplicative);
@@ -63,7 +65,7 @@ public class AffectMovement : Status {
 
     protected override void CleanUp() {
         if (targetMovement == null) {
-            Debug.Log("Nove moves");
+            //Debug.Log("Nove moves");
             Destroy(this);
             return;
         }

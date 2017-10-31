@@ -44,6 +44,8 @@ public abstract class EntityMovement : BaseMovement {
         Grid.EventManager.RegisterListener(Constants.GameEvent.StatChanged, OnStatChanged);
     }
 
+    
+
 
     #region EVENTS
 
@@ -51,11 +53,19 @@ public abstract class EntityMovement : BaseMovement {
         Constants.BaseStatType stat = (Constants.BaseStatType)data.GetInt("Stat");
         Entity target = data.GetMonoBehaviour("Target") as Entity;
 
-        if (target != owner)
+
+        //Debug.Log("Event Recieved: " + target.gameObject.name + " ::: " + stat);
+
+        if (target != owner) {
+            //Debug.Log(target.gameObject.name + " does not match " + owner.gameObject.name);
+
             return;
+        }
+
 
         switch (stat) {
             case Constants.BaseStatType.MoveSpeed:
+                //Debug.Log("MoveSpeed Event Recieved");
                 maxSpeed = owner.stats.GetStatModifiedValue(Constants.BaseStatType.MoveSpeed);
                 break;
 

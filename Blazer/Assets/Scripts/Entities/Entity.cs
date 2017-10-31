@@ -55,8 +55,13 @@ public class Entity : MonoBehaviour {
     }
 
     public void UnregisterListeners() {
-        Grid.EventManager.RemoveMyListeners(movement);
-        Grid.EventManager.RemoveMyListeners(healthDeathManager);
+        //Grid.EventManager.RemoveMyListeners(this);
+        if(movement != null)
+            movement.RemoveMyListeners();
+
+        if(healthDeathManager != null)
+            healthDeathManager.RemoveListeners();
+        //Grid.EventManager.RemoveMyListeners(healthDeathManager);
 
     }
 
