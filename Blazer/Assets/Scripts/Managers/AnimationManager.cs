@@ -23,6 +23,7 @@ public class AnimationManager : MonoBehaviour {
 
 
     public void Attack(AnimationEvent animEvent) {
+        //Debug.Log("Sending Attack");
 
         EventData data = new EventData();
         data.AddString("AttackName", animEvent.stringParameter);
@@ -30,7 +31,7 @@ public class AnimationManager : MonoBehaviour {
 
         Grid.EventManager.SendEvent(Constants.GameEvent.AnimationEvent, data);
 
-        Debug.Log("Sending Attack");
+
 
     }
 

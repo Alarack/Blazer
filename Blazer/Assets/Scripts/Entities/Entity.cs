@@ -15,8 +15,6 @@ public class Entity : MonoBehaviour {
     public StatCollectionData statTemplate;
     public StatCollection stats;
 
-
-
     public SpriteRenderer SpriteRenderer { get; protected set; }
     public Constants.EntityFacing Facing { get; set; }
     public Animator MyAnimator { get; protected set; }

@@ -30,8 +30,8 @@ public abstract class EntityMovement : BaseMovement {
     public override void Initialize() {
         base.Initialize();
 
-        maxSpeed = owner.stats.GetStatCurrentValue(Constants.BaseStatType.MoveSpeed);
-        jumpForce = owner.stats.GetStatCurrentValue(Constants.BaseStatType.JumpForce);
+        maxSpeed = owner.stats.GetStatModifiedValue(Constants.BaseStatType.MoveSpeed);
+        jumpForce = owner.stats.GetStatModifiedValue(Constants.BaseStatType.JumpForce);
 
         float spriteOffsetX = owner.SpriteRenderer.bounds.size.x;
 
@@ -56,11 +56,11 @@ public abstract class EntityMovement : BaseMovement {
 
         switch (stat) {
             case Constants.BaseStatType.MoveSpeed:
-                maxSpeed = owner.stats.GetStatCurrentValue(Constants.BaseStatType.MoveSpeed);
+                maxSpeed = owner.stats.GetStatModifiedValue(Constants.BaseStatType.MoveSpeed);
                 break;
 
             case Constants.BaseStatType.JumpForce:
-                jumpForce = owner.stats.GetStatCurrentValue(Constants.BaseStatType.JumpForce);
+                jumpForce = owner.stats.GetStatModifiedValue(Constants.BaseStatType.JumpForce);
                 break;
         }
 

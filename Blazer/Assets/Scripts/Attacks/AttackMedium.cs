@@ -38,8 +38,8 @@ public abstract class AttackMedium : MonoBehaviour {
         }
 
 
-        this.life = life + stats.GetStatCurrentValue(Constants.BaseStatType.Lifetime);
-        this.damage = damage + stats.GetStatCurrentValue(Constants.BaseStatType.BaseDamage);
+        this.life = life + stats.GetStatModifiedValue(Constants.BaseStatType.Lifetime);
+        this.damage = damage + stats.GetStatModifiedValue(Constants.BaseStatType.BaseDamage);
 
         if (this.life > 0f) {
             Invoke("CleanUp", this.life);

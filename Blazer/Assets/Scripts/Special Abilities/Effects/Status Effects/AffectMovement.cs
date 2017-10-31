@@ -5,8 +5,8 @@ using UnityEngine;
 public class AffectMovement : Status {
 
     public enum AffectMovementType {
-        Increase,
-        Decrease,
+        None,
+        AlterSpeed,
         Halt,
         Knockback
     }
@@ -16,24 +16,24 @@ public class AffectMovement : Status {
     protected AffectMovementType affectType;
     protected float amount;
     protected Vector2 knockbackVector;
+    //protected List<StatCollection.StatModifer> mods = new List<StatCollection.StatModifer>();
+    protected StatCollection.StatModifer mod;
 
-    public override void Initialize(GameObject target, float duration, float interval, Constants.StatusEffectType statusType) {
-        base.Initialize(target, duration, interval, statusType);
-
+    public override void Initialize(GameObject target, float duration, float interval, Constants.StatusEffectType statusType, SpecialAbility sourceAbility) {
+        base.Initialize(target, duration, interval, statusType, sourceAbility);
     }
 
     public void InitializeAffectMovement(AffectMovementType type, float value, Vector2 knockback) {
         affectType = type;
         amount = value;
-
         targetMovement = target.GetComponent<BaseMovement>();
 
-        if (targetMovement == null)
-            return;
-
         switch (affectType) {
-
             case AffectMovementType.Halt:
+                
+
+                if (targetMovement == null)
+                    return;
 
                 if (targetMovement is EntityMovement) {
                     if (((EntityMovement)targetMovement).Grounded)
@@ -44,15 +44,16 @@ public class AffectMovement : Status {
                 break;
 
             case AffectMovementType.Knockback:
-
-                //Vector2 direction = TargetingUtilities.DegreeToVector2(value);
-
-                //Vector2 flipped = new Vector2(-direction.x, direction.y);
-
-                //Debug.Log(knockback);
-
                 target.GetComponent<Rigidbody2D>().AddForce(knockback * value);
 
+                break;
+
+            case AffectMovementType.AlterSpeed:
+                mod = new StatCollection.StatModifer(amount, StatCollection.StatModificationType.Multiplicative);
+
+                CombatManager.ApplyTrackedStatMod(source, targetEntity, Constants.BaseStatType.MoveSpeed, mod);
+
+                //CombatManager.ApplyUntrackedStatMod(source, target.GetComponent<Entity>(), Constants.BaseStatType.MoveSpeed, amount, StatCollection.StatModificationType.Multiplicative);
                 break;
         }
 
@@ -60,15 +61,9 @@ public class AffectMovement : Status {
     }
 
 
-    
-
-
-
-
-
-
     protected override void CleanUp() {
         if (targetMovement == null) {
+            Debug.Log("Nove moves");
             Destroy(this);
             return;
         }
@@ -76,6 +71,15 @@ public class AffectMovement : Status {
         switch (affectType) {
             case AffectMovementType.Halt:
                 targetMovement.CanMove = true;
+                break;
+
+            case AffectMovementType.AlterSpeed:
+                if(mod != null) {
+                    CombatManager.RemoveTrackedStatMod(targetEntity, Constants.BaseStatType.MoveSpeed, mod);
+                }
+                else {
+                    Debug.Log("Mod NUll");
+                }
                 break;
         }
 

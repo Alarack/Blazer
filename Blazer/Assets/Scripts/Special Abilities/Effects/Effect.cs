@@ -11,6 +11,13 @@ public class Effect {
     public Constants.EffectDeliveryMethod deliveryMethod;
     public string animationTrigger;
 
+    public bool applyToSpecificTarget;
+    public int targetIndex;
+
+    //public bool requireMultipleHits;
+    //public int requiredHits;
+    //protected int hitCounter;
+
     public Entity Source { get { return parentAbility.source; } }
 
     [System.NonSerialized]
@@ -18,6 +25,7 @@ public class Effect {
 
     [System.NonSerialized]
     protected List<Effect> riders = new List<Effect>();
+
 
     //protected List<GameObject> currentTargets = new List<GameObject>();
 
@@ -35,7 +43,7 @@ public class Effect {
 
 
     public virtual void Activate() {
-        Debug.Log("An effect of type " + effectType.ToString() + " on the ability " + parentAbility.abilityName + " is being activated");
+        //Debug.Log("An effect of type " + effectType.ToString() + " on the ability " + parentAbility.abilityName + " is being activated");
         //Debug.Log(deliveryMethod + " is my delivery method");
     }
 
@@ -64,14 +72,19 @@ public class Effect {
     }
 
     public virtual void Apply(GameObject target) {
-        //if(!currentTargets.Contains(target))
-        //    currentTargets.Add(target);
+        Entity targetEntity = target.GetComponent<Entity>();
+        if (target != null) {
+
+            if (parentAbility.ParentAbility != null) {
+                parentAbility.ParentAbility.AddTarget(targetEntity);
+            }
+            else {
+                parentAbility.AddTarget(targetEntity);
+            }
+        }
 
         ApplyRiderEffects(target);
-
-        Debug.Log(effectName + " is being applied on " + target.gameObject.name);
-
-
+        //Debug.Log(effectName + " is being applied on " + target.gameObject.name);
     }
 
     public virtual void Remove() {
@@ -101,6 +114,27 @@ public class Effect {
         for (int i = 0; i < riders.Count; i++) {
             riders[i].Apply(target);
         }
+    }
+
+
+    protected virtual bool CheckForSpecificTarget(GameObject target) {
+        Entity targetEntity = target.GetComponent<Entity>();
+
+        if (applyToSpecificTarget) {
+            if (parentAbility.targets.Count < targetIndex - 1) {
+                //Debug.Log("Target out of range");
+                return false;
+            }
+
+            if (targetEntity != parentAbility.targets[targetIndex - 1]) {
+                //Debug.Log("target no at right index ");
+                return false;
+            }
+
+            //Debug.Log(targetEntity.gameObject.name + " is the " + targetIndex + "th target");
+        }
+
+        return true;
     }
 
 }

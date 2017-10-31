@@ -20,8 +20,20 @@ public class AbilityManager : MonoBehaviour {
 
         for(int i = 0; i < abilityData.Count; i++) {
             SpecialAbility newAbility = new SpecialAbility();
-            newAbility.Initialize(source, abilityData[i]);
+
+            newAbility.Initialize(source, abilityData[i], abilityData[i].sequencedAbilities);
             abilities.Add(newAbility);
+
+
+            //if (abilityData[i].sequencedAbilities.Count < 1) {
+            //    newAbility.Initialize(source, abilityData[i]);
+            //    abilities.Add(newAbility);
+            //}
+            //else {
+            //    newAbility.Initialize(source, abilityData[i], abilityData[i].sequencedAbilities);
+            //    abilities.Add(newAbility);
+            //}
+
         }
 
     }

@@ -71,19 +71,15 @@ public class EffectAttack : Effect {
 
         float damage;
         if (scaleFromBaseDamage)
-            damage = effectDamage + (parentAbility.source.stats.GetStatCurrentValue(Constants.BaseStatType.BaseDamage) * percentOfBaseDamage);
+            damage = effectDamage + (parentAbility.source.stats.GetStatModifiedValue(Constants.BaseStatType.BaseDamage) * percentOfBaseDamage);
         else
             damage = effectDamage;
 
         Entity targetEntity = target.GetComponent<Entity>();
 
         if(targetEntity != null) {
-            CombatManager.AlterStat(Source, target.GetComponent<Entity>(), Constants.BaseStatType.Health, damage);
+            CombatManager.ApplyUntrackedStatMod(Source, targetEntity, Constants.BaseStatType.Health, damage);
         }
-
-        //Debug.Log(parentAbility.abilityName + " deals " + damage + " points of damage to " + target.gameObject.name);
-
-        //VisualEffectManager.MakeFloatingText(damage.ToString(), target.transform.position);
 
         base.Apply(target);
     }

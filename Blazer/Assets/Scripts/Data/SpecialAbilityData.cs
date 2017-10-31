@@ -7,6 +7,7 @@ using UnityEngine;
 public class SpecialAbilityData : ScriptableObject {
 
     public string abilityName;
+    public Sprite abilityIcon;
     public float useDuration;
     public bool overrideOtherAbilities;
     public List<Constants.SpecialAbilityEffectType> effectTypes = new List<Constants.SpecialAbilityEffectType>();
@@ -16,6 +17,8 @@ public class SpecialAbilityData : ScriptableObject {
 
     public EffectHolder effectHolder = new EffectHolder();
 
+    public List<SpecialAbilityData> sequencedAbilities = new List<SpecialAbilityData>();
+    public float sequenceWindow = 0.5f;
 
     public List<SpecialAbilityRecovery> GetAllRecoveryMechanics() {
         List<SpecialAbilityRecovery> results = new List<SpecialAbilityRecovery>();

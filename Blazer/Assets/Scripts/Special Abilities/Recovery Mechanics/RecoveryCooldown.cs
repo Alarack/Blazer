@@ -7,30 +7,28 @@ public class RecoveryCooldown : SpecialAbilityRecovery {
 
     public float cooldown;
 
-    private float _timer;
+    public float RatioOfRecovery { get { return timer.Ratio; } }
+    private Timer timer;
+
+
+    public override void Initialize(SpecialAbility parentAbility) {
+        base.Initialize(parentAbility);
+        timer = new Timer("Cooldown", cooldown, false, Refresh);
+
+    }
 
     public override void Recover() {
-        //base.Recover();
-
-        if (!Ready) {
-            IncrementTimer();
-            CheckReady();
-        }
+        if(!Ready)
+            timer.UpdateClock();
     }
 
-    private void IncrementTimer() {
-        if (_timer < cooldown) {
-            _timer += Time.deltaTime;
-
-            //Debug.Log("an ability: " + parentAbility.abilityName + " has a cooldown actively running at: " + _timer + " seconds");
-        }
+    private void Refresh() {
+        Ready = true;
     }
 
-    private void CheckReady() {
-        if (_timer >= cooldown) {
-            _timer = 0f;
-            Ready = true;
-        }
+    public override void Trigger() {
+        base.Trigger();
+        timer.ResetTimer();
     }
 
 }

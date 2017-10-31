@@ -20,7 +20,7 @@ public class SpecialAbilityDataEditor : Editor {
 
 
         _abilityData.abilityName = EditorGUILayout.TextField("Ability Name", _abilityData.abilityName);
-
+        _abilityData.abilityIcon = EditorHelper.ObjectField<Sprite>("Icon", _abilityData.abilityIcon);
         EditorGUILayout.Separator();
 
         _abilityData.recoveryType = EditorHelper.EnumPopup("Recvery Type", _abilityData.recoveryType);
@@ -32,6 +32,13 @@ public class SpecialAbilityDataEditor : Editor {
         _abilityData.useDuration = EditorGUILayout.FloatField("Use Duration", _abilityData.useDuration);
         _abilityData.overrideOtherAbilities = EditorGUILayout.Toggle("Override Other Abilities?", _abilityData.overrideOtherAbilities);
 
+        EditorGUILayout.Separator();
+
+        _abilityData.sequencedAbilities = EditorHelper.DrawList("Sequenced Abilities", _abilityData.sequencedAbilities, true, null, true, DrawSpecialAbilityData);
+
+        if(_abilityData.sequencedAbilities.Count > 0) {
+            _abilityData.sequenceWindow = EditorGUILayout.FloatField("Sequence Window", _abilityData.sequenceWindow);
+        }
 
         EditorGUILayout.Separator();
 
@@ -98,6 +105,19 @@ public class SpecialAbilityDataEditor : Editor {
 
         DrawDeliveryMethod(entry);
 
+
+        entry.applyToSpecificTarget = EditorGUILayout.Toggle("Apply to Xth hit Target?", entry.applyToSpecificTarget);
+
+        if (entry.applyToSpecificTarget) {
+            entry.targetIndex = EditorGUILayout.IntField("Which Hit?", entry.targetIndex);
+        }
+
+        //entry.requireMultipleHits = EditorGUILayout.Toggle("Require Multiple Triggers?", entry.requireMultipleHits);
+        //if (entry.requireMultipleHits) {
+        //    entry.requiredHits = EditorGUILayout.IntField("Number of Triggers", entry.requiredHits);
+        //}
+
+        //Attacks
         if (entry is EffectAttack) {
             EffectAttack attackEffect = entry as EffectAttack;
             attackEffect.effectType = Constants.SpecialAbilityEffectType.AttackEffect;
@@ -128,9 +148,17 @@ public class SpecialAbilityDataEditor : Editor {
             attackEffect.impactEffectName = EditorGUILayout.TextField("Impact Effect Name", attackEffect.impactEffectName);
         }
 
+        //Status Effects
         if(entry is EffectStatus) {
             EffectStatus statusAttack = entry as EffectStatus;
             statusAttack.effectType = Constants.SpecialAbilityEffectType.StatusEffect;
+            statusAttack.stackMethod = EditorHelper.EnumPopup("Stack Method", statusAttack.stackMethod);
+
+            switch (statusAttack.stackMethod) {
+                case Constants.StatusStackingMethod.LimitedStacks:
+                    statusAttack.maxStack = EditorGUILayout.IntField("Max Stacks?", statusAttack.maxStack);
+                    break;
+            }
 
             statusAttack.statusType = EditorHelper.EnumPopup("Status Type", statusAttack.statusType);
             statusAttack.duration = EditorGUILayout.FloatField("Duration (0 = INF)", statusAttack.duration);
@@ -151,6 +179,7 @@ public class SpecialAbilityDataEditor : Editor {
                     break;
 
                 case Constants.StatusEffectType.DamageOverTime:
+
                     statusAttack.damagePerInterval = EditorHelper.FloatField("Damage Per Interval", statusAttack.damagePerInterval);
                     statusAttack.scaleFromBaseDamage = EditorGUILayout.Toggle("Scale from Base Damage?", statusAttack.scaleFromBaseDamage);
 
@@ -232,6 +261,11 @@ public class SpecialAbilityDataEditor : Editor {
 
     private Constants.SpecialAbilityEffectType DrawSpecialAbilityTypes(List<Constants.SpecialAbilityEffectType> list, int index) {
         Constants.SpecialAbilityEffectType result = EditorHelper.EnumPopup("Effect Type", list[index]);
+        return result;
+    }
+
+    private SpecialAbilityData DrawSpecialAbilityData(List<SpecialAbilityData> abilityData, int index) {
+        SpecialAbilityData result = EditorHelper.ObjectField<SpecialAbilityData>("Ability", abilityData[index]);
         return result;
     }
 

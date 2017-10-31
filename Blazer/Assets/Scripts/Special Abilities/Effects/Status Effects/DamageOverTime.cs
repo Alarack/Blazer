@@ -6,11 +6,12 @@ public class DamageOverTime : Status {
 
 
     protected float effectDamage;
-
+    protected float baseDamage;
     
 
     public void InitializeDamageOverTime(float damge, Entity source) {
         effectDamage = damge;
+        baseDamage = damge;
         this.source = source;
     }
 
@@ -19,13 +20,19 @@ public class DamageOverTime : Status {
         base.Tick();
 
         if (targetEntity != null) {
-            CombatManager.AlterStat(source, target.GetComponent<Entity>(), Constants.BaseStatType.Health, effectDamage);
+            CombatManager.ApplyUntrackedStatMod(source, target.GetComponent<Entity>(), Constants.BaseStatType.Health, effectDamage);
             //Debug.Log(effectDamage);
         }
         else {
             Debug.Log("Target null");
         }
 
+    }
+
+    public override void Stack() {
+        base.Stack();
+        effectDamage += baseDamage;
+        RefreshDuration();
     }
 
 }

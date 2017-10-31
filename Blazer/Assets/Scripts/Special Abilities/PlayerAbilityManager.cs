@@ -17,6 +17,7 @@ public class PlayerAbilityManager : AbilityManager {
         for (int i = 0; i < abilities.Count; i++) {
             PlayerAbilityContainer newAbility = new PlayerAbilityContainer(abilities[i], (i + 1));
             playerAbilities.Add(newAbility);
+            MainHud.SetPlayerSlot(abilities[i], i);
         }
 
     }

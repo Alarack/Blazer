@@ -32,7 +32,7 @@ public class HealthDeathManager : MonoBehaviour {
             return;
 
         if(stat == Constants.BaseStatType.Health) {
-            if(owner.stats.GetStatCurrentValue(Constants.BaseStatType.Health) <= 0f) {
+            if(owner.stats.GetStatModifiedValue(Constants.BaseStatType.Health) <= 0f) {
                 Die();
             }
         }

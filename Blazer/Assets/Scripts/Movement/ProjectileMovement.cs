@@ -31,8 +31,8 @@ public class ProjectileMovement : BaseMovement {
     public override void Initialize() {
         base.Initialize();
 
-        maxSpeed = parentProjectile.stats.GetStatCurrentValue(Constants.BaseStatType.MoveSpeed);
-        rotateSpeed = parentProjectile.stats.GetStatCurrentValue(Constants.BaseStatType.RotateSpeed);
+        maxSpeed = parentProjectile.stats.GetStatModifiedValue(Constants.BaseStatType.MoveSpeed);
+        rotateSpeed = parentProjectile.stats.GetStatModifiedValue(Constants.BaseStatType.RotateSpeed);
 
     }
 

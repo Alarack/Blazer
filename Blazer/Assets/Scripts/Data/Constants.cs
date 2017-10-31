@@ -40,12 +40,20 @@ public class Constants {
 
     public enum StatusEffectType {
         None = 0,
-        Burning = 1,
+        //Burning = 1,
         Stun = 2,
-        KnockBack = 3,
+        //KnockBack = 3,
         AffectMovement = 4,
         DamageOverTime = 5
     }
+
+    public enum StatusStackingMethod {
+        None = 0,
+        LimitedStacks = 1,
+        StacksWithOtherAbilities = 2,
+
+    }
+
 
     public enum EffectDeliveryMethod {
         None = 0,
