@@ -5,9 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class AbilityManager : MonoBehaviour {
 
-
-
-
     public List<SpecialAbilityData> abilityData = new List<SpecialAbilityData>();
 
 
@@ -18,25 +15,29 @@ public class AbilityManager : MonoBehaviour {
     public virtual void Initialize(Entity source) {
         this.source = source;
 
-        for(int i = 0; i < abilityData.Count; i++) {
+
+        PopulateSpecialAblities(abilityData);
+
+        //for(int i = 0; i < abilityData.Count; i++) {
+        //    SpecialAbility newAbility = new SpecialAbility();
+
+        //    newAbility.Initialize(source, abilityData[i], abilityData[i].sequencedAbilities);
+        //    abilities.Add(newAbility);
+
+        //}
+
+    }
+
+
+    public virtual void PopulateSpecialAblities(List<SpecialAbilityData> abilityData) {
+        for (int i = 0; i < abilityData.Count; i++) {
             SpecialAbility newAbility = new SpecialAbility();
 
             newAbility.Initialize(source, abilityData[i], abilityData[i].sequencedAbilities);
             abilities.Add(newAbility);
-
-
-            //if (abilityData[i].sequencedAbilities.Count < 1) {
-            //    newAbility.Initialize(source, abilityData[i]);
-            //    abilities.Add(newAbility);
-            //}
-            //else {
-            //    newAbility.Initialize(source, abilityData[i], abilityData[i].sequencedAbilities);
-            //    abilities.Add(newAbility);
-            //}
-
         }
-
     }
+
 
     protected virtual void Update() {
         for(int i = 0; i < abilities.Count; i++) {
@@ -46,7 +47,6 @@ public class AbilityManager : MonoBehaviour {
     }
 
     protected bool IsAbilityInUse() {
-
         for(int i = 0; i < abilities.Count; i++) {
             if (abilities[i].InUse)
                 return true;

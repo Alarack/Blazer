@@ -53,7 +53,6 @@ public abstract class EntityMovement : BaseMovement {
         Constants.BaseStatType stat = (Constants.BaseStatType)data.GetInt("Stat");
         Entity target = data.GetMonoBehaviour("Target") as Entity;
 
-
         //Debug.Log("Event Recieved: " + target.gameObject.name + " ::: " + stat);
 
         if (target != owner) {

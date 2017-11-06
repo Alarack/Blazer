@@ -5,12 +5,15 @@ using UnityEngine;
 [System.Serializable]
 public class SpecialAbility {
 
+    public Constants.SpecialAbilityType abilityType;
+    public Constants.SpecialAbilityActivationMethod activationMethod;
     public string abilityName;
     [System.NonSerialized]
     public Sprite abilityIcon;
     public Entity source;
     public float useDuration;
     public bool overrideOtherAbilities;
+    public float procChance;
 
     public List<Entity> targets = new List<Entity>();
 
@@ -51,10 +54,17 @@ public class SpecialAbility {
 
             sequenceTimer = new Timer("SequenceTimer", sequenceWindow, false, ResetSequenceIndex);
         }
+
+        if(activationMethod == Constants.SpecialAbilityActivationMethod.Passive) {
+            Activate();
+        }
     }
 
     private void SetUpAbility() {
         abilityName = abilitydata.abilityName;
+        abilityType = abilitydata.abilityType;
+        activationMethod = abilitydata.activationMethod;
+        procChance = abilitydata.procChance;
         effects = abilitydata.GetAllEffects();
         recoveryMethod = abilitydata.GetRecoveryMechanic();
         sequenceWindow = abilitydata.sequenceWindow;
@@ -65,15 +75,78 @@ public class SpecialAbility {
 
         if (recoveryMethod != null) {
             recoveryMethod.Initialize(this);
-            //Debug.Log(recoveryMethod.recoveryType.ToString());
         }
 
         for (int i = 0; i < effects.Count; i++) {
             effects[i].Initialize(this);
         }
 
+        RegisterListeners();
+
         SetupRiders();
+
+        //Debug.Log(abilityName + " has been initialized");
     }
+
+
+
+    public void RegisterListeners() {
+        switch (activationMethod) {
+            case Constants.SpecialAbilityActivationMethod.DamageDealt:
+                Grid.EventManager.RegisterListener(Constants.GameEvent.StatChanged, OnDamageDealt);
+                break;
+
+            case Constants.SpecialAbilityActivationMethod.EffectApplied:
+                Grid.EventManager.RegisterListener(Constants.GameEvent.EffectApplied, OnEffectApplied);
+                break;
+        }
+    }
+
+
+
+    #region EVENTS
+
+    private bool ProcRoll() {
+        float roll = Random.Range(0f, 1f);
+        return roll <= procChance;
+    }
+
+
+    private void OnDamageDealt(EventData data) {
+        Constants.BaseStatType stat = (Constants.BaseStatType)data.GetInt("Stat");
+        //Entity target = data.GetMonoBehaviour("Target") as Entity;
+        Entity cause = data.GetMonoBehaviour("Cause") as Entity;
+        float value = data.GetFloat("Value");
+
+        //Debug.Log(target.gameObject + " has been damaged by " + cause.gameObject);
+
+        if (cause != source)
+            return;
+
+        if (stat != Constants.BaseStatType.Health)
+            return;
+
+        if (value > 0)
+            return;
+
+
+
+        Activate();
+    }
+
+    private void OnEffectApplied(EventData data) {
+        Entity cause = data.GetMonoBehaviour("Cause") as Entity;
+        //Entity target = data.GetMonoBehaviour("Target") as Entity;
+
+        if (cause != source)
+            return;
+
+        Activate();
+    }
+
+
+    #endregion
+
 
 
     public void IncrementSequenceIndex() {
@@ -102,10 +175,13 @@ public class SpecialAbility {
     }
 
     public virtual bool Activate() {
-        if (!recoveryMethod.Ready) {
-            //Debug.Log(abilityName + " is On Cooldown: " + ((RecoveryCooldown)recoveryMethod).cooldown);
+        if (recoveryMethod != null && !recoveryMethod.Ready) {
             return false;
         }
+
+        if (procChance < 1f && !ProcRoll())
+            return false;
+
         //Debug.Log(abilityName + " has been activated");
         if (sequencedAbilities.Count < 1) {
             for (int i = 0; i < effects.Count; i++) {
@@ -114,7 +190,6 @@ public class SpecialAbility {
             }
 
             FinishActivation();
-            //Debug.Log(abilityName + " has been activated");
             return true;
         }
 
@@ -124,6 +199,8 @@ public class SpecialAbility {
         }
 
         FinishActivation();
+
+        
         return true;
     }
 
@@ -139,7 +216,8 @@ public class SpecialAbility {
             recoveryMethod.Trigger();
         }
 
-        InUse = true;
+        if(useDuration > 0f)
+            InUse = true;
 
     }
 

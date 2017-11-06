@@ -10,16 +10,20 @@ public class Entity : MonoBehaviour {
     [Header("Attack Origin Points")]
     public Transform leftShotOrigin;
     public Transform rightShotOrigin;
+    public Transform topShotPoint;
 
     [Header("Entity Stats")]
     public StatCollectionData statTemplate;
     public StatCollection stats;
 
+    [Header("Inventory")]
+    public Inventory inventory;
+
     public SpriteRenderer SpriteRenderer { get; protected set; }
     public Constants.EntityFacing Facing { get; set; }
     public Animator MyAnimator { get; protected set; }
+    public AbilityManager AbilityManager { get; protected set; }
 
-    protected AbilityManager abilityManager;
     protected EntityMovement movement;
     protected HealthDeathManager healthDeathManager;
 
@@ -34,24 +38,24 @@ public class Entity : MonoBehaviour {
 
         SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         MyAnimator = GetComponentInChildren<Animator>();
-        abilityManager = GetComponent<AbilityManager>();
-
-        if(abilityManager != null)
-            abilityManager.Initialize(this);
-
+        AbilityManager = GetComponent<AbilityManager>();
+        inventory = GetComponent<Inventory>();
         movement = GetComponent<EntityMovement>();
+        healthDeathManager = GetComponent<HealthDeathManager>();
+
+        if (inventory != null) 
+            inventory.Initialize(this);
+
+        if(AbilityManager != null)
+            AbilityManager.Initialize(this);
 
         if(movement != null)
             movement.Initialize();
-
-        healthDeathManager = GetComponent<HealthDeathManager>();
 
         if (healthDeathManager != null)
             healthDeathManager.Initialize(this);
 
         GameManager.RegisterEntity(this);
-
-
     }
 
     public void UnregisterListeners() {

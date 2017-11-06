@@ -20,6 +20,9 @@ public class SpecialAbilityDataEditor : Editor {
 
 
         _abilityData.abilityName = EditorGUILayout.TextField("Ability Name", _abilityData.abilityName);
+        _abilityData.abilityType = EditorHelper.EnumPopup("Ability Type", _abilityData.abilityType);
+        _abilityData.activationMethod = EditorHelper.EnumPopup("Activation Method", _abilityData.activationMethod);
+        _abilityData.procChance = EditorHelper.PercentFloatField("Proc Chance", _abilityData.procChance);
         _abilityData.abilityIcon = EditorHelper.ObjectField<Sprite>("Icon", _abilityData.abilityIcon);
         EditorGUILayout.Separator();
 
@@ -100,6 +103,10 @@ public class SpecialAbilityDataEditor : Editor {
     }
 
     private Effect DrawEffect(Effect entry) {
+
+        entry.eventOptions = EditorHelper.DrawExtendedList("Event Options", entry.eventOptions, "Option", DrawEventOptions);
+
+        EditorGUILayout.Separator();
 
         entry.deliveryMethod = EditorHelper.EnumPopup("Delivery method", entry.deliveryMethod);
 
@@ -267,6 +274,15 @@ public class SpecialAbilityDataEditor : Editor {
     private SpecialAbilityData DrawSpecialAbilityData(List<SpecialAbilityData> abilityData, int index) {
         SpecialAbilityData result = EditorHelper.ObjectField<SpecialAbilityData>("Ability", abilityData[index]);
         return result;
+    }
+
+    private Effect.EffectEventOptions DrawEventOptions(Effect.EffectEventOptions entry) {
+
+        entry.option = EditorHelper.EnumPopup("Event Option", entry.option);
+        entry.sendEvent = EditorGUILayout.Toggle("Send Event?", entry.sendEvent);
+
+
+        return entry;
     }
 
 }

@@ -35,6 +35,12 @@ public class EffectDeliveryProjectile : EffectDeliveryMethod {
                     shotPos = parentAbility.source.rightShotOrigin;
                 }
                 break;
+
+            case TargetingMethod.Up:
+                shootDirection = Vector2.up;
+                effectOrigin = parentAbility.source.topShotPoint.position;
+                shotPos = parentAbility.source.topShotPoint;
+                break;
         }
     }
 
@@ -54,10 +60,19 @@ public class EffectDeliveryProjectile : EffectDeliveryMethod {
         GameObject shot = VisualEffectManager.CreateVisualEffect(loadedPrefab, effectOrigin, shotPos.rotation);
         Projectile shotScript = shot.GetComponent<Projectile>();
 
+
+
         if (error != 0f) {
             float e = Random.Range(-error, error);
             shot.transform.rotation = shotPos.rotation * Quaternion.Euler(shotPos.rotation.x, shotPos.rotation.y, e);
+
+            if (shotScript.ProjectileMovement.lobbed) {
+                shotScript.ProjectileMovement.angle += e;
+            }
+
         }
+
+
 
         shotScript.Initialize(parentEffect, layerMask, 0f, parentEffect.effectDamage);
 
@@ -69,8 +84,13 @@ public class EffectDeliveryProjectile : EffectDeliveryMethod {
 
     private void CreateFireEffect() {
 
-        GameObject hitPrefab = Resources.Load(((EffectAttack)parentEffect).fireEffectName) as GameObject;
-        GameObject hitEffect = VisualEffectManager.CreateVisualEffect(hitPrefab, effectOrigin, Quaternion.identity);
+        GameObject firePrefab = Resources.Load(((EffectAttack)parentEffect).fireEffectName) as GameObject;
+        if(firePrefab == null) {
+            Debug.LogError("Fire Prefab Null");
+            return;
+        }
+
+        GameObject fireEffect = VisualEffectManager.CreateVisualEffect(firePrefab, effectOrigin, Quaternion.identity);
 
     }
 

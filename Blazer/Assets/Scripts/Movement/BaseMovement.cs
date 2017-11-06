@@ -30,6 +30,10 @@ public abstract class BaseMovement : MonoBehaviour {
         Grid.EventManager.RemoveMyListeners(this);
     }
 
+    public virtual void UpdateBaseStats() {
+
+    }
+
 
     protected virtual void FixedUpdate() {
         if (maxSpeed == 0f)

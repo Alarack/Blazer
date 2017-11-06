@@ -26,7 +26,8 @@ public class Effect {
     [System.NonSerialized]
     protected List<Effect> riders = new List<Effect>();
 
-
+    public List<EffectEventOptions> eventOptions = new List<EffectEventOptions>();
+    protected Dictionary<Constants.EffectEventOption, bool> eventDict = new Dictionary<Constants.EffectEventOption, bool>();
     //protected List<GameObject> currentTargets = new List<GameObject>();
 
     public EffectDeliveryRaycast rayCastDelivery = new EffectDeliveryRaycast();
@@ -35,11 +36,30 @@ public class Effect {
 
     public virtual void Initialize(SpecialAbility parentAbility) {
         this.parentAbility = parentAbility;
+
+        for(int i = 0; i < eventOptions.Count; i++) {
+            eventDict.Add(eventOptions[i].option, eventOptions[i].sendEvent);
+        }
+
     }
 
     public virtual void ManagedUpdate() {
 
     }
+
+    #region EVENTS
+    private void SendEffectAppliedEvent(Entity target) {
+        EventData data = new EventData();
+        data.AddMonoBehaviour("Cause", Source);
+        data.AddMonoBehaviour("Target", target);
+        data.AddInt("EffectType", (int)effectType);
+
+        Grid.EventManager.SendEvent(Constants.GameEvent.EffectApplied, data);
+
+    }
+
+
+    #endregion
 
 
     public virtual void Activate() {
@@ -84,6 +104,10 @@ public class Effect {
         }
 
         ApplyRiderEffects(target);
+
+        if (eventDict.ContainsKey(Constants.EffectEventOption.Applied) && eventDict[Constants.EffectEventOption.Applied]) {
+            SendEffectAppliedEvent(targetEntity);
+        }
         //Debug.Log(effectName + " is being applied on " + target.gameObject.name);
     }
 
@@ -135,6 +159,16 @@ public class Effect {
         }
 
         return true;
+    }
+
+    [System.Serializable]
+    public class EffectEventOptions {
+        public Constants.EffectEventOption option;
+        public bool sendEvent = false;
+
+        public EffectEventOptions() {
+
+        }
     }
 
 }

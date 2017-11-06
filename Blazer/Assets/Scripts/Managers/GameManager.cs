@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     public static GameManager gameManager;
+    public ItemPools itemPools;
     public StatCollectionData defaultStats;
     public StatCollectionData defaultProjectileStats;
     private static List<Entity> allEntities = new List<Entity>();
@@ -26,6 +27,10 @@ public class GameManager : MonoBehaviour {
 
     public static StatCollectionData GetDefaultProjectileStats() {
         return gameManager.defaultProjectileStats;
+    }
+
+    public static ItemPools GetItemPools() {
+        return gameManager.itemPools;
     }
 
     public static void RegisterEntity(Entity target) {

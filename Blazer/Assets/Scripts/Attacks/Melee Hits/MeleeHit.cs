@@ -21,7 +21,7 @@ public class MeleeHit : AttackMedium {
     }
 
     protected virtual void OnTriggerStay2D(Collider2D other) {
-        if ((layerMask & 1 << other.gameObject.layer) == 1 << other.gameObject.layer) {
+        if ((LayerMask & 1 << other.gameObject.layer) == 1 << other.gameObject.layer) {
 
             Entity hitTarget = other.gameObject.GetComponent<Entity>();
 

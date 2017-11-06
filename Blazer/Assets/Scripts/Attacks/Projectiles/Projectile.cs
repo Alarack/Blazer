@@ -13,19 +13,26 @@ public class Projectile : AttackMedium {
 
     [Header("Basic Stats")]
     public ProjectileType projectileType;
- 
-    protected ProjectileMovement movement;
+
+
+    [Header("VFX")]
+    public GameObject particleTrail;
+
+    public ProjectileMovement ProjectileMovement { get; protected set; }
 
 
     protected virtual void Awake() {
-        movement = GetComponent<ProjectileMovement>();
+        ProjectileMovement = GetComponent<ProjectileMovement>();
     }
 
 
     public override void Initialize(Effect parentEffect, LayerMask mask, float life = 0f, float damage = 0f) {
         base.Initialize(parentEffect, mask, life, damage);
 
-        movement.Initialize();
+        if (ProjectileMovement != null)
+            ProjectileMovement.Initialize();
+        else
+            Debug.LogError(gameObject.name + " has no projectile movement script and it's been told to initialize one");
     }
 
     public override void CleanUp() {
@@ -34,6 +41,12 @@ public class Projectile : AttackMedium {
         base.CleanUp();
 
         CreateImpactEffect();
+
+        if (particleTrail != null) {
+            particleTrail.transform.SetParent(null, true);
+            Destroy(particleTrail, 3f);
+        }
+
 
         Destroy(gameObject);
 
@@ -47,14 +60,14 @@ public class Projectile : AttackMedium {
 
         GameObject loadedEffect = Resources.Load(impactEffect) as GameObject;
 
-        if(loadedEffect == null) {
+        if (loadedEffect == null) {
             Debug.LogError("[Projectile] Impact Effect was null");
             return;
         }
 
         Vector2 dir = parentEffect.Source.transform.position - transform.position;
 
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg -90f;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
 
         //Quaternion impactRotation = Quaternion.LookRotation(dir, Vector3.forward);
@@ -67,7 +80,7 @@ public class Projectile : AttackMedium {
 
     protected virtual void OnTriggerEnter2D(Collider2D other) {
 
-        if ((layerMask & 1 << other.gameObject.layer) == 1 << other.gameObject.layer) {
+        if ((LayerMask & 1 << other.gameObject.layer) == 1 << other.gameObject.layer) {
 
             parentEffect.Apply(other.gameObject);
 

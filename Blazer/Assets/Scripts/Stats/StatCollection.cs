@@ -112,7 +112,7 @@ public class StatCollection {
         }
 
         public float GetTotalMultiplier() {
-            float totalMultiplier = 0f;
+            float totalMultiplier = 1f;
             List<StatModifer> allMulipliers = new List<StatModifer>();
 
             for (int i = 0; i < mods.Count; i++) {

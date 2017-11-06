@@ -23,6 +23,12 @@ public class Constants {
         Right = 2,
     }
 
+    public enum SpecialAbilityType {
+        None = 0,
+        Attack = 1,
+        Buff = 2,
+    }
+
     public enum SpecialAbilityRecoveryType {
         None = 1,
         Timed = 2,
@@ -36,6 +42,17 @@ public class Constants {
         None = 0,
         AttackEffect = 1,
         StatusEffect = 2,
+    }
+
+    public enum SpecialAbilityActivationMethod {
+        None = 0,
+        Manual = 1,
+        Timed = 2,
+        DamageDealt = 3,
+        Passive = 4,
+        EntityKilled = 5,
+        DamageTaken = 6,
+        EffectApplied = 7,
     }
 
     public enum StatusEffectType {
@@ -65,11 +82,27 @@ public class Constants {
 
     }
 
+    public enum EffectEventOption {
+        None = 0,
+        Applied = 1,
+        Removed = 2,
+    }
+
+    public enum ItemPool {
+        None = 0,
+        Boss = 1,
+        Secret = 2,
+        Shop = 3,
+        Standard = 4
+    }
+
     public enum GameEvent {
         None = 0,
         AbilityActivated = 1,
         StatChanged = 2,
         AnimationEvent = 3,
+        EntityDied = 4,
+        EffectApplied = 5,
 
     }
 

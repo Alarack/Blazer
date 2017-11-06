@@ -9,13 +9,15 @@ public class HealthDeathManager : MonoBehaviour {
     public GameObject deathEffect;
 
     protected Entity owner;
-
+    protected LootManager lootManager;
 
 
 
 
     public virtual void Initialize(Entity owner) {
         this.owner = owner;
+
+        lootManager = GetComponent<LootManager>();
 
         RegisterListeners();
     }
@@ -31,6 +33,7 @@ public class HealthDeathManager : MonoBehaviour {
     protected void OnStatChanged(EventData data) {
         Constants.BaseStatType stat = (Constants.BaseStatType)data.GetInt("Stat");
         Entity target = data.GetMonoBehaviour("Target") as Entity;
+        Entity cause = data.GetMonoBehaviour("Cause") as Entity;
 
         if (target != owner)
             return;
@@ -40,7 +43,7 @@ public class HealthDeathManager : MonoBehaviour {
 
             if (owner.stats.GetStatModifiedValue(Constants.BaseStatType.Health) <= 0f) {
 
-                Die();
+                Die(cause);
             }
         }
 
@@ -48,12 +51,23 @@ public class HealthDeathManager : MonoBehaviour {
 
 
 
-    protected virtual void Die() {
+    protected virtual void Die(Entity cause = null) {
         ShowDeathEffect();
         GameManager.UnregisterEntity(owner);
         owner.UnregisterListeners();
 
-        Debug.Log(owner.gameObject + " has died");
+        //Debug.Log(owner.gameObject + " has died");
+
+        if(lootManager != null) {
+            lootManager.SpawnLoot();
+        }
+
+        EventData data = new EventData();
+        data.AddMonoBehaviour("Tagret", owner);
+        data.AddMonoBehaviour("Cause", cause);
+
+        Grid.EventManager.SendEvent(Constants.GameEvent.EntityDied, data);
+
 
         Destroy(owner.gameObject);
     }

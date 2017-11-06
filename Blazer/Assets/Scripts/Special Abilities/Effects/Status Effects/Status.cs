@@ -60,7 +60,7 @@ public class Status : MonoBehaviour {
     }
 
     protected virtual void CleanUp() {
-        //Debug.Log("Cleaning");
+        Debug.Log("Cleaning " + sourceAbility.abilityName);
         Destroy(this);
     }
 

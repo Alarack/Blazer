@@ -10,8 +10,11 @@ public class SpecialAbilityData : ScriptableObject {
     public Sprite abilityIcon;
     public float useDuration;
     public bool overrideOtherAbilities;
+    public float procChance = 1f;
     public List<Constants.SpecialAbilityEffectType> effectTypes = new List<Constants.SpecialAbilityEffectType>();
     public Constants.SpecialAbilityRecoveryType recoveryType;
+    public Constants.SpecialAbilityActivationMethod activationMethod;
+    public Constants.SpecialAbilityType abilityType;
 
     public AbilityRecoveryManager recoveryManager = new AbilityRecoveryManager();
 

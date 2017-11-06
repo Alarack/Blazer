@@ -9,7 +9,8 @@ public abstract class AttackMedium : MonoBehaviour {
 
     public StatCollectionData statTemplate;
     public StatCollection stats;
-
+    public LayerMask LayerMask { get; protected set; }
+    public Constants.EntityFacing ParentFacing { get; protected set; }
 
     protected bool penetrating;
     protected int numPen;
@@ -19,15 +20,16 @@ public abstract class AttackMedium : MonoBehaviour {
     protected float damage;
 
     protected Effect parentEffect;
-    protected LayerMask layerMask;
+
 
 
 
     public virtual void Initialize(Effect parentEffect, LayerMask mask, float life = 0f, float damage = 0f) {
         this.parentEffect = parentEffect;
-        layerMask = mask;
+        LayerMask = mask;
         stats = new StatCollection();
         stats.Initialize(statTemplate);
+        ParentFacing = parentEffect.Source.Facing;
 
 
         if (this.parentEffect is EffectAttack) {

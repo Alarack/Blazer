@@ -36,7 +36,7 @@ public class Timer {
     }
 
     public void UpdateClock() {
-        if (_timer <= duration) {
+        if (_timer < duration) {
             _timer += Time.deltaTime;
 
             if (_timer >= duration) {

@@ -17,6 +17,8 @@ public class ProjectileMovement : BaseMovement {
     }
 
     public Direction direction;
+    public bool lobbed;
+    public float angle;
 
     protected Projectile parentProjectile;
     protected float rotateSpeed;
@@ -31,9 +33,29 @@ public class ProjectileMovement : BaseMovement {
     public override void Initialize() {
         base.Initialize();
 
+        UpdateBaseStats();
+
+
+        if (lobbed) {
+            direction = Direction.None;
+
+           Vector2 lobDirection = TargetingUtilities.DegreeToVector2(angle);
+
+            if (parentProjectile.ParentFacing == Constants.EntityFacing.Left) {
+                lobDirection = new Vector2(-lobDirection.x, lobDirection.y);
+            }
+
+            myBody.AddForce(lobDirection * maxSpeed);
+
+        }
+
+    }
+
+    public override void UpdateBaseStats() {
+        base.UpdateBaseStats();
+
         maxSpeed = parentProjectile.stats.GetStatModifiedValue(Constants.BaseStatType.MoveSpeed);
         rotateSpeed = parentProjectile.stats.GetStatModifiedValue(Constants.BaseStatType.RotateSpeed);
-
     }
 
 
@@ -44,8 +66,6 @@ public class ProjectileMovement : BaseMovement {
             case Direction.Up:
                 myBody.velocity = transform.up * maxSpeed * Time.deltaTime;
                 break;
-
-
 
         }
     }

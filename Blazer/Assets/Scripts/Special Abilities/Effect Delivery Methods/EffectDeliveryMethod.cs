@@ -8,6 +8,7 @@ public class EffectDeliveryMethod {
     public enum TargetingMethod {
         None = 0,
         StraightLeftRight = 1,
+        Up = 2,
     }
 
 
