@@ -75,6 +75,8 @@ public class EffectAttack : Effect {
         else
             damage = effectDamage;
 
+        //Debug.Log(damage);
+
         Entity targetEntity = target.GetComponent<Entity>();
 
         if(targetEntity != null) {

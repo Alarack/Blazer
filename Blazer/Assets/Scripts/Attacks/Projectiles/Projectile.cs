@@ -14,9 +14,13 @@ public class Projectile : AttackMedium {
     [Header("Basic Stats")]
     public ProjectileType projectileType;
 
+    [Header("Payload")]
+    public bool spawnPayload;
+    public string payloadPrefabName;
 
     [Header("VFX")]
     public GameObject particleTrail;
+    public string payloadSpawnVFXPrefabName;
 
     public ProjectileMovement ProjectileMovement { get; protected set; }
 
@@ -36,8 +40,6 @@ public class Projectile : AttackMedium {
     }
 
     public override void CleanUp() {
-        //Debug.Log("Cleaning");
-        //CancelInvoke("CleanUp");
         base.CleanUp();
 
         CreateImpactEffect();
@@ -47,9 +49,10 @@ public class Projectile : AttackMedium {
             Destroy(particleTrail, 3f);
         }
 
+        if (spawnPayload)
+            CreatePayload();
 
         Destroy(gameObject);
-
     }
 
 
@@ -77,6 +80,23 @@ public class Projectile : AttackMedium {
         VisualEffectManager.SetParticleEffectLayer(activeHitEffect, gameObject);
 
     }
+
+    protected virtual void CreatePayload() {
+
+        GameObject loadedPrefab = Resources.Load("Payloads/" + payloadPrefabName) as GameObject;
+
+        if (loadedPrefab == null) {
+            Debug.LogError("Prefab was null");
+            return;
+        }
+
+        GameObject payload = Instantiate(loadedPrefab, transform.position, transform.rotation) as GameObject;
+        AttackMedium payloadScript = payload.GetComponent<AttackMedium>();
+
+        payloadScript.Initialize(parentEffect, LayerMask, 0f, 1f);
+
+    }
+
 
     protected virtual void OnTriggerEnter2D(Collider2D other) {
 

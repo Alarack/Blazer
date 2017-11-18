@@ -240,11 +240,11 @@ public class SpecialAbilityDataEditor : Editor {
                 effect.projectileDelivery.projectileType = EditorHelper.EnumPopup("Projectile Type", effect.projectileDelivery.projectileType);
                 effect.projectileDelivery.prefabName = EditorGUILayout.TextField("Projectile Prefab Name", effect.projectileDelivery.prefabName);
 
-                effect.projectileDelivery.kickBack = EditorGUILayout.Toggle("Kickback?", effect.projectileDelivery.kickBack);
+                //effect.projectileDelivery.kickBack = EditorGUILayout.Toggle("Kickback?", effect.projectileDelivery.kickBack);
 
-                if (effect.projectileDelivery.kickBack) {
-                    effect.projectileDelivery.kickStrength = EditorGUILayout.FloatField("Kick Strength", effect.projectileDelivery.kickStrength);
-                }
+                //if (effect.projectileDelivery.kickBack) {
+                //    effect.projectileDelivery.kickStrength = EditorGUILayout.FloatField("Kick Strength", effect.projectileDelivery.kickStrength);
+                //}
 
                 effect.projectileDelivery.error = EditorGUILayout.FloatField("Inacuraccy", effect.projectileDelivery.error);
 

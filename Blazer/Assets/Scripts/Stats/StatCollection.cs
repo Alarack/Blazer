@@ -105,8 +105,8 @@ public class StatCollection {
 
             //Debug.Log("Getting a value of " + statType + ". Value of: " + result);
 
-            if (result <= 0f)
-                result = 0f;
+            //if (result <= 0f)
+            //    result = 0f;
 
             return result;
         }
