@@ -23,23 +23,21 @@ public class SpecialAbilityData : ScriptableObject {
     public List<SpecialAbilityData> sequencedAbilities = new List<SpecialAbilityData>();
     public float sequenceWindow = 0.5f;
 
-    public List<SpecialAbilityRecovery> GetAllRecoveryMechanics() {
-        List<SpecialAbilityRecovery> results = new List<SpecialAbilityRecovery>();
+    //public List<SpecialAbilityRecovery> GetAllRecoveryMechanics() {
+    //    List<SpecialAbilityRecovery> results = new List<SpecialAbilityRecovery>();
 
-        for(int i = 0; i < recoveryManager.recoveryTypes.Count; i++) {
-            results.Add(recoveryManager.GetRecoveryMethodByType(recoveryManager.recoveryTypes[i]));
-        }
+    //    for(int i = 0; i < recoveryManager.recoveryTypes.Count; i++) {
+    //        results.Add(recoveryManager.GetRecoveryMethodByType(recoveryManager.recoveryTypes[i]));
+    //    }
 
-        return results;
-    }
+    //    return results;
+    //}
 
     public SpecialAbilityRecovery GetRecoveryMechanic() {
-
         SpecialAbilityRecovery result = ObjectCopier.Clone(recoveryManager.GetRecoveryMethodByType(recoveryType)) as SpecialAbilityRecovery;
 
         return result;
     }
-
 
     public List<Effect> GetAllEffects() {
         List<Effect> results = new List<Effect>();
@@ -56,9 +54,6 @@ public class SpecialAbilityData : ScriptableObject {
     }
 
 
-
-
-
     [System.Serializable]
     public class EffectHolder {
 
@@ -70,9 +65,9 @@ public class SpecialAbilityData : ScriptableObject {
         public EffectSet GetEffectSet(Constants.SpecialAbilityEffectType effectType) {
             switch (effectType) {
                 case Constants.SpecialAbilityEffectType.AttackEffect:
-                    EffectSet raycastAttacks = new EffectSet(effectType, attacks.ConvertAll<Effect>(b => (Effect)b));
+                    EffectSet attackEffect = new EffectSet(effectType, attacks.ConvertAll<Effect>(b => (Effect)b));
 
-                    return raycastAttacks;
+                    return attackEffect;
 
                 case Constants.SpecialAbilityEffectType.StatusEffect:
 

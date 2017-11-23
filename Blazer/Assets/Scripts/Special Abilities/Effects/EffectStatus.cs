@@ -31,14 +31,6 @@ public class EffectStatus : Effect {
 
     public override void Apply(GameObject target) {
         base.Apply(target);
-        //if (requireMultipleHits) {
-        //    if (parentAbility.UseCount < requiredHits) {
-        //        return;
-        //    }
-        //    else {
-        //        parentAbility.ResetUseCount();
-        //    }
-        //}
 
         if (!CheckForSpecificTarget(target))
             return;
@@ -88,9 +80,6 @@ public class EffectStatus : Effect {
                         }
                     }
                 }
-
-
-
 
                 float damage;
                 if (scaleFromBaseDamage)

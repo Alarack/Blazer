@@ -30,7 +30,6 @@ public class AffectMovement : Status {
 
         switch (affectType) {
             case AffectMovementType.Halt:
-                
 
                 if (targetMovement == null)
                     return;
