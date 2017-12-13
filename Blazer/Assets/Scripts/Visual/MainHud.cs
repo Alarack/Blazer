@@ -16,7 +16,10 @@ public class MainHud : MonoBehaviour {
     }
 
     public static void SetPlayerSlot(SpecialAbility ability, int index) {
-        mainHud.quickBar.SetQuickBarSlot(ability, index);
+        if(mainHud != null){
+            mainHud.quickBar.SetQuickBarSlot(ability, index);
+        }
+
 
     }
 
