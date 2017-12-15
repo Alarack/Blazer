@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Status : MonoBehaviour {
+public class Status {
 
     public Constants.StatusEffectType statusType;
     public int stackCount = 1;
@@ -50,6 +50,11 @@ public class Status : MonoBehaviour {
     }
 
     protected virtual void Update() {
+        //durationTimer.UpdateClock();
+        //intervalTimer.UpdateClock();
+    }
+
+    public virtual void ManagedUpdate() {
         durationTimer.UpdateClock();
         intervalTimer.UpdateClock();
     }
@@ -61,7 +66,9 @@ public class Status : MonoBehaviour {
 
     protected virtual void CleanUp() {
         Debug.Log("Cleaning " + sourceAbility.abilityName);
-        Destroy(this);
+        //Destroy(this);
+        StatusManager.RemoveStatus(targetEntity, this);
+
     }
 
 

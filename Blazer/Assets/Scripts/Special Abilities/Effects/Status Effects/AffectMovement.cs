@@ -65,7 +65,8 @@ public class AffectMovement : Status {
     protected override void CleanUp() {
         if (targetMovement == null) {
             //Debug.Log("Nove moves");
-            Destroy(this);
+            StatusManager.RemoveStatus(targetEntity, this);
+            //Destroy(this);
             return;
         }
 

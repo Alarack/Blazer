@@ -37,13 +37,18 @@ public class EffectStatus : Effect {
 
         switch (statusType) {
             case Constants.StatusEffectType.None:
-                Status newStatus = target.AddComponent<Status>();
+                //Status newStatus = target.AddComponent<Status>();
+                Status newStatus = new Status();
+
 
                 newStatus.Initialize(target, duration, interval, statusType, parentAbility);
+
+                StatusManager.AddStatus(target.GetComponent<Entity>(), newStatus); //HERE IS THE TEST LINE
                 break;
 
             case Constants.StatusEffectType.AffectMovement:
-                AffectMovement newAffectMovement = target.AddComponent<AffectMovement>();
+                //AffectMovement newAffectMovement = target.AddComponent<AffectMovement>();
+                AffectMovement newAffectMovement = new AffectMovement();
 
                 knockbackVector = TargetingUtilities.DegreeToVector2(knocbackAngle);
 
@@ -53,33 +58,35 @@ public class EffectStatus : Effect {
 
                 newAffectMovement.Initialize(target, duration, interval, statusType, parentAbility);
                 newAffectMovement.InitializeAffectMovement(affectMoveType, affectMoveValue, knockbackVector);
+
+                StatusManager.AddStatus(target.GetComponent<Entity>(), newAffectMovement); //HERE IS THE TEST LINE
                 break;
 
             case Constants.StatusEffectType.DamageOverTime:
-                DamageOverTime[] existingDots = target.GetComponents<DamageOverTime>();
+                //DamageOverTime[] existingDots = target.GetComponents<DamageOverTime>();
 
-                for(int i = 0; i < existingDots.Length; i++) {
-                    DamageOverTime existingDot = existingDots[i];
+                //for(int i = 0; i < existingDots.Length; i++) {
+                //    DamageOverTime existingDot = existingDots[i];
 
-                    if (existingDot.IsFromSameSource(parentAbility)) {
-                        switch (stackMethod) {
-                            case Constants.StatusStackingMethod.None:
-                                return;
+                //    if (existingDot.IsFromSameSource(parentAbility)) {
+                //        switch (stackMethod) {
+                //            case Constants.StatusStackingMethod.None:
+                //                return;
 
-                            case Constants.StatusStackingMethod.LimitedStacks:
-                                if (existingDot.stackCount < maxStack) {
-                                    existingDot.Stack();
-                                }
-                                else {
-                                    existingDot.RefreshDuration();
-                                }
-                                return;
+                //            case Constants.StatusStackingMethod.LimitedStacks:
+                //                if (existingDot.stackCount < maxStack) {
+                //                    existingDot.Stack();
+                //                }
+                //                else {
+                //                    existingDot.RefreshDuration();
+                //                }
+                //                return;
 
-                            case Constants.StatusStackingMethod.StacksWithOtherAbilities:
-                                return;
-                        }
-                    }
-                }
+                //            case Constants.StatusStackingMethod.StacksWithOtherAbilities:
+                //                return;
+                //        }
+                //    }
+                //}
 
                 float damage;
                 if (scaleFromBaseDamage)
@@ -87,9 +94,12 @@ public class EffectStatus : Effect {
                 else
                     damage = damagePerInterval;
 
-                DamageOverTime newDot = target.AddComponent<DamageOverTime>();
+                //DamageOverTime newDot = target.AddComponent<DamageOverTime>();
+                DamageOverTime newDot = new DamageOverTime();
                 newDot.Initialize(target, duration, interval, statusType, parentAbility);
                 newDot.InitializeDamageOverTime(damage, parentAbility.source);
+
+                StatusManager.AddStatus(target.GetComponent<Entity>(), newDot); //HERE IS THE TEST LINE
 
                 break;
         }

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ea0478cedfa4c21469541a0fb0680aa2
-timeCreated: 1511033981
+timeCreated: 1511732600
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -22,8 +22,6 @@ TextureImporter:
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
-    mipMapsPreserveCoverage: 0
-    alphaTestReferenceValue: 0.5
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
@@ -39,13 +37,10 @@ TextureImporter:
   textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
-    serializedVersion: 2
     filterMode: 0
     aniso: -1
     mipBias: -1
-    wrapU: 0
-    wrapV: 0
-    wrapW: 0
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -140,11 +135,10 @@ TextureImporter:
         y: 2
         width: 27
         height: 26
-      alignment: 0
+      alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: PlaceHold_Char_CombatRoll_1
@@ -154,11 +148,10 @@ TextureImporter:
         y: 2
         width: 27
         height: 26
-      alignment: 0
+      alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: PlaceHold_Char_CombatRoll_2
@@ -168,11 +161,10 @@ TextureImporter:
         y: 2
         width: 27
         height: 26
-      alignment: 0
+      alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: PlaceHold_Char_CombatRoll_3
@@ -182,11 +174,10 @@ TextureImporter:
         y: 2
         width: 27
         height: 26
-      alignment: 0
+      alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: PlaceHold_Char_CombatRoll_4
@@ -196,11 +187,10 @@ TextureImporter:
         y: 2
         width: 27
         height: 26
-      alignment: 0
+      alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: PlaceHold_Char_CombatRoll_5
@@ -210,11 +200,10 @@ TextureImporter:
         y: 2
         width: 27
         height: 26
-      alignment: 0
+      alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: PlaceHold_Char_CombatRoll_6
@@ -224,11 +213,10 @@ TextureImporter:
         y: 2
         width: 27
         height: 26
-      alignment: 0
+      alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: PlaceHold_Char_CombatRoll_7
@@ -238,11 +226,10 @@ TextureImporter:
         y: 2
         width: 27
         height: 26
-      alignment: 0
+      alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: PlaceHold_Char_CombatRoll_8
@@ -252,11 +239,10 @@ TextureImporter:
         y: 2
         width: 27
         height: 26
-      alignment: 0
+      alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: PlaceHold_Char_CombatRoll_9
@@ -266,14 +252,12 @@ TextureImporter:
         y: 2
         width: 27
         height: 26
-      alignment: 0
+      alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     outline: []
-    physicsShape: []
   spritePackingTag: 
   userData: 
   assetBundleName: 
