@@ -93,7 +93,8 @@ public class Constants {
         Boss = 1,
         Secret = 2,
         Shop = 3,
-        Standard = 4
+        StandardChest = 4,
+        AdvancedChest = 5,
     }
 
     public enum GameEvent {
