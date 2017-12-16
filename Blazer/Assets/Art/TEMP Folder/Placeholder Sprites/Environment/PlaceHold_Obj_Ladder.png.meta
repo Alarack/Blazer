@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 1153320d920ab654587629485ef4f47f
-timeCreated: 1513450653
+timeCreated: 1513466479
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -11,6 +11,11 @@ TextureImporter:
     21300008: PlaceHold_Obj_Platform
     21300010: PlaceHold_Obj_Ladder_0
     21300012: PlaceHold_Obj_LadderTile
+    21300014: PlaceHold_Obj_Door_Locked
+    21300016: PlaceHold_Obj_Door_Closed
+    21300018: PlaceHold_Obj_Door OpenLeft
+    21300020: PlaceHold_Obj_Door_OpenRight
+    21300022: PlaceHold_Obj_Door_Broken
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -133,8 +138,8 @@ TextureImporter:
       name: PlaceHold_Obj_Ground
       rect:
         serializedVersion: 2
-        x: 50
-        y: 27
+        x: 75
+        y: 52
         width: 16
         height: 16
       alignment: 0
@@ -147,8 +152,8 @@ TextureImporter:
       name: PlaceHold_Obj_Chest_Closed
       rect:
         serializedVersion: 2
-        x: 50
-        y: 46
+        x: 75
+        y: 71
         width: 16
         height: 16
       alignment: 0
@@ -161,9 +166,9 @@ TextureImporter:
       name: PlaceHold_Obj_Chest_Open
       rect:
         serializedVersion: 2
-        x: 68
-        y: 46
-        width: 14
+        x: 92
+        y: 71
+        width: 16
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -175,8 +180,8 @@ TextureImporter:
       name: PlaceHold_Obj_Platform
       rect:
         serializedVersion: 2
-        x: 18
-        y: 53
+        x: 43
+        y: 78
         width: 16
         height: 16
       alignment: 0
@@ -189,10 +194,10 @@ TextureImporter:
       name: PlaceHold_Obj_Ladder_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 21
+        x: 32
+        y: 46
         width: 5
-        height: 66
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,10 +208,80 @@ TextureImporter:
       name: PlaceHold_Obj_LadderTile
       rect:
         serializedVersion: 2
-        x: 7
-        y: 71
+        x: 32
+        y: 69
         width: 5
         height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlaceHold_Obj_Door_Locked
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 107
+        width: 12
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlaceHold_Obj_Door_Closed
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 107
+        width: 12
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlaceHold_Obj_Door OpenLeft
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 107
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlaceHold_Obj_Door_OpenRight
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 107
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlaceHold_Obj_Door_Broken
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 107
+        width: 20
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
