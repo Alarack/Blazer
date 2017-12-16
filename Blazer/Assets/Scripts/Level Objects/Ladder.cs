@@ -15,9 +15,14 @@ public class Ladder : MonoBehaviour {
     private Rigidbody2D currentBody;
 
     private void Update() {
-        currentSpeed = Input.GetAxisRaw("Vertical") * climbSpeed;
+        if (Input.GetAxisRaw("Vertical") >= 0){
+            currentSpeed = Input.GetAxisRaw("Vertical") * climbSpeed;
+        }
+        else if (Input.GetAxisRaw("Vertical") <= 0){
+            currentSpeed = Input.GetAxisRaw("Vertical") * descendSpeed;
+        }
 
-        if(currentUser != null && !isClimbing) {
+            if (currentUser != null && !isClimbing) {
             if(currentSpeed!= 0f) {
                 isClimbing = true;
                 currentBody.gravityScale = 0f;
