@@ -41,7 +41,7 @@ public class EffectDeliveryMelee : EffectDeliveryMethod {
 
 
     private void OnAnimationEvent(EventData data) {
-        //Debug.Log("Recieving Attack");
+        Debug.Log("Recieving Attack");
 
         Entity owner = data.GetMonoBehaviour("Entity") as Entity;
         string attackName = data.GetString("AttackName");
