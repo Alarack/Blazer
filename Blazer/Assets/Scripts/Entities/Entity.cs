@@ -55,6 +55,13 @@ public class Entity : MonoBehaviour {
         if (healthDeathManager != null)
             healthDeathManager.Initialize(this);
 
+
+        AIBrain testBrain = GetComponent<AIBrain>();
+        if(testBrain != null) {
+            testBrain.Initialize();
+        }
+
+
         GameManager.RegisterEntity(this);
     }
 
