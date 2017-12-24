@@ -12,25 +12,33 @@ public abstract class Activateable : MonoBehaviour {
         Shop,
         LevelExit,
     }
-
+    protected bool canActivate = false;
     public ActivateableType type;
 
-    void OnTriggerStay2D(Collider2D other)
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && canActivate)
+        {
+            ActivationFunction();
+        }
+    }
+
+
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
             Debug.Log("can be activated by player");
+            canActivate = true;
             /*--Insert ActivationFunction reference and event hooks here--*/
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                ActivationFunction();
-            }          
+      
         }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
         Debug.Log("can no longer be activated by player");
+        canActivate = false;
     }
 
     public virtual void ActivationFunction()
