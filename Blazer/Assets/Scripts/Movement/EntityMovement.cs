@@ -13,7 +13,9 @@ public abstract class EntityMovement : BaseMovement {
     public Transform groundCheck;
     public float groundCheckRadius = 0.01f;
     public LayerMask whatIsGround;
+    public LayerMask whatIsPlatform;
     public bool Grounded { get; protected set; }
+    public bool Platformed { get; protected set; }
 
     [Header("Sprite Pivot Hack")]
     public bool useSpritePivotHack;
@@ -84,15 +86,15 @@ public abstract class EntityMovement : BaseMovement {
     protected override void FixedUpdate() {
         base.FixedUpdate();
         
-        CheckGround();
+        CheckGroundandPlatforms();
     }
 
-    protected virtual void CheckGround() {
+    protected virtual void CheckGroundandPlatforms() {
         if (groundCheck == null)
             return;
 
         Grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
-
+        Platformed = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsPlatform);
     }
 
     protected void CheckFacing() {
@@ -124,4 +126,8 @@ public abstract class EntityMovement : BaseMovement {
     }
 
 
+    protected void Fallthrough(bool ignore)
+    {
+        Physics2D.IgnoreLayerCollision(gameObject.layer, 15, ignore);
+    }
 }

@@ -5,10 +5,17 @@ using UnityEngine;
 
 public class PlayerController : EntityMovement {
 
+    public Timer fallthroughTimer;
+    public float disableDuration;
 
     private bool isJumping = false;
+    private bool isFallingThrough = false;
 
-
+    public override void Initialize()
+    {
+        base.Initialize();
+        fallthroughTimer = new Timer("fallthroughTimer", disableDuration, true, DisableFallthrough);
+    }
 
 
     private void Update() {
@@ -21,9 +28,15 @@ public class PlayerController : EntityMovement {
             owner.MyAnimator.SetBool("Walking", false);
         }
 
+        if (Platformed && Input.GetAxisRaw("Vertical") < 0)
+        {
+            isFallingThrough = true;
+        }
 
         CheckFacing();
         TryJump();
+        Fallthrough(isFallingThrough);
+        fallthroughTimer.UpdateClock();
     }
 
 
@@ -34,7 +47,7 @@ public class PlayerController : EntityMovement {
 
   
     private void TryJump() {
-        if (Input.GetButtonDown("Jump") && Grounded) {
+        if (Input.GetButtonDown("Jump") && (Grounded || Platformed)) {
             isJumping = true;
         }
     }
@@ -45,5 +58,10 @@ public class PlayerController : EntityMovement {
             isJumping = false;
         }
 
+    }
+
+    private void DisableFallthrough()
+    {
+        isFallingThrough = false;
     }
 }
