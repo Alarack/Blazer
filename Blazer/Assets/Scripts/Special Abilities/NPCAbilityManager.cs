@@ -33,7 +33,7 @@ public class NPCAbilityManager : AbilityManager {
         List<NPCAbilityContainer> possibleAbilities = new List<NPCAbilityContainer>();
         SpecialAbility targetAbility = null;
 
-        Debug.Log("Trying to activate");
+        //Debug.Log("Trying to activate");
 
         for(int i = 0; i < npcAbiliites.Count; i++) {
             //Debug.Log("Checking " + npcAbiliites[i].ability.abilityName + " for readiness");
@@ -43,7 +43,7 @@ public class NPCAbilityManager : AbilityManager {
                 //Debug.Log("Checking " + npcAbiliites[i].ability.abilityName + " is ready");
             }
             else {
-                Debug.Log( npcAbiliites[i].ability.abilityName + " is on cooldown");
+                Debug.Log( npcAbiliites[i].ability.abilityName + " is in use: " + npcAbiliites[i].ability.InUse);
             }
         }
 

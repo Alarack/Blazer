@@ -4,23 +4,33 @@ using UnityEngine;
 
 public class BaseEnemyMovement : EntityMovement {
 
+    public float paceTime = 2f;
+
+    protected Timer paceTimer;
 
     protected AIBrain brain;
 
+    protected float facingMod = 1f;
 
     public override void Initialize() {
         base.Initialize();
 
         brain = GetComponent<AIBrain>();
         brain.State = AIBrain.EnemyState.Walking;
+
+        paceTimer = new Timer("Pace Timer", paceTime, true, Flip);
     }
 
 
 
     protected virtual void Update() {
+
+        if (paceTimer != null)
+            paceTimer.UpdateClock();
+
         switch (brain.State) {
             case AIBrain.EnemyState.Walking:
-                currentSpeed = maxSpeed;
+                currentSpeed = maxSpeed * facingMod;
                 //Walk();
                 break;
 
@@ -59,5 +69,9 @@ public class BaseEnemyMovement : EntityMovement {
         myBody.velocity = new Vector2(currentSpeed, myBody.velocity.y);
 
 
+    }
+
+    public void Flip() {
+        facingMod *= -1;
     }
 }

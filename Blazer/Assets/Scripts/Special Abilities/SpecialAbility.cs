@@ -175,6 +175,10 @@ public class SpecialAbility {
     }
 
     public virtual bool Activate() {
+
+        if (InUse && !overrideOtherAbilities)
+            return false;
+
         if (recoveryMethod != null && !recoveryMethod.Ready) {
             return false;
         }
@@ -249,11 +253,14 @@ public class SpecialAbility {
     protected void AbilityInUse() {
         if (InUse) {
             useTimer.UpdateClock();
+            //Debug.Log("Updating " + abilityName + " use clock");
         }
     }
 
     protected virtual void PopAbilityUseTimer() {
         InUse = false;
+
+        Debug.Log("Popping usetimer for " + abilityName + " Use status: " + InUse);
 
         if (ParentAbility != null) {
             ParentAbility.IncrementSequenceIndex();

@@ -74,7 +74,6 @@ public class AIBrain : MonoBehaviour {
         //Debug.DrawLine(transform.position, rayDir, Color.red);
 
         if (hit.collider != null) {
-            Debug.Log("Hit " + hit.collider.gameObject.name);
             State = EnemyState.Attacking;
         }
         else {
