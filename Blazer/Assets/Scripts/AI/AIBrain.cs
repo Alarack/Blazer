@@ -58,23 +58,31 @@ public class AIBrain : MonoBehaviour {
                     case TargetDirection.None:
                         break;
                     case TargetDirection.Right:
-
                         if(movement.facingMod != 1)
                         {
                             movement.Flip();
-                            if (!inMeleeRange)
-                            {
-
-                            }
+                        }
+                        if (!inMeleeRange)
+                        {
+                            State = EnemyState.Walking;
+                        }
+                        else
+                        {
+                            State = EnemyState.Attacking;
                         }
                         break;
                     case TargetDirection.Left:
                         if (movement.facingMod != -1)
                         {
-                            if (!inMeleeRange)
-                            {
-
-                            }
+                            movement.Flip();
+                        }
+                        if (!inMeleeRange)
+                        {
+                            State = EnemyState.Walking;
+                        }
+                        else
+                        {
+                            State = EnemyState.Attacking;
                         }
                         break;
                     default:
@@ -85,10 +93,45 @@ public class AIBrain : MonoBehaviour {
 
             case EnemyState.Attacking:
                 abilityManager.ActivateAbility();
+                State = EnemyState.None;
                 break;
 
             case EnemyState.Walking:
-
+                switch (moveDir)
+                {
+                    case TargetDirection.None:
+                        break;
+                    case TargetDirection.Right:
+                        if (movement.facingMod != 1)
+                        {
+                            movement.Flip();
+                        }
+                        if (!inMeleeRange)
+                        {
+                            State = EnemyState.Walking;
+                        }
+                        else
+                        {
+                            State = EnemyState.Attacking;
+                        }
+                        break;
+                    case TargetDirection.Left:
+                        if (movement.facingMod != -1)
+                        {
+                            movement.Flip();
+                        }
+                        if (!inMeleeRange)
+                        {
+                            State = EnemyState.Walking;
+                        }
+                        else
+                        {
+                            State = EnemyState.Attacking;
+                        }
+                        break;
+                    default:
+                        break;
+                }
                 break;
 
             default:
