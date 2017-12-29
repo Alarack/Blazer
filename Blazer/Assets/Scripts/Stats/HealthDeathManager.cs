@@ -63,7 +63,7 @@ public class HealthDeathManager : MonoBehaviour {
         }
 
         EventData data = new EventData();
-        data.AddMonoBehaviour("Tagret", owner);
+        data.AddMonoBehaviour("Target", owner);
         data.AddMonoBehaviour("Cause", cause);
 
         Grid.EventManager.SendEvent(Constants.GameEvent.EntityDied, data);

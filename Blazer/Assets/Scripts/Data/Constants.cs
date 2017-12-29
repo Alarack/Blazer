@@ -61,7 +61,8 @@ public class Constants {
         Stun = 2,
         //KnockBack = 3,
         AffectMovement = 4,
-        DamageOverTime = 5
+        DamageOverTime = 5,
+        StaticStatAdjustment = 6,
     }
 
     public enum StatusStackingMethod {

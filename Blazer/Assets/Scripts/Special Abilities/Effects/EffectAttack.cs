@@ -45,7 +45,7 @@ public class EffectAttack : Effect {
     public override void Activate() {
         base.Activate();
 
-        Debug.Log("Activating an attack");
+        //Debug.Log("Activating an attack");
 
         if (burstAttack) {
             parentAbility.source.StartCoroutine(BurstFire(burstInterval, burstNumber));

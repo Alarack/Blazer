@@ -34,6 +34,7 @@ public class ItemPickup : MonoBehaviour {
             switch (item.itemType) {
                 case ItemData.ItemType.Passive:
                     otherEntity.inventory.AddItemEntry(item);
+                    Debug.Log("Collected " + item.itemName);
                     break;
             }
 

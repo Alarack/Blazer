@@ -129,7 +129,7 @@ public class SpecialAbilityDataEditor : Editor {
             EffectAttack attackEffect = entry as EffectAttack;
             attackEffect.effectType = Constants.SpecialAbilityEffectType.AttackEffect;
 
-            attackEffect.effectDamage = EditorGUILayout.IntField("Efect Base Damage", attackEffect.effectDamage);
+            attackEffect.effectDamage = EditorGUILayout.IntField("Efect Base Damage", attackEffect.effectDamage) * -1;
 
             attackEffect.scaleFromBaseDamage = EditorGUILayout.Toggle("Scale From Entity base damage?", attackEffect.scaleFromBaseDamage);
             if (attackEffect.scaleFromBaseDamage) {
@@ -187,11 +187,27 @@ public class SpecialAbilityDataEditor : Editor {
 
                 case Constants.StatusEffectType.DamageOverTime:
 
-                    statusAttack.damagePerInterval = EditorHelper.FloatField("Damage Per Interval", statusAttack.damagePerInterval);
+                    statusAttack.damagePerInterval = EditorGUILayout.FloatField("Damage Per Interval", statusAttack.damagePerInterval) * -1;
                     statusAttack.scaleFromBaseDamage = EditorGUILayout.Toggle("Scale from Base Damage?", statusAttack.scaleFromBaseDamage);
 
                     if (statusAttack.scaleFromBaseDamage)
                         statusAttack.percentOfBaseDamage = EditorHelper.PercentFloatField("Percentage of Base Damage", statusAttack.percentOfBaseDamage);
+
+                    break;
+
+                case Constants.StatusEffectType.StaticStatAdjustment:
+                    statusAttack.statType = EditorHelper.EnumPopup("Stat Type", statusAttack.statType);
+                    switch (statusAttack.statType) {
+                        case Constants.BaseStatType.BaseDamage:
+                            statusAttack.statAdjustmentValue = EditorGUILayout.FloatField("Value", statusAttack.statAdjustmentValue) * -1;
+                            break;
+
+                        default:
+                            statusAttack.statAdjustmentValue = EditorHelper.FloatField("Value", statusAttack.statAdjustmentValue);
+                            break;
+                    }
+                    
+                    statusAttack.modType = EditorHelper.EnumPopup("Mod Type", statusAttack.modType);
 
                     break;
             }

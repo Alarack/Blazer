@@ -11,8 +11,7 @@ public class PlayerController : EntityMovement {
     private bool isJumping = false;
     private bool isFallingThrough = false;
 
-    public override void Initialize()
-    {
+    public override void Initialize() {
         base.Initialize();
         fallthroughTimer = new Timer("fallthroughTimer", disableDuration, true, DisableFallthrough);
     }
@@ -28,8 +27,7 @@ public class PlayerController : EntityMovement {
             owner.MyAnimator.SetBool("Walking", false);
         }
 
-        if (Platformed && Input.GetAxisRaw("Vertical") < 0)
-        {
+        if (Platformed && Input.GetAxisRaw("Vertical") < 0) {
             isFallingThrough = true;
         }
 
@@ -45,7 +43,7 @@ public class PlayerController : EntityMovement {
         Jump();
     }
 
-  
+
     private void TryJump() {
         if (Input.GetButtonDown("Jump") && (Grounded || Platformed)) {
             isJumping = true;
@@ -60,8 +58,7 @@ public class PlayerController : EntityMovement {
 
     }
 
-    private void DisableFallthrough()
-    {
+    private void DisableFallthrough() {
         isFallingThrough = false;
     }
 }
