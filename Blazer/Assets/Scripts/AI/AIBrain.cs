@@ -59,8 +59,9 @@ public class AIBrain : MonoBehaviour {
                         break;
                     case TargetDirection.Right:
 
-                        if(movement.facingMod != -1)
+                        if(movement.facingMod != 1)
                         {
+                            movement.Flip();
                             if (!inMeleeRange)
                             {
 
@@ -68,6 +69,13 @@ public class AIBrain : MonoBehaviour {
                         }
                         break;
                     case TargetDirection.Left:
+                        if (movement.facingMod != -1)
+                        {
+                            if (!inMeleeRange)
+                            {
+
+                            }
+                        }
                         break;
                     default:
                         break;
