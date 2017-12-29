@@ -4,29 +4,35 @@ using UnityEngine;
 
 public class BaseEnemyMovement : EntityMovement {
 
-    public float paceTime = 2f;
+    /*--Removed pacer functionality for the chasing functionality--*/
+    //public float paceTime = 2f;
 
-    protected Timer paceTimer;
+    //protected Timer paceTimer;
 
     protected AIBrain brain;
 
-    protected float facingMod = 1f;
+    /*--Changed this to public for my purposes--*/
+    public float facingMod = 1f;
 
     public override void Initialize() {
         base.Initialize();
 
         brain = GetComponent<AIBrain>();
-        brain.State = AIBrain.EnemyState.Walking;
+        brain.State = AIBrain.EnemyState.None;
 
-        paceTimer = new Timer("Pace Timer", paceTime, true, Flip);
+        /*--Removed pacer functionality for the chasing functionality--*/
+        //paceTimer = new Timer("Pace Timer", paceTime, true, Flip);
     }
 
 
 
     protected virtual void Update() {
 
-        if (paceTimer != null)
-            paceTimer.UpdateClock();
+        /*--Removed pacer functionality for the chasing functionality--*/
+        //if (paceTimer != null)
+        //    paceTimer.UpdateClock();
+        //Debug.Log(brain.State);
+        Debug.Log(facingMod);
 
         switch (brain.State) {
             case AIBrain.EnemyState.Walking:
