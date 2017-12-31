@@ -37,6 +37,10 @@ public class PlayerController : EntityMovement {
         TryJump();
         Fallthrough(isFallingThrough);
         fallthroughTimer.UpdateClock();
+
+
+        //Debug.Log(Grounded + " is the status of Grounded");
+        //Debug.Log(Platformed + " is the status of platformed");
     }
 
 
