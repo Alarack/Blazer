@@ -1,5 +1,5 @@
 ﻿#if DEBUG
-#undef DEBUG
+//#undef DEBUG
 #endif
 
 using UnityEngine;
@@ -11,7 +11,7 @@ using System.Diagnostics;
 public static class Profiler {
     [Conditional("DEBUG")]
     public static void BeginSample(string name, Object targetObject = null) {
-        UnityEngine.Profiling.Profiler.BeginSample(name, targetObject);
+        //UnityEngine.Profiling.Profiler.BeginSample(name, targetObject);
     }
 
     [Conditional("DEBUG")]

@@ -15,7 +15,7 @@ public class NPCAbilityManager : AbilityManager {
             try {
                 NPCAbilityContainer newAbility = new NPCAbilityContainer(abilities[i], abilityWeights[i]);
                 npcAbiliites.Add(newAbility);
-                Debug.Log("Adding" + newAbility.ability.abilityName + " to list");
+                //Debug.Log("Adding" + newAbility.ability.abilityName + " to list");
             }
             catch (System.IndexOutOfRangeException) {
                 Debug.LogError("Ability and Ability Weights don't have the same number of entries");

@@ -45,7 +45,7 @@ public class AIBrain : MonoBehaviour {
 
 
     protected virtual void Update() {
-        Debug.Log(State);
+        //Debug.Log(State);
 
         CheckEnemy();
 
