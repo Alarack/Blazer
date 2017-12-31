@@ -24,6 +24,12 @@ public class EffectStatus : Effect {
     public float damagePerInterval;
     public float percentOfBaseDamage;
 
+    //Static Stat Adjustment
+    public Constants.BaseStatType statType;
+    public float statAdjustmentValue;
+    public StatCollection.StatModificationType modType;
+
+
     public override void Activate() {
         base.Activate();
         BeginDelivery();
@@ -100,6 +106,13 @@ public class EffectStatus : Effect {
                 newDot.InitializeDamageOverTime(damage, parentAbility.source);
 
                 StatusManager.AddStatus(target.GetComponent<Entity>(), newDot); //HERE IS THE TEST LINE
+
+                break;
+
+            case Constants.StatusEffectType.StaticStatAdjustment:
+                StatCollection.StatModifer mod = new StatCollection.StatModifer(statAdjustmentValue, modType);
+
+                CombatManager.ApplyTrackedStatMod(Source, target.GetComponent<Entity>(), statType, mod);
 
                 break;
         }

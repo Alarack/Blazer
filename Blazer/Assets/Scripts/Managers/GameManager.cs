@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager gameManager;
     public ItemPools itemPools;
+    public SpawnManager spawnManager;
     public StatCollectionData defaultStats;
     public StatCollectionData defaultProjectileStats;
     private static List<Entity> allEntities = new List<Entity>();
@@ -18,6 +19,11 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
         }
         
+    }
+
+    private void Start() {
+        if (spawnManager != null)
+            spawnManager.Initialize();
     }
 
 

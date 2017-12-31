@@ -24,7 +24,7 @@ public class DamageOverTime : Status {
             //Debug.Log(effectDamage);
         }
         else {
-            Debug.Log("Target null");
+            //Debug.Log("Target null");
         }
 
     }

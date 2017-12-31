@@ -65,7 +65,7 @@ public class Status {
     }
 
     protected virtual void CleanUp() {
-        Debug.Log("Cleaning " + sourceAbility.abilityName);
+        //Debug.Log("Cleaning " + sourceAbility.abilityName);
         //Destroy(this);
         StatusManager.RemoveStatus(targetEntity, this);
 

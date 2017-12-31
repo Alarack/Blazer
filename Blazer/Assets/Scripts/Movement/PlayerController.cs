@@ -49,7 +49,7 @@ public class PlayerController : EntityMovement {
         Jump();
     }
 
-  
+
     private void TryJump() {
         if (Input.GetButtonDown("Jump") && (Grounded || Platformed)) {
             isJumping = true;
@@ -69,3 +69,11 @@ public class PlayerController : EntityMovement {
         isFallingThrough = false;
     }
 }
+
+    public override void Initialize() {
+        base.Initialize();
+        fallthroughTimer = new Timer("fallthroughTimer", disableDuration, true, DisableFallthrough);
+        if (Platformed && Input.GetAxisRaw("Vertical") < 0) {
+            isFallingThrough = true;
+    private void DisableFallthrough() {
+        isFallingThrough = false;

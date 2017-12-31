@@ -260,7 +260,7 @@ public class SpecialAbility {
     protected virtual void PopAbilityUseTimer() {
         InUse = false;
 
-        Debug.Log("Popping usetimer for " + abilityName + " Use status: " + InUse);
+        //Debug.Log("Popping usetimer for " + abilityName + " Use status: " + InUse);
 
         if (ParentAbility != null) {
             ParentAbility.IncrementSequenceIndex();

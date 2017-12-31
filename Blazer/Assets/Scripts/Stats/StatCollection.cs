@@ -126,6 +126,8 @@ public class StatCollection {
                 return 1f;
             }
 
+            //Debug.Log(totalMultiplier + " is the total multiplier on " + statType);
+
             return totalMultiplier;
         }
 
@@ -133,10 +135,16 @@ public class StatCollection {
             float result = 0;
             for (int i = 0; i < mods.Count; i++) {
                 if (mods[i].modType == StatModificationType.Additive) {
+                    //Debug.Log(mods[i].value + " is the value of a mod on " + statType);
+
                     result += mods[i].value;
+
+                    
                 }
             }
 
+
+            //Debug.Log(result + " is the result of mods on " + statType);
             return result;
         }
 
