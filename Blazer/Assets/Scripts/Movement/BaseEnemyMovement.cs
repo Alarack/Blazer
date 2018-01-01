@@ -32,7 +32,7 @@ public class BaseEnemyMovement : EntityMovement {
         //if (paceTimer != null)
         //    paceTimer.UpdateClock();
         //Debug.Log(brain.State);
-        Debug.Log(facingMod);
+        //Debug.Log(facingMod);
 
         switch (brain.State) {
             case AIBrain.EnemyState.Walking:

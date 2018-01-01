@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnZone : MonoBehaviour {
 
     public BoxCollider2D zoneCollider;
-    public int numSpanws;
+    public int numSpawns;
 
     private void Awake() {
         zoneCollider = GetComponent<BoxCollider2D>();
@@ -21,12 +21,12 @@ public class SpawnZone : MonoBehaviour {
         Vector2 result = Vector2.zero;
 
         float xCord = zoneCollider.bounds.extents.x;
-        float yCord = zoneCollider.bounds.extents.y;
+        //float yCord = zoneCollider.bounds.extents.y;
 
         float randomX = Random.Range(-xCord, xCord);
-        float randomY = Random.Range(-yCord, yCord);
+        //float randomY = Random.Range(-yCord, yCord);
 
-        result = new Vector2(randomX, randomY);
+        result = new Vector2(randomX, 0/*yCord*/);
 
         result += (Vector2)transform.position;
 

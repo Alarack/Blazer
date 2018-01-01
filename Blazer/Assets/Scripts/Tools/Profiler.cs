@@ -1,5 +1,5 @@
 ﻿#if DEBUG
-#undef DEBUG
+//#undef DEBUG
 #endif
 
 using UnityEngine;

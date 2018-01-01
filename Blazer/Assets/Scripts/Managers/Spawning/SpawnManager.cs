@@ -9,7 +9,10 @@ public class SpawnManager : MonoBehaviour {
     public int maxSpawn;
     [Header("Spawn Points")]
     //public List<Transform> spawnPoints = new List<Transform>();
-    public SpawnZone spawnZone; // There will be multiple zones later. this is just for the demo.
+
+    /*--I'm implementing multiple spawn zones now so they can be used in level creation in the interim--*/
+    //public SpawnZone spawnZone; // There will be multiple zones later. this is just for the demo.
+    public List<SpawnZone> spawnZones;
     [Header("Spawns")]
     public List<GameObject> spawns = new List<GameObject>();
 
@@ -47,9 +50,9 @@ public class SpawnManager : MonoBehaviour {
             return;
 
         int randomSpawnIndex = Random.Range(0, spawns.Count);
-        //int randomLocIndex = Random.Range(0, spawnPoints.Count);
+        int randomLocIndex = Random.Range(0, spawnZones.Count);
 
-        GameObject activeSpawn = Instantiate(spawns[randomSpawnIndex], spawnZone.GetSpawnLocation(), Quaternion.identity) as GameObject;
+        GameObject activeSpawn = Instantiate(spawns[randomSpawnIndex], spawnZones[randomLocIndex].GetSpawnLocation(), Quaternion.identity) as GameObject;
 
         Entity activeEntity = activeSpawn.GetComponent<Entity>();
 
