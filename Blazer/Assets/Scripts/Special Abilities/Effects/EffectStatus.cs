@@ -29,6 +29,57 @@ public class EffectStatus : Effect {
     public float statAdjustmentValue;
     public StatCollection.StatModificationType modType;
 
+    public EffectStatus() {
+
+    }
+
+    public EffectStatus(EffectStatus effectStatus) {
+        effectName = effectStatus.effectName;
+        riderTarget = effectStatus.riderTarget;
+        effectType = effectStatus.effectType;
+        deliveryMethod = effectStatus.deliveryMethod;
+        animationTrigger = effectStatus.animationTrigger;
+
+        applyToSpecificTarget = effectStatus.applyToSpecificTarget;
+        targetIndex = effectStatus.targetIndex;
+        riders = effectStatus.CloneRiders();
+
+        scaleFromBaseDamage = effectStatus.scaleFromBaseDamage;
+        percentOfBaseDamage = effectStatus.percentOfBaseDamage;
+        damagePerInterval = effectStatus.damagePerInterval;
+
+        statusType = effectStatus.statusType;
+        stackMethod = effectStatus.stackMethod;
+        maxStack = effectStatus.maxStack;
+        duration = effectStatus.duration;
+        interval = effectStatus.interval;
+
+        affectMoveType = effectStatus.affectMoveType;
+        affectMoveValue = effectStatus.affectMoveValue;
+        knocbackAngle = effectStatus.knocbackAngle;
+
+        statType = effectStatus.statType;
+        statAdjustmentValue = effectStatus.statAdjustmentValue;
+        modType = effectStatus.modType;
+
+
+
+        switch (deliveryMethod) {
+            case Constants.EffectDeliveryMethod.Melee:
+                meleeDelivery.prefabName = effectStatus.meleeDelivery.prefabName;
+                meleeDelivery.layerMask = effectStatus.meleeDelivery.layerMask;
+                break;
+
+            case Constants.EffectDeliveryMethod.Projectile:
+                projectileDelivery.prefabName = effectStatus.projectileDelivery.prefabName;
+                projectileDelivery.layerMask = effectStatus.projectileDelivery.layerMask;
+                break;
+        }
+
+    }
+
+
+
 
     public override void Activate() {
         base.Activate();

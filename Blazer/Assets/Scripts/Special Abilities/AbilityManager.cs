@@ -35,6 +35,8 @@ public class AbilityManager : MonoBehaviour {
 
             newAbility.Initialize(source, abilityData[i], abilityData[i].sequencedAbilities);
             abilities.Add(newAbility);
+
+            //Debug.Log("Adding " + newAbility.abilityName);
         }
     }
 

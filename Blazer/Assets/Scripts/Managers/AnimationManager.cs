@@ -27,7 +27,10 @@ public class AnimationManager : MonoBehaviour {
 
         EventData data = new EventData();
         data.AddString("AttackName", animEvent.stringParameter);
-        data.AddMonoBehaviour("Entity", owner);
+        //data.AddMonoBehaviour("Entity", owner);
+        data.AddInt("ID", owner.SessionID);
+
+        Debug.Log(owner.entityName + " " + owner.SessionID + " is sending an animation event");
 
         Grid.EventManager.SendEvent(Constants.GameEvent.AnimationEvent, data);
 

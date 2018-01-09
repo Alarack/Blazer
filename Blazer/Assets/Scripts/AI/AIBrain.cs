@@ -6,8 +6,7 @@ public class AIBrain : MonoBehaviour {
 
 
     /*--This is a setting kicked straight from the AI detection Array that determines which way the AI will move--*/
-    public enum TargetDirection
-    {
+    public enum TargetDirection {
         None,
         Left,
         Right
@@ -36,7 +35,7 @@ public class AIBrain : MonoBehaviour {
     protected virtual void Awake() {
         movement = GetComponent<BaseEnemyMovement>();
         parentEntity = GetComponent<Entity>();
-        
+
     }
 
     public void Initialize() {
@@ -53,35 +52,28 @@ public class AIBrain : MonoBehaviour {
         switch (State) {
             /*--Added this as a general AI practice--*/
             case EnemyState.None:
-                switch (moveDir)
-                {
+                switch (moveDir) {
                     case TargetDirection.None:
                         break;
                     case TargetDirection.Right:
-                        if(movement.facingMod != 1)
-                        {
+                        if (movement.facingMod != 1) {
                             movement.Flip();
                         }
-                        if (!inMeleeRange)
-                        {
+                        if (!inMeleeRange) {
                             State = EnemyState.Walking;
                         }
-                        else
-                        {
+                        else {
                             State = EnemyState.Attacking;
                         }
                         break;
                     case TargetDirection.Left:
-                        if (movement.facingMod != -1)
-                        {
+                        if (movement.facingMod != -1) {
                             movement.Flip();
                         }
-                        if (!inMeleeRange)
-                        {
+                        if (!inMeleeRange) {
                             State = EnemyState.Walking;
                         }
-                        else
-                        {
+                        else {
                             State = EnemyState.Attacking;
                         }
                         break;
@@ -97,35 +89,28 @@ public class AIBrain : MonoBehaviour {
                 break;
 
             case EnemyState.Walking:
-                switch (moveDir)
-                {
+                switch (moveDir) {
                     case TargetDirection.None:
                         break;
                     case TargetDirection.Right:
-                        if (movement.facingMod != 1)
-                        {
+                        if (movement.facingMod != 1) {
                             movement.Flip();
                         }
-                        if (!inMeleeRange)
-                        {
+                        if (!inMeleeRange) {
                             State = EnemyState.Walking;
                         }
-                        else
-                        {
+                        else {
                             State = EnemyState.Attacking;
                         }
                         break;
                     case TargetDirection.Left:
-                        if (movement.facingMod != -1)
-                        {
+                        if (movement.facingMod != -1) {
                             movement.Flip();
                         }
-                        if (!inMeleeRange)
-                        {
+                        if (!inMeleeRange) {
                             State = EnemyState.Walking;
                         }
-                        else
-                        {
+                        else {
                             State = EnemyState.Attacking;
                         }
                         break;
@@ -144,13 +129,11 @@ public class AIBrain : MonoBehaviour {
     public virtual void CheckEnemy() {
 
         /*--New Attack checker; needs some tweaking, but works fine and doesn't rely on facing--*/
-        if (Physics2D.OverlapCircle(visualCenter.position, meleeCheckRadius, whatIsEnemy))
-        {
-            Debug.Log("In Attack Range");
+        if (Physics2D.OverlapCircle(visualCenter.position, meleeCheckRadius, whatIsEnemy)) {
+            //Debug.Log("In Attack Range");
             inMeleeRange = true;
         }
-        else
-        {
+        else {
             inMeleeRange = false;
         }
 

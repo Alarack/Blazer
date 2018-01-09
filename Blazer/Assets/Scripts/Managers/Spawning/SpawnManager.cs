@@ -53,7 +53,6 @@ public class SpawnManager : MonoBehaviour {
         int randomLocIndex = Random.Range(0, spawnZones.Count);
 
         GameObject activeSpawn = Instantiate(spawns[randomSpawnIndex], spawnZones[randomLocIndex].GetSpawnLocation(), Quaternion.identity) as GameObject;
-
         Entity activeEntity = activeSpawn.GetComponent<Entity>();
 
         currentSpawns.Add(activeEntity);

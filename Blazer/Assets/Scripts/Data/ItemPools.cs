@@ -18,7 +18,7 @@ public class ItemPools : ScriptableObject {
 
         Dictionary<ItemData.ItemRarity, float> dropChances = GetDropChances();
 
-        Debug.Log(roll + " is the roll");
+        //Debug.Log(roll + " is the roll");
 
         //Debug.Log(dropChances[ItemData.ItemRarity.Legendary] + " is the legend drop chance");
 

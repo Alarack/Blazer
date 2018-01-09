@@ -176,17 +176,20 @@ public class SpecialAbility {
 
     public virtual bool Activate() {
 
-        if (InUse && !overrideOtherAbilities)
-            return false;
+        //if (InUse && !overrideOtherAbilities) {
+        //    Debug.Log("Another ability is in use.");
+        //    return false;
+        //}
 
         if (recoveryMethod != null && !recoveryMethod.Ready) {
+           // Debug.Log(abilityName + " is not ready");
             return false;
         }
 
         if (procChance < 1f && !ProcRoll())
             return false;
 
-        //Debug.Log(abilityName + " has been activated");
+        Debug.Log(abilityName + " has been activated");
         if (sequencedAbilities.Count < 1) {
             for (int i = 0; i < effects.Count; i++) {
                 targets.Clear();

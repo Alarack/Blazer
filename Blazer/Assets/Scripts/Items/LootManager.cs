@@ -14,7 +14,7 @@ public class LootManager : MonoBehaviour {
         if (!CheckDrop())
             return;
 
-        Debug.Log(GameManager.GetItemPools().DetermineRarity() + " is the rarity");
+        //Debug.Log(GameManager.GetItemPools().DetermineRarity() + " is the rarity");
 
         ItemData item = GameManager.GetItemPools().GetItem(pool);
 

@@ -37,6 +37,21 @@ public class Effect {
     public virtual void Initialize(SpecialAbility parentAbility) {
         this.parentAbility = parentAbility;
 
+        //switch (deliveryMethod) {
+        //    case Constants.EffectDeliveryMethod.Melee:
+        //        meleeDelivery = new EffectDeliveryMelee();
+        //        break;
+
+        //    case Constants.EffectDeliveryMethod.Projectile:
+        //        projectileDelivery = new EffectDeliveryProjectile();
+        //        break;
+
+        //    case Constants.EffectDeliveryMethod.Raycast:
+        //        rayCastDelivery = new EffectDeliveryRaycast();
+        //        break;
+        //}
+
+
         for(int i = 0; i < eventOptions.Count; i++) {
             eventDict.Add(eventOptions[i].option, eventOptions[i].sendEvent);
         }
@@ -69,8 +84,13 @@ public class Effect {
 
     public virtual void BeginDelivery() {
 
-        if(!string.IsNullOrEmpty(animationTrigger))
+        if (!string.IsNullOrEmpty(animationTrigger)) {
             parentAbility.source.MyAnimator.SetTrigger(animationTrigger);
+        }
+        //else {
+        //    Debug.LogError("No animation trigger on " + effectName);
+        //}
+
 
         switch (deliveryMethod) {
             case Constants.EffectDeliveryMethod.Raycast:
@@ -132,6 +152,22 @@ public class Effect {
             host.AddRider(this);
         }
 
+    }
+
+    protected virtual List<Effect> CloneRiders() {
+        List<Effect> clones = new List<Effect>();
+
+        for (int i = 0; i < riders.Count; i++) {
+            if(riders[i] is EffectAttack) {
+                EffectAttack clone = new EffectAttack((EffectAttack)riders[i]);
+                clones.Add(clone);
+            }
+
+
+            //clones.Add(riders[i]);
+        }
+
+        return clones;
     }
 
     protected virtual void ApplyRiderEffects(GameObject target) {
