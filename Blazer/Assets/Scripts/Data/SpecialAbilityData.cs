@@ -65,13 +65,26 @@ public class SpecialAbilityData : ScriptableObject {
         public EffectSet GetEffectSet(Constants.SpecialAbilityEffectType effectType) {
             switch (effectType) {
                 case Constants.SpecialAbilityEffectType.AttackEffect:
-                    EffectSet attackEffect = new EffectSet(effectType, attacks.ConvertAll<Effect>(b => (Effect)b));
+                    List<Effect> attackBundle = new List<Effect>();
+
+                    for(int i = 0; i < attacks.Count; i++) {
+                        EffectAttack clonedAttack = new EffectAttack(attacks[i]);
+                        attackBundle.Add(clonedAttack);
+                    }
+
+                    EffectSet attackEffect = new EffectSet(effectType, attackBundle/*.ConvertAll<Effect>(b => (Effect)b)*/);
 
                     return attackEffect;
 
                 case Constants.SpecialAbilityEffectType.StatusEffect:
+                    List<Effect> statusBundle = new List<Effect>();
 
-                    EffectSet statusAttacks = new EffectSet(effectType, statusEffects.ConvertAll<Effect>(b => (Effect)b));
+                    for(int i = 0; i < statusEffects.Count; i++) {
+                        EffectStatus clonedStatus = new EffectStatus(statusEffects[i]);
+                        statusBundle.Add(clonedStatus);
+                    }
+
+                    EffectSet statusAttacks = new EffectSet(effectType, statusBundle /*statusEffects.ConvertAll<Effect>(b => (Effect)b)*/);
 
                     return statusAttacks;
 

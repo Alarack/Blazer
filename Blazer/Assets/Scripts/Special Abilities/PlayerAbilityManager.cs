@@ -15,6 +15,8 @@ public class PlayerAbilityManager : AbilityManager {
             PlayerAbilityContainer newAbility = new PlayerAbilityContainer(abilities[i], (i + 1));
             playerAbilities.Add(newAbility);
             MainHud.SetPlayerSlot(abilities[i], i);
+
+            //Debug.Log("Adding " + abilities[i].abilityName);
         }
     }
 
@@ -37,6 +39,8 @@ public class PlayerAbilityManager : AbilityManager {
                     Debug.LogError("another ability is current in use");
                     return;
                 }
+
+                //Debug.Log("Player is activating " + playerAbilities[i].ability.abilityName);
                 playerAbilities[i].ability.Activate();
             }
         }

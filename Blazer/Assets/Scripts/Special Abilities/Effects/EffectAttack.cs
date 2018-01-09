@@ -21,8 +21,50 @@ public class EffectAttack : Effect {
     public bool penetrate;
     public int numPenetrations;
 
-    protected Vector2 shotOrigin;
+    //protected Vector2 shotOrigin;
 
+
+    public EffectAttack() {
+
+    }
+
+    public EffectAttack(EffectAttack attackEffect) {
+        effectName = attackEffect.effectName;
+        riderTarget = attackEffect.riderTarget;
+        effectType = attackEffect.effectType;
+        deliveryMethod = attackEffect.deliveryMethod;
+        animationTrigger = attackEffect.animationTrigger;
+
+        applyToSpecificTarget = attackEffect.applyToSpecificTarget;
+        targetIndex = attackEffect.targetIndex;
+
+        //parentAbility = attackEffect.parentAbility;
+        riders = attackEffect.CloneRiders();
+
+        effectDamage = attackEffect.effectDamage;
+        scaleFromBaseDamage = attackEffect.scaleFromBaseDamage;
+        percentOfBaseDamage = attackEffect.percentOfBaseDamage;
+        burstAttack = attackEffect.burstAttack;
+        burstNumber = attackEffect.burstNumber;
+        burstInterval = attackEffect.burstInterval;
+        impactEffectName = attackEffect.impactEffectName;
+        fireEffectName = attackEffect.fireEffectName;
+        penetrate = attackEffect.penetrate;
+        numPenetrations = attackEffect.numPenetrations;
+
+        switch (deliveryMethod) {
+            case Constants.EffectDeliveryMethod.Melee:
+                meleeDelivery.prefabName = attackEffect.meleeDelivery.prefabName;
+                meleeDelivery.layerMask = attackEffect.meleeDelivery.layerMask;
+                break;
+
+            case Constants.EffectDeliveryMethod.Projectile:
+                projectileDelivery.prefabName = attackEffect.projectileDelivery.prefabName;
+                projectileDelivery.layerMask = attackEffect.projectileDelivery.layerMask;
+                break;
+        }
+
+    }
 
     public override void Initialize(SpecialAbility parentAbility) {
         base.Initialize(parentAbility);

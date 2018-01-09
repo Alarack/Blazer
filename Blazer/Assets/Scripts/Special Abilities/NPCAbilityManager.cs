@@ -38,21 +38,27 @@ public class NPCAbilityManager : AbilityManager {
         for(int i = 0; i < npcAbiliites.Count; i++) {
             //Debug.Log("Checking " + npcAbiliites[i].ability.abilityName + " for readiness");
 
-            if(!IsAbilityInUse() || npcAbiliites[i].ability.overrideOtherAbilities) {
-                possibleAbilities.Add(npcAbiliites[i]);
+            if(!IsAbilityInUse() /*|| npcAbiliites[i].ability.overrideOtherAbilities*/) {
+                if(!possibleAbilities.Contains(npcAbiliites[i]) && npcAbiliites[i].ability.Recovery.Ready)
+                    possibleAbilities.Add(npcAbiliites[i]);
+
                 //Debug.Log("Checking " + npcAbiliites[i].ability.abilityName + " is ready");
             }
-            else {
-                Debug.Log( npcAbiliites[i].ability.abilityName + " is in use: " + npcAbiliites[i].ability.InUse);
-            }
+            //else {
+            //    Debug.Log(npcAbiliites[i].ability.abilityName + " is in use: " + npcAbiliites[i].ability.InUse);
+            //}
         }
 
 
         if(possibleAbilities.Count > 0)
             targetAbility = possibleAbilities[0].ability;
 
-        if (targetAbility != null)
+        if (targetAbility != null) {
             targetAbility.Activate();
+            Debug.Log( targetAbility.source.entityName + " " + targetAbility.source.SessionID + " is activating an ability");
+            //targetAbility = null;
+        }
+
 
 
 

@@ -23,6 +23,7 @@ public class Entity : MonoBehaviour {
     public Constants.EntityFacing Facing { get; set; }
     public Animator MyAnimator { get; protected set; }
     public AbilityManager AbilityManager { get; protected set; }
+    public int SessionID { get; private set; }
 
     protected EntityMovement movement;
     protected HealthDeathManager healthDeathManager;
@@ -33,6 +34,8 @@ public class Entity : MonoBehaviour {
     }
 
     public void Initialize() {
+        SessionID = IDFactory.GenerateEntityID();
+
         stats = new StatCollection();
         stats.Initialize(statTemplate);
 

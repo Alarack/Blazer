@@ -55,5 +55,17 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public static Entity GetEntityByID(int id) {
+        int count = allEntities.Count;
+
+        for(int i = 0; i < count; i++) {
+            if(allEntities[i].SessionID == id) {
+                return allEntities[i];
+            }
+        }
+
+        return null;
+    }
+
 
 }

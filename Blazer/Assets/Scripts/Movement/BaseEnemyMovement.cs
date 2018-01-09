@@ -61,11 +61,11 @@ public class BaseEnemyMovement : EntityMovement {
     protected virtual void SetWalkAnimation() {
         if (currentSpeed != 0f && !owner.MyAnimator.GetBool("Walk")) {
             owner.MyAnimator.SetBool("Walk", true);
-            Debug.Log("Start Walk");
+            //Debug.Log("Start Walk");
         }
         else if (currentSpeed == 0f && owner.MyAnimator.GetBool("Walk")) {
             owner.MyAnimator.SetBool("Walk", false);
-            Debug.Log("Stop Walk");
+            //Debug.Log("Stop Walk");
         }
     }
 

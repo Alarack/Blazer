@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class SpawnZone : MonoBehaviour {
 
-    public BoxCollider2D zoneCollider;
-    public int numSpawns;
+    private BoxCollider2D zoneCollider;
 
     private void Awake() {
         zoneCollider = GetComponent<BoxCollider2D>();

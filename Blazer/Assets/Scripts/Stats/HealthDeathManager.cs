@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Entity))]
 public class HealthDeathManager : MonoBehaviour {
 
-
+    public bool cheat;
     public GameObject deathEffect;
 
     protected Entity owner;
@@ -42,8 +42,8 @@ public class HealthDeathManager : MonoBehaviour {
             //Debug.Log(owner.stats.GetStatModifiedValue(Constants.BaseStatType.Health) + " is the health of " + owner.gameObject.name);
 
             if (owner.stats.GetStatModifiedValue(Constants.BaseStatType.Health) <= 0f) {
-
-                Die(cause);
+                if(!cheat)
+                    Die(cause);
             }
         }
 

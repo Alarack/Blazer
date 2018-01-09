@@ -9,13 +9,21 @@ public class EffectDeliveryMelee : EffectDeliveryMethod {
 
 
 
+    public override void Initialize(SpecialAbility parentAbility, EffectAttack parentEffect) {
+        base.Initialize(parentAbility, parentEffect);
+
+        Grid.EventManager.RegisterListener(Constants.GameEvent.AnimationEvent, OnAnimationEvent);
+    }
+
 
     public override void Deliver() {
         base.Deliver();
 
         //CreateMeleeAttack();
 
-        Grid.EventManager.RegisterListener(Constants.GameEvent.AnimationEvent, OnAnimationEvent);
+        //Debug.Log(parentAbility.source.entityName + " " + parentAbility.source.SessionID + " is delivering an attack");
+
+        
     }
 
 
@@ -41,13 +49,32 @@ public class EffectDeliveryMelee : EffectDeliveryMethod {
 
 
     private void OnAnimationEvent(EventData data) {
-        Debug.Log("Recieving Attack");
+        //Debug.Log("Recieving Attack");
 
-        Entity owner = data.GetMonoBehaviour("Entity") as Entity;
+        //Entity owner = data.GetMonoBehaviour("Entity") as Entity;
+        int id = data.GetInt("ID");
         string attackName = data.GetString("AttackName");
+        Entity owner = GameManager.GetEntityByID(id);
 
-        if (owner != parentAbility.source)
+        if(owner != parentAbility.source) {
+            Debug.Log("ID " + id + " is not " + parentAbility.source.SessionID);
             return;
+        }
+
+
+        //if (owner == null)
+        //    return;
+
+
+        Debug.Log(parentAbility.source.entityName + " " + parentAbility.source.SessionID + " has recieved an anition event sent by: " + owner.entityName + " " + owner.SessionID);
+
+        //Debug.Log(owner.entityName + " " + owner.SessionID + " has recieved an animation event from ");
+
+        //if (owner != parentAbility.source)
+        //    return;
+        //else {
+        //    Debug.Log(owner.entityName + " " + owner.SessionID + " has recieved an animation event");
+        //}
 
         if (attackName != parentEffect.animationTrigger)
             return;
@@ -59,7 +86,7 @@ public class EffectDeliveryMelee : EffectDeliveryMethod {
 
 
     private void CreateMeleeAttack() {
-        Grid.EventManager.RemoveListener(Constants.GameEvent.AnimationEvent, OnAnimationEvent);
+        //Grid.EventManager.RemoveListener(Constants.GameEvent.AnimationEvent, OnAnimationEvent);
 
 
         ConfigureMeleeAttack();
@@ -67,7 +94,7 @@ public class EffectDeliveryMelee : EffectDeliveryMethod {
         GameObject loadedPrefab = Resources.Load("Melee/" + prefabName) as GameObject;
 
         if (loadedPrefab == null) {
-            Debug.LogError("Prefab was null");
+            Debug.LogError("Prefab was null : " + prefabName);
             return;
         }
 
