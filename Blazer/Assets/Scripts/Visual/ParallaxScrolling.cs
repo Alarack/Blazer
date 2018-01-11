@@ -20,28 +20,28 @@ public class ParallaxScrolling : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        //previousCamPos = camTransform.position;
-        //parallaxScales = new float[backgrounds.Length];
+        previousCamPos = camTransform.position;
+        parallaxScales = new float[backgrounds.Length];
 
-        //for (int i = 0; i < backgrounds.Length; i++)
-        //{
-        //    parallaxScales[i] = backgrounds[i].position.z * -1;
-        //}
+        for (int i = 0; i < backgrounds.Length; i++)
+        {
+            parallaxScales[i] = backgrounds[i].position.z * -1;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        //for (int i = 0; i < backgrounds.Length; i++)
-        //{
-        //    float parallax = (previousCamPos.x - camTransform.position.x) * parallaxScales[i];
-        //    float backgroundTargetPosX = backgrounds[i].position.x + parallax;
-        //    Vector3 backgroundTargetPos = new Vector3(backgroundTargetPosX, backgrounds[i].position.y, backgrounds[i].position.y);
+        for (int i = 0; i < backgrounds.Length; i++)
+        {
+            float parallax = (previousCamPos.x - camTransform.position.x) * parallaxScales[i];
+            float backgroundTargetPosX = backgrounds[i].position.x + parallax;
+            Vector3 backgroundTargetPos = new Vector3(backgroundTargetPosX, backgrounds[i].position.y, backgrounds[i].position.y);
 
-        //    backgrounds[i].position = Vector3.Lerp(backgrounds[i].position, backgroundTargetPos, smoothing * Time.fixedDeltaTime);
-        //}
+            backgrounds[i].position = Vector3.Lerp(backgrounds[i].position, backgroundTargetPos, smoothing * Time.fixedDeltaTime);
+        }
 
-        //previousCamPos = camTransform.position;
+        previousCamPos = camTransform.position;
     }
 }

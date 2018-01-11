@@ -1,0 +1,355 @@
+fileFormatVersion: 2
+guid: 9cf3aed47153f9b419e312aeb2d369b2
+timeCreated: 1515562309
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Slugger_GrandSlam_0
+    21300002: Slugger_GrandSlam_6
+    21300004: Slugger_GrandSlam_7
+    21300006: Slugger_GrandSlam_8
+    21300008: Slugger_GrandSlam_9
+    21300010: Slugger_GrandSlam_10
+    21300012: Slugger_GrandSlam_11
+    21300014: Slugger_GrandSlam_12
+    21300016: Slugger_GrandSlam_13
+    21300018: Slugger_GrandSlam_14
+    21300020: Slugger_GrandSlam_10
+    21300022: Slugger_GrandSlam_0
+    21300024: Slugger_GrandSlam_1
+    21300026: Slugger_GrandSlam_2
+    21300028: Slugger_GrandSlam_3
+    21300030: Slugger_GrandSlam_4
+    21300032: Slugger_GrandSlam_5
+    21300034: Slugger_GrandSlam_-1
+    21300036: Slugger_GrandSlam_15
+    21300038: Slugger_Idle_1
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 16
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Slugger_GrandSlam_6
+      rect:
+        serializedVersion: 2
+        x: 237
+        y: 3
+        width: 34
+        height: 25
+      alignment: 9
+      pivot: {x: 0.10294116, y: 0.02}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Slugger_GrandSlam_7
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 3
+        width: 34
+        height: 25
+      alignment: 9
+      pivot: {x: 0.01470588, y: 0.02}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Slugger_GrandSlam_8
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 3
+        width: 34
+        height: 25
+      alignment: 9
+      pivot: {x: 0.046875, y: 0.02}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Slugger_GrandSlam_9
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 3
+        width: 34
+        height: 25
+      alignment: 9
+      pivot: {x: 0.046875, y: 0.02}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Slugger_GrandSlam_10
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 3
+        width: 34
+        height: 25
+      alignment: 9
+      pivot: {x: 0.078125, y: 0.02}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Slugger_GrandSlam_11
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 3
+        width: 34
+        height: 25
+      alignment: 9
+      pivot: {x: 0.01470588, y: 0.02}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Slugger_GrandSlam_12
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 3
+        width: 34
+        height: 25
+      alignment: 9
+      pivot: {x: 0.01470588, y: 0.02}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Slugger_GrandSlam_13
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 3
+        width: 34
+        height: 25
+      alignment: 9
+      pivot: {x: 0.01470588, y: 0.02}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Slugger_GrandSlam_14
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 3
+        width: 34
+        height: 25
+      alignment: 9
+      pivot: {x: 0.01470588, y: 0.02}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Slugger_GrandSlam_0
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 3
+        width: 34
+        height: 25
+      alignment: 9
+      pivot: {x: 0.01470588, y: 0.02}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Slugger_GrandSlam_1
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 3
+        width: 34
+        height: 25
+      alignment: 9
+      pivot: {x: 0.01470588, y: 0.02}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Slugger_GrandSlam_2
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 3
+        width: 34
+        height: 25
+      alignment: 9
+      pivot: {x: 0.01470588, y: 0.02}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Slugger_GrandSlam_3
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 3
+        width: 32
+        height: 25
+      alignment: 9
+      pivot: {x: 0.015625, y: 0.02}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Slugger_GrandSlam_4
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 3
+        width: 34
+        height: 25
+      alignment: 9
+      pivot: {x: 0.01470588, y: 0.02}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Slugger_GrandSlam_5
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 3
+        width: 34
+        height: 25
+      alignment: 9
+      pivot: {x: 0.01470588, y: 0.02}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Slugger_GrandSlam_-1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 3
+        width: 34
+        height: 25
+      alignment: 9
+      pivot: {x: 0.014705882, y: 0.02}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Slugger_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 3
+        width: 12
+        height: 25
+      alignment: 9
+      pivot: {x: 0.041666668, y: 0.02}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
