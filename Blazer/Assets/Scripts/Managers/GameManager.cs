@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour {
     public SpawnManager spawnManager;
     public StatCollectionData defaultStats;
     public StatCollectionData defaultProjectileStats;
+    public GameDifficulty gameDifficulty;
+
+    public static bool GamePaused { get; set; }
+
     private static List<Entity> allEntities = new List<Entity>();
 
     private void Awake() {
@@ -24,6 +28,14 @@ public class GameManager : MonoBehaviour {
     private void Start() {
         if (spawnManager != null)
             spawnManager.Initialize();
+
+        if (gameDifficulty != null)
+            gameDifficulty.Initialize();
+    }
+
+    private void Update() {
+        if (gameDifficulty != null)
+            gameDifficulty.ManagedUpdate();
     }
 
 
@@ -65,6 +77,10 @@ public class GameManager : MonoBehaviour {
         }
 
         return null;
+    }
+
+    public static List<DifficultyData.DifficultyEntry> GetDifficultyEntries() {
+        return gameManager.gameDifficulty.difficultyData.difficultyEntries;
     }
 
 

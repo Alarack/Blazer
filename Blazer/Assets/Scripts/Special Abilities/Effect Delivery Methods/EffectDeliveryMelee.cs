@@ -45,36 +45,17 @@ public class EffectDeliveryMelee : EffectDeliveryMethod {
         }
     }
 
-
-
-
     private void OnAnimationEvent(EventData data) {
         //Debug.Log("Recieving Attack");
 
-        //Entity owner = data.GetMonoBehaviour("Entity") as Entity;
         int id = data.GetInt("ID");
         string attackName = data.GetString("AttackName");
         Entity owner = GameManager.GetEntityByID(id);
 
         if(owner != parentAbility.source) {
-            Debug.Log("ID " + id + " is not " + parentAbility.source.SessionID);
+            //Debug.Log("ID " + id + " is not " + parentAbility.source.SessionID);
             return;
         }
-
-
-        //if (owner == null)
-        //    return;
-
-
-        Debug.Log(parentAbility.source.entityName + " " + parentAbility.source.SessionID + " has recieved an anition event sent by: " + owner.entityName + " " + owner.SessionID);
-
-        //Debug.Log(owner.entityName + " " + owner.SessionID + " has recieved an animation event from ");
-
-        //if (owner != parentAbility.source)
-        //    return;
-        //else {
-        //    Debug.Log(owner.entityName + " " + owner.SessionID + " has recieved an animation event");
-        //}
 
         if (attackName != parentEffect.animationTrigger)
             return;
@@ -83,11 +64,8 @@ public class EffectDeliveryMelee : EffectDeliveryMethod {
 
     }
 
-
-
     private void CreateMeleeAttack() {
         //Grid.EventManager.RemoveListener(Constants.GameEvent.AnimationEvent, OnAnimationEvent);
-
 
         ConfigureMeleeAttack();
 

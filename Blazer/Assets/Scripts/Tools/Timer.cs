@@ -8,9 +8,9 @@ public class Timer {
 
     public string timerName;
 
-    public float Ratio { get { return _timer / duration; } }
+    public float Ratio { get { return _timer / Duration; } }
 
-    private float duration;
+    public float Duration { get; private set; }
     private bool resetTimerOnComplete;
 
     private Action completionCallback;
@@ -20,7 +20,7 @@ public class Timer {
 
     public Timer(string timerName, float duration, bool resetOnComplete = false, Action completionCallback = null) {
         this.timerName = timerName;
-        this.duration = duration;
+        this.Duration = duration;
         this.resetTimerOnComplete = resetOnComplete;
 
         if (completionCallback != null)
@@ -28,18 +28,18 @@ public class Timer {
     }
 
     public void ModifyDuration(float mod) {
-        duration += mod;
+        Duration += mod;
 
-        if (duration <= 0f) {
-            duration = 0f;
+        if (Duration <= 0f) {
+            Duration = 0f;
         }
     }
 
     public void UpdateClock() {
-        if (_timer < duration) {
+        if (_timer < Duration) {
             _timer += Time.deltaTime;
 
-            if (_timer >= duration) {
+            if (_timer >= Duration) {
 
                 if (completionCallback != null)
                     completionCallback();

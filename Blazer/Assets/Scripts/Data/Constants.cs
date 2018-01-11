@@ -105,6 +105,7 @@ public class Constants {
         AnimationEvent = 3,
         EntityDied = 4,
         EffectApplied = 5,
+        DifficultyChange = 6
 
     }
 

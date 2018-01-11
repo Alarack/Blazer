@@ -30,7 +30,7 @@ public class AnimationManager : MonoBehaviour {
         //data.AddMonoBehaviour("Entity", owner);
         data.AddInt("ID", owner.SessionID);
 
-        Debug.Log(owner.entityName + " " + owner.SessionID + " is sending an animation event");
+        //Debug.Log(owner.entityName + " " + owner.SessionID + " is sending an animation event");
 
         Grid.EventManager.SendEvent(Constants.GameEvent.AnimationEvent, data);
 

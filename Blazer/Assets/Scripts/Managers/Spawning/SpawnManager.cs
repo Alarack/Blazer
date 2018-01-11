@@ -24,6 +24,7 @@ public class SpawnManager : MonoBehaviour {
         spawnTimer = new Timer("Spawn Timer", spawnInterval, true, Spawn);
 
         Grid.EventManager.RegisterListener(Constants.GameEvent.EntityDied, OnEntityDeath);
+        Grid.EventManager.RegisterListener(Constants.GameEvent.DifficultyChange, OnDifficultyChange);
     }
 
     private void Update() {
@@ -41,6 +42,18 @@ public class SpawnManager : MonoBehaviour {
         currentSpawns.Remove(target);
         spawnCount--;
         
+
+    }
+
+    private void OnDifficultyChange(EventData data) {
+        GameDifficulty.DifficultyLevel recievedDifficulty = (GameDifficulty.DifficultyLevel)data.GetInt("DifficultyValue");
+
+        float spawnRateIncrease = GameManager.gameManager.gameDifficulty.GetDifficultySpawnValue();
+
+        spawnTimer.ModifyDuration(-spawnRateIncrease);
+        Debug.Log(spawnTimer.Duration + " is the new Span Duration");
+
+
 
     }
 
