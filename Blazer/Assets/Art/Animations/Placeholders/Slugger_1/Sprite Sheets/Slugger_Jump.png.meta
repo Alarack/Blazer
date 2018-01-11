@@ -1,12 +1,12 @@
 fileFormatVersion: 2
 guid: d630102f21ce25145a984aed28c34c17
-timeCreated: 1515487170
+timeCreated: 1515678787
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: Slugger_Jump_0
     21300002: Slugger_Jump_1
-    21300004: Slugger_Jump_2
+    21300004: Slugger_Fall
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -100,8 +100,8 @@ TextureImporter:
         y: 3
         width: 12
         height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.041666668, y: 0.023809524}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -113,23 +113,23 @@ TextureImporter:
         x: 28
         y: 3
         width: 13
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 36
+      alignment: 9
+      pivot: {x: 0.03846154, y: 0.013888889}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Slugger_Jump_2
+      name: Slugger_Fall
       rect:
         serializedVersion: 2
         x: 50
         y: 3
         width: 11
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 36
+      alignment: 9
+      pivot: {x: 0.045454547, y: 0.013888889}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

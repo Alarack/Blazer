@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 9388908e0f1a40042831b48227c010bb
-timeCreated: 1515487223
+timeCreated: 1515678877
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -99,12 +99,12 @@ TextureImporter:
       name: Slugger_Slide_0
       rect:
         serializedVersion: 2
-        x: 38
+        x: 33
         y: 3
-        width: 12
-        height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 22
+        height: 36
+      alignment: 9
+      pivot: {x: 0.11363637, y: 0.013888889}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -115,10 +115,10 @@ TextureImporter:
         serializedVersion: 2
         x: 61
         y: 3
-        width: 20
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 22
+        height: 36
+      alignment: 9
+      pivot: {x: 0.1136364, y: 0.01388889}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -127,12 +127,12 @@ TextureImporter:
       name: Slugger_Slide_2
       rect:
         serializedVersion: 2
-        x: 87
+        x: 86
         y: 3
-        width: 21
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 22
+        height: 36
+      alignment: 9
+      pivot: {x: 0.1136364, y: 0.01388889}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -141,12 +141,12 @@ TextureImporter:
       name: Slugger_Slide_3
       rect:
         serializedVersion: 2
-        x: 111
+        x: 112
         y: 3
-        width: 23
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 22
+        height: 36
+      alignment: 9
+      pivot: {x: 0.1136364, y: 0.01388889}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -155,12 +155,12 @@ TextureImporter:
       name: Slugger_Slide_4
       rect:
         serializedVersion: 2
-        x: 139
+        x: 140
         y: 3
-        width: 23
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 22
+        height: 36
+      alignment: 9
+      pivot: {x: 0.1136364, y: 0.01388889}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -172,9 +172,9 @@ TextureImporter:
         x: 168
         y: 3
         width: 22
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 36
+      alignment: 9
+      pivot: {x: 0.1136364, y: 0.01388889}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
