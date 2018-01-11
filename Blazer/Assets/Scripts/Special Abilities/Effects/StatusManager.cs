@@ -25,7 +25,7 @@ public class StatusManager : MonoBehaviour {
         }
     }
 
-    public static void AddStatus(Entity target, Status status) {
+    public static void AddStatus(Entity target, Status status, EffectStatus sourceEffect, SpecialAbility sourceAbility) {
         int count = statusManager.statusEntries.Count;
         StatusEntry targetEntry = null;
 
@@ -37,7 +37,7 @@ public class StatusManager : MonoBehaviour {
         }
 
         if(targetEntry != null) {
-            targetEntry.AddStatus(status);
+            targetEntry.AddStatus(status, sourceEffect, sourceAbility);
             return;
         }
 
@@ -85,7 +85,37 @@ public class StatusManager : MonoBehaviour {
             return statusContainer.activeStatusList.Count;
         }
 
-        public void AddStatus(Status status) {
+        public void AddStatus(Status status, EffectStatus sourceEffect, SpecialAbility sourceAbility) {
+            List<Status> existingStatus = statusContainer.GetStatusListByType(status.statusType);
+
+            int count = existingStatus.Count;
+
+            if(existingStatus.Count > 0) {
+                for (int i = 0; i < count; i++) {
+                    if (existingStatus[i].IsFromSameSource(sourceAbility)) {
+                        switch (sourceEffect.stackMethod) {
+                            case Constants.StatusStackingMethod.None:
+                                existingStatus[i].RefreshDuration();
+                                return;
+
+                            case Constants.StatusStackingMethod.LimitedStacks:
+                                if (existingStatus[i].StackCount < existingStatus[i].maxStack) {
+                                    existingStatus[i].Stack();
+                                }
+                                else {
+                                    existingStatus[i].RefreshDuration();
+                                }
+                                return;
+
+
+                            case Constants.StatusStackingMethod.StacksWithOtherAbilities:
+                                existingStatus[i].RefreshDuration();
+                                return;
+                        }
+                    }
+                }
+            }
+
             statusContainer.AddStatus(status);
         }
 
@@ -118,6 +148,20 @@ public class StatusManager : MonoBehaviour {
             for (int i = 0; i < activeStatusList.Count; i++) {
                 activeStatusList[i].ManagedUpdate();
             }
+        }
+
+        public List<Status> GetStatusListByType(Constants.StatusEffectType type) {
+            List<Status> results = new List<Status>();
+
+            int count = activeStatusList.Count;
+
+            for(int i = 0; i < count; i++) {
+                if(activeStatusList[i].statusType == type) {
+                    results.Add(activeStatusList[i]);
+                }
+            }
+
+            return results;
         }
 
 

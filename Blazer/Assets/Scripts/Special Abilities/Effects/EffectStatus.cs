@@ -100,7 +100,7 @@ public class EffectStatus : Effect {
 
                 newStatus.Initialize(target, duration, interval, statusType, parentAbility);
 
-                StatusManager.AddStatus(target.GetComponent<Entity>(), newStatus); //HERE IS THE TEST LINE
+                StatusManager.AddStatus(target.GetComponent<Entity>(), newStatus, this, parentAbility); //HERE IS THE TEST LINE
                 break;
 
             case Constants.StatusEffectType.AffectMovement:
@@ -116,7 +116,7 @@ public class EffectStatus : Effect {
                 newAffectMovement.Initialize(target, duration, interval, statusType, parentAbility);
                 newAffectMovement.InitializeAffectMovement(affectMoveType, affectMoveValue, knockbackVector);
 
-                StatusManager.AddStatus(target.GetComponent<Entity>(), newAffectMovement); //HERE IS THE TEST LINE
+                StatusManager.AddStatus(target.GetComponent<Entity>(), newAffectMovement, this, parentAbility); //HERE IS THE TEST LINE
                 break;
 
             case Constants.StatusEffectType.DamageOverTime:
@@ -153,10 +153,10 @@ public class EffectStatus : Effect {
 
                 //DamageOverTime newDot = target.AddComponent<DamageOverTime>();
                 DamageOverTime newDot = new DamageOverTime();
-                newDot.Initialize(target, duration, interval, statusType, parentAbility);
+                newDot.Initialize(target, duration, interval, statusType, parentAbility, maxStack);
                 newDot.InitializeDamageOverTime(damage, parentAbility.source);
 
-                StatusManager.AddStatus(target.GetComponent<Entity>(), newDot); //HERE IS THE TEST LINE
+                StatusManager.AddStatus(target.GetComponent<Entity>(), newDot, this, parentAbility); //HERE IS THE TEST LINE
 
                 break;
 

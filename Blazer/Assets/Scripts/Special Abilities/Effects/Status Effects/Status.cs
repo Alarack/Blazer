@@ -6,7 +6,8 @@ using UnityEngine;
 public class Status {
 
     public Constants.StatusEffectType statusType;
-    public int stackCount = 1;
+    public int StackCount { get; protected set; } 
+    public int maxStack;
 
     protected Timer durationTimer;
     protected Timer intervalTimer;
@@ -17,10 +18,11 @@ public class Status {
 
 
 
-    public virtual void Initialize(GameObject target, float duration, float interval, Constants.StatusEffectType statusType, SpecialAbility sourceAbility) {
+    public virtual void Initialize(GameObject target, float duration, float interval, Constants.StatusEffectType statusType, SpecialAbility sourceAbility, int maxStack = 1) {
         this.target = target;
         this.statusType = statusType;
         this.sourceAbility = sourceAbility;
+        this.maxStack = maxStack;
 
         targetEntity = target.GetComponent<Entity>();
 
@@ -34,7 +36,7 @@ public class Status {
 
     public virtual void Stack() {
         Debug.Log("Stacking");
-        stackCount++;
+        StackCount++;
     }
 
     public virtual void RefreshDuration() {
@@ -47,11 +49,6 @@ public class Status {
 
     public virtual void ModifyDuration(float mod) {
         durationTimer.ModifyDuration(mod);
-    }
-
-    protected virtual void Update() {
-        //durationTimer.UpdateClock();
-        //intervalTimer.UpdateClock();
     }
 
     public virtual void ManagedUpdate() {

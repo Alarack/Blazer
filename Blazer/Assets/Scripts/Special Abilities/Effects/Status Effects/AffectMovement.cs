@@ -19,8 +19,8 @@ public class AffectMovement : Status {
     //protected List<StatCollection.StatModifer> mods = new List<StatCollection.StatModifer>();
     protected StatCollection.StatModifer mod;
 
-    public override void Initialize(GameObject target, float duration, float interval, Constants.StatusEffectType statusType, SpecialAbility sourceAbility) {
-        base.Initialize(target, duration, interval, statusType, sourceAbility);
+    public override void Initialize(GameObject target, float duration, float interval, Constants.StatusEffectType statusType, SpecialAbility sourceAbility, int maxStack = 1) {
+        base.Initialize(target, duration, interval, statusType, sourceAbility, maxStack);
     }
 
     public void InitializeAffectMovement(AffectMovementType type, float value, Vector2 knockback) {
