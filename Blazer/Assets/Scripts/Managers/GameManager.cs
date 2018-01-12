@@ -5,11 +5,22 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     public static GameManager gameManager;
+
+    [Header("Items")]
     public ItemPools itemPools;
+
+    [Header("Spawns")]
     public SpawnManager spawnManager;
+
+    [Header("Default Stats")]
     public StatCollectionData defaultStats;
     public StatCollectionData defaultProjectileStats;
+
+    [Header("Difficulty")]
     public GameDifficulty gameDifficulty;
+
+    [Header("Panels")]
+    public PauseMenu pauseMenu;
 
     public static bool GamePaused { get; set; }
 
@@ -36,6 +47,14 @@ public class GameManager : MonoBehaviour {
     private void Update() {
         if (gameDifficulty != null)
             gameDifficulty.ManagedUpdate();
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            PauseGame();
+        }
+    }
+
+    private void PauseGame() {
+        pauseMenu.TogglePause();
     }
 
 
