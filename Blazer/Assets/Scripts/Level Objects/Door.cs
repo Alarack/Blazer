@@ -12,6 +12,7 @@ public class Door : Activateable {
         Broken
     }
 
+    public Animator myAnim;
     public DoorState currentState;
     public Collider2D doorColl;
 
@@ -41,10 +42,12 @@ public class Door : Activateable {
     {
         switch (currentState) {
             case DoorState.Open:
+                myAnim.SetBool("Open", false);
                 currentState = DoorState.Closed;
                 doorColl.enabled = true;
                 break;
             case DoorState.Closed:
+                myAnim.SetBool("Open", true);
                 currentState = DoorState.Open;
                 doorColl.enabled = false;
                 break;
