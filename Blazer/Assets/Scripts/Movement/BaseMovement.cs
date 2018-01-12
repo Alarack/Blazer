@@ -6,6 +6,7 @@ using UnityEngine;
 public abstract class BaseMovement : MonoBehaviour {
 
     public bool CanMove { get; set; }
+    public bool CanPivot { get; set; }
 
     protected float maxSpeed;
     protected float currentSpeed;
@@ -19,7 +20,7 @@ public abstract class BaseMovement : MonoBehaviour {
         RegisterListeners();
 
         CanMove = true;
-
+        CanPivot = true;
     }
 
     protected virtual void RegisterListeners() {

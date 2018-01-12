@@ -40,6 +40,7 @@ public class AffectMovement : Status {
                 }
 
                 targetMovement.CanMove = false;
+                targetMovement.CanPivot = false;
                 break;
 
             case AffectMovementType.Knockback:
@@ -73,6 +74,7 @@ public class AffectMovement : Status {
         switch (affectType) {
             case AffectMovementType.Halt:
                 targetMovement.CanMove = true;
+                targetMovement.CanPivot = true;
                 break;
 
             case AffectMovementType.AlterSpeed:

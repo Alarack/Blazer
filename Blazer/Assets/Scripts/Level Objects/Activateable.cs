@@ -17,7 +17,7 @@ public abstract class Activateable : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && canActivate)
+        if (Input.GetKeyDown(KeyCode.F) && canActivate)
         {
             ActivationFunction();
         }

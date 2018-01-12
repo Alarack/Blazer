@@ -100,28 +100,34 @@ public abstract class EntityMovement : BaseMovement {
     protected void CheckFacing() {
         if (owner.SpriteRenderer == null)
             return;
+        if (CanPivot)
+        {
+            if (currentSpeed > 0 && owner.SpriteRenderer.flipX)
+            {
+                owner.SpriteRenderer.flipX = false;
+                //owner.SpriteRenderer.transform.localScale = Vector3.one;
+                owner.Facing = Constants.EntityFacing.Right;
+                //Debug.Log("Flipping right " + owner.SpriteRenderer.flipX);
 
-        if (currentSpeed > 0 && owner.SpriteRenderer.flipX) {
-            owner.SpriteRenderer.flipX = false;
-            //owner.SpriteRenderer.transform.localScale = Vector3.one;
-            owner.Facing = Constants.EntityFacing.Right;
-            //Debug.Log("Flipping right " + owner.SpriteRenderer.flipX);
+                if (useSpritePivotHack)
+                {
+                    owner.SpriteRenderer.gameObject.transform.localPosition -= (Vector3)spriteOffset;
+                }
 
-            if (useSpritePivotHack) {
-                owner.SpriteRenderer.gameObject.transform.localPosition -= (Vector3)spriteOffset;
             }
+            else if (currentSpeed < 0 && !owner.SpriteRenderer.flipX)
+            {
+                owner.SpriteRenderer.flipX = true;
+                //owner.SpriteRenderer.transform.localScale = new Vector3(-1f, 1f, 1f);
+                owner.Facing = Constants.EntityFacing.Left;
 
-        }
-        else if (currentSpeed < 0 && !owner.SpriteRenderer.flipX) {
-            owner.SpriteRenderer.flipX = true;
-            //owner.SpriteRenderer.transform.localScale = new Vector3(-1f, 1f, 1f);
-            owner.Facing = Constants.EntityFacing.Left;
+                if (useSpritePivotHack)
+                {
+                    owner.SpriteRenderer.gameObject.transform.localPosition += (Vector3)spriteOffset;
+                }
 
-            if (useSpritePivotHack) {
-                owner.SpriteRenderer.gameObject.transform.localPosition += (Vector3)spriteOffset;
+                //Debug.Log("Flipping Left " + owner.SpriteRenderer.flipX);
             }
-
-            //Debug.Log("Flipping Left " + owner.SpriteRenderer.flipX);
         }
     }
 

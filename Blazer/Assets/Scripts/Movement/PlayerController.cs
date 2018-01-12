@@ -39,7 +39,15 @@ public class PlayerController : EntityMovement {
         TryJump();
         Fallthrough(isFallingThrough);
         fallthroughTimer.UpdateClock();
-
+        
+        if(!Grounded && !Platformed)
+        {
+            owner.MyAnimator.SetBool("InAir", true);
+        }
+        if(Grounded || Platformed)
+        {
+            owner.MyAnimator.SetBool("InAir", false);
+        }
 
         //Debug.Log(Grounded + " is the status of Grounded");
         //Debug.Log(Platformed + " is the status of platformed");
@@ -54,6 +62,7 @@ public class PlayerController : EntityMovement {
 
     private void TryJump() {
         if (Input.GetButtonDown("Jump") && (Grounded || Platformed)) {
+            owner.MyAnimator.SetTrigger("Jumping");
             isJumping = true;
         }
     }
@@ -69,6 +78,5 @@ public class PlayerController : EntityMovement {
     private void DisableFallthrough() {
         isFallingThrough = false;
     }
-
 
 }
