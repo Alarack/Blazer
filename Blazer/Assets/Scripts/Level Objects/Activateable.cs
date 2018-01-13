@@ -28,7 +28,7 @@ public abstract class Activateable : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            Debug.Log("can be activated by player");
+            //Debug.Log("can be activated by player");
             canActivate = true;
             /*--Insert ActivationFunction reference and event hooks here--*/
       
@@ -37,7 +37,7 @@ public abstract class Activateable : MonoBehaviour {
 
     void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log("can no longer be activated by player");
+        //Debug.Log("can no longer be activated by player");
         canActivate = false;
     }
 
