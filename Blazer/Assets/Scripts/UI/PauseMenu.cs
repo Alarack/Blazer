@@ -33,6 +33,7 @@ public class PauseMenu : MonoBehaviour {
     }
 
     public void OnQuitClick() {
+        Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSe7j2wWKBCb7pEC0UM2nSHIBhP5ZUSNxQAATtdEDz-lMFzpeg/viewform?usp=sf_link");
         Application.Quit();
     }
 
