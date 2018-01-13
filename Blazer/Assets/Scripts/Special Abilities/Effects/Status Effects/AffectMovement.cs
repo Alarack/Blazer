@@ -44,6 +44,8 @@ public class AffectMovement : Status {
                 break;
 
             case AffectMovementType.Knockback:
+                target.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
                 target.GetComponent<Rigidbody2D>().AddForce(knockback * value);
 
                 break;
