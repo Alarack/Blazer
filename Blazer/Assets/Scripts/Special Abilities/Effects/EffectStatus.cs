@@ -119,6 +119,15 @@ public class EffectStatus : Effect {
                 StatusManager.AddStatus(target.GetComponent<Entity>(), newAffectMovement, this, parentAbility); //HERE IS THE TEST LINE
                 break;
 
+            case Constants.StatusEffectType.Stun:
+                Stun newStun = new Stun();
+
+                newStun.Initialize(target, duration, interval, statusType, parentAbility);
+                newStun.InitializeStun();
+
+                StatusManager.AddStatus(target.GetComponent<Entity>(), newStun, this, parentAbility);
+                break;
+
             case Constants.StatusEffectType.DamageOverTime:
                 //DamageOverTime[] existingDots = target.GetComponents<DamageOverTime>();
 

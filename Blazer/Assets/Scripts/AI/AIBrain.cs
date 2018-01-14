@@ -16,6 +16,7 @@ public class AIBrain : MonoBehaviour {
         None = 0,
         Walking = 1,
         Attacking = 2,
+        Stunned = 3
     }
 
     public EnemyState State { get; set; }
@@ -44,7 +45,7 @@ public class AIBrain : MonoBehaviour {
 
 
     protected virtual void Update() {
-        //Debug.Log(State);
+        Debug.Log(State);
 
         CheckEnemy();
 
@@ -118,7 +119,9 @@ public class AIBrain : MonoBehaviour {
                         break;
                 }
                 break;
-
+            case EnemyState.Stunned:
+                Debug.Log("I am stunned");
+                break;
             default:
 
                 break;
