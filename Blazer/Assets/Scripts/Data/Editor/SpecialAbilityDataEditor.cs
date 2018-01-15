@@ -160,6 +160,7 @@ public class SpecialAbilityDataEditor : Editor {
             EffectStatus statusAttack = entry as EffectStatus;
             statusAttack.effectType = Constants.SpecialAbilityEffectType.StatusEffect;
             statusAttack.stackMethod = EditorHelper.EnumPopup("Stack Method", statusAttack.stackMethod);
+            statusAttack.onCompleteEffectName = EditorGUILayout.TextField("On Complete Effect Name", statusAttack.onCompleteEffectName);
 
             switch (statusAttack.stackMethod) {
                 case Constants.StatusStackingMethod.LimitedStacks:

@@ -12,6 +12,7 @@ public class EffectStatus : Effect {
     public int maxStack = 1;
     public float duration;
     public float interval;
+    public string onCompleteEffectName;
 
     //Affect Movement
     public AffectMovement.AffectMovementType affectMoveType;
@@ -28,6 +29,8 @@ public class EffectStatus : Effect {
     public Constants.BaseStatType statType;
     public float statAdjustmentValue;
     public StatCollection.StatModificationType modType;
+
+    protected Effect onCompleteEffect;
 
     public EffectStatus() {
 
@@ -54,6 +57,8 @@ public class EffectStatus : Effect {
         duration = effectStatus.duration;
         interval = effectStatus.interval;
 
+        onCompleteEffectName = effectStatus.onCompleteEffectName;
+
         affectMoveType = effectStatus.affectMoveType;
         affectMoveValue = effectStatus.affectMoveValue;
         knocbackAngle = effectStatus.knocbackAngle;
@@ -78,7 +83,21 @@ public class EffectStatus : Effect {
 
     }
 
+    public override void Initialize(SpecialAbility parentAbility) {
+        base.Initialize(parentAbility);
 
+        //Debug.Log("Initializing " + effectName);
+
+        if(string.IsNullOrEmpty(onCompleteEffectName) == false) {
+            //Debug.Log("Looking for an on complete effect");
+            onCompleteEffect = parentAbility.GetEffectByName(onCompleteEffectName);
+        }
+            
+
+        //if (onCompleteEffect != null)
+        //    Debug.Log(onCompleteEffect.effectName + " is an on complete effect");
+
+    }
 
 
     public override void Activate() {
@@ -91,6 +110,8 @@ public class EffectStatus : Effect {
 
         if (!CheckForSpecificTarget(target))
             return;
+
+
 
         switch (statusType) {
             case Constants.StatusEffectType.None:
@@ -113,7 +134,7 @@ public class EffectStatus : Effect {
                     knockbackVector = new Vector2(-knockbackVector.x, knockbackVector.y);
                 }
 
-                newAffectMovement.Initialize(target, duration, interval, statusType, parentAbility);
+                newAffectMovement.Initialize(target, duration, interval, statusType, parentAbility, maxStack, onCompleteEffect);
                 newAffectMovement.InitializeAffectMovement(affectMoveType, affectMoveValue, knockbackVector);
 
                 StatusManager.AddStatus(target.GetComponent<Entity>(), newAffectMovement, this, parentAbility); //HERE IS THE TEST LINE

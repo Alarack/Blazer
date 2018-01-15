@@ -15,14 +15,17 @@ public class Status {
     protected Entity source;
     protected Entity targetEntity;
     protected SpecialAbility sourceAbility;
+    protected Effect onCompleteEffect;
 
 
-
-    public virtual void Initialize(GameObject target, float duration, float interval, Constants.StatusEffectType statusType, SpecialAbility sourceAbility, int maxStack = 1) {
+    public virtual void Initialize(GameObject target, float duration, float interval, Constants.StatusEffectType statusType, SpecialAbility sourceAbility, int maxStack = 1, Effect onCompleteEffect = null) {
         this.target = target;
         this.statusType = statusType;
         this.sourceAbility = sourceAbility;
         this.maxStack = maxStack;
+        this.onCompleteEffect = onCompleteEffect;
+
+        //Debug.Log(onCompleteEffect);
 
         targetEntity = target.GetComponent<Entity>();
 
@@ -65,6 +68,11 @@ public class Status {
         //Debug.Log("Cleaning " + sourceAbility.abilityName);
         //Destroy(this);
         StatusManager.RemoveStatus(targetEntity, this);
+
+        if(onCompleteEffect != null) {
+            Debug.Log("Sending On Complete effect");
+            onCompleteEffect.Activate();
+        }
 
     }
 

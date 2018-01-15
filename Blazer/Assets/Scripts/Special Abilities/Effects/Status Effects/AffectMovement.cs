@@ -19,8 +19,8 @@ public class AffectMovement : Status {
     //protected List<StatCollection.StatModifer> mods = new List<StatCollection.StatModifer>();
     protected StatCollection.StatModifer mod;
 
-    public override void Initialize(GameObject target, float duration, float interval, Constants.StatusEffectType statusType, SpecialAbility sourceAbility, int maxStack = 1) {
-        base.Initialize(target, duration, interval, statusType, sourceAbility, maxStack);
+    public override void Initialize(GameObject target, float duration, float interval, Constants.StatusEffectType statusType, SpecialAbility sourceAbility, int maxStack = 1, Effect onCompleteEffect = null) {
+        base.Initialize(target, duration, interval, statusType, sourceAbility, maxStack, onCompleteEffect);
     }
 
     public void InitializeAffectMovement(AffectMovementType type, float value, Vector2 knockback) {
@@ -45,6 +45,7 @@ public class AffectMovement : Status {
 
             case AffectMovementType.Knockback:
                 target.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                targetMovement.CanMove = false;
 
                 target.GetComponent<Rigidbody2D>().AddForce(knockback * value);
 
@@ -86,6 +87,10 @@ public class AffectMovement : Status {
                 else {
                     Debug.Log("Mod NUll");
                 }
+                break;
+
+            case AffectMovementType.Knockback:
+                targetMovement.CanMove = true;
                 break;
         }
 

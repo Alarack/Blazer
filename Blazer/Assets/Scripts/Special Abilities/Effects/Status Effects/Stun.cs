@@ -7,7 +7,7 @@ public class Stun : Status {
 
     protected AIBrain targetBrain;
 
-    public override void Initialize(GameObject target, float duration, float interval, Constants.StatusEffectType statusType, SpecialAbility sourceAbility, int maxStack = 1)
+    public override void Initialize(GameObject target, float duration, float interval, Constants.StatusEffectType statusType, SpecialAbility sourceAbility, int maxStack = 1, Effect onCompleteEffect = null)
     {
         base.Initialize(target, duration, interval, statusType, sourceAbility, maxStack);
         targetBrain = target.GetComponent<AIBrain>();

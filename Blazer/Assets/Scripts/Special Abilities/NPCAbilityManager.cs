@@ -55,7 +55,7 @@ public class NPCAbilityManager : AbilityManager {
 
         if (targetAbility != null) {
             targetAbility.Activate();
-            Debug.Log( targetAbility.source.entityName + " " + targetAbility.source.SessionID + " is activating an ability");
+            //Debug.Log( targetAbility.source.entityName + " " + targetAbility.source.SessionID + " is activating an ability");
             //targetAbility = null;
         }
 

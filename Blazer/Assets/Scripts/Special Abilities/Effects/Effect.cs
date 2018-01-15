@@ -51,8 +51,9 @@ public class Effect {
         //        break;
         //}
 
+        //Debug.Log(effectName + " has been initialized");
 
-        for(int i = 0; i < eventOptions.Count; i++) {
+        for (int i = 0; i < eventOptions.Count; i++) {
             eventDict.Add(eventOptions[i].option, eventOptions[i].sendEvent);
         }
 
@@ -108,6 +109,17 @@ public class Effect {
             case Constants.EffectDeliveryMethod.SelfTargeting:
                 Apply(Source.gameObject);
                 break;
+
+            case Constants.EffectDeliveryMethod.None:
+
+                int count = parentAbility.targets.Count;
+
+                for (int i = 0; i < count; i++) {
+                    Apply(parentAbility.targets[i].gameObject);
+                }
+
+                //Debug.Log(effectName + " has no delivery");
+                break;
         }
     }
 
@@ -158,7 +170,7 @@ public class Effect {
         List<Effect> clones = new List<Effect>();
 
         for (int i = 0; i < riders.Count; i++) {
-            if(riders[i] is EffectAttack) {
+            if (riders[i] is EffectAttack) {
                 EffectAttack clone = new EffectAttack((EffectAttack)riders[i]);
                 clones.Add(clone);
             }
