@@ -163,13 +163,13 @@ public class SpecialAbility {
 
     public Effect GetEffectByName(string effectName) {
         if (string.IsNullOrEmpty(effectName)) {
-            Debug.Log("String was empty");
+            //Debug.Log("String was empty");
             return null;
         }
 
 
         for (int i = 0; i < effects.Count; i++) {
-            Debug.Log("Seeking " + effectName);
+            //Debug.Log("Seeking " + effectName);
 
             if (effects[i].effectName == effectName) {
                 return effects[i];
