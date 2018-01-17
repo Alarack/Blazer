@@ -28,10 +28,15 @@ public class Timer {
     }
 
     public void ModifyDuration(float mod) {
+
         Duration += mod;
 
         if (Duration <= 0f) {
             Duration = 0f;
+        }
+
+        if(_timer > Duration) {
+            _timer = 0f;
         }
     }
 
