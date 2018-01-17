@@ -8,6 +8,8 @@ public class ItemIDs : MonoBehaviour {
         None = 0,
         TestItem = 1,
         DamageBoost1 = 2,
+        HealthBooster = 3,
+
     }
 
 }

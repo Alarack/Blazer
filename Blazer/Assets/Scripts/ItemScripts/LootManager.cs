@@ -21,8 +21,8 @@ public class LootManager : MonoBehaviour {
         if (item == null)
             return;
 
-        GameObject drop = Resources.Load("Items/Item Pickup") as GameObject;
-        GameObject activeDrop = Instantiate(drop, transform.position, Quaternion.identity) as GameObject;
+        GameObject drop = Resources.Load("Item Prefabs/Item Pickup") as GameObject;
+        GameObject activeDrop = Instantiate(drop, new Vector3(transform.position.x, transform.position.y, transform.position.z -2), Quaternion.identity) as GameObject;
 
         ItemPickup pickup = activeDrop.GetComponent<ItemPickup>();
 

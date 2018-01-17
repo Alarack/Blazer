@@ -51,7 +51,7 @@ public class SpawnManager : MonoBehaviour {
         float spawnRateIncrease = GameManager.gameManager.gameDifficulty.GetDifficultySpawnValue();
 
         spawnTimer.ModifyDuration(-spawnRateIncrease);
-        Debug.Log(spawnTimer.Duration + " is the new Span Duration");
+        Debug.Log(spawnTimer.Duration + " is the new Spawn Interval");
 
 
 
