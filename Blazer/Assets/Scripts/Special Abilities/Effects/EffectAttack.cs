@@ -62,6 +62,10 @@ public class EffectAttack : Effect {
                 projectileDelivery.prefabName = attackEffect.projectileDelivery.prefabName;
                 projectileDelivery.layerMask = attackEffect.projectileDelivery.layerMask;
                 break;
+
+            case Constants.EffectDeliveryMethod.Raycast:
+                rayCastDelivery.layerMask = attackEffect.rayCastDelivery.layerMask;
+                break;
         }
 
     }
@@ -117,7 +121,7 @@ public class EffectAttack : Effect {
         else
             damage = effectDamage;
 
-        //Debug.Log(damage + " is being dealt to " + target.gameObject.name);
+        Debug.Log(damage + " is being dealt to " + target.gameObject.name);
 
         Entity targetEntity = target.GetComponent<Entity>();
 

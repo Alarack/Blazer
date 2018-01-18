@@ -57,6 +57,8 @@ public class EffectDeliveryRaycast : EffectDeliveryMethod {
     private void TryShootMultiRay() {
         ConfigureRay();
 
+        //Debug.Log("Shooting");
+
         RaycastHit2D[] hits = Physics2D.RaycastAll(effectOrigin, shootDirection, range, layerMask);
         int count;
 
@@ -66,6 +68,8 @@ public class EffectDeliveryRaycast : EffectDeliveryMethod {
         else {
             count = hits.Length;
         }
+
+        //Debug.Log(count + " hits");
 
         for (int i = 0; i < count; i++) {
             RaycastHit2D hit = hits[i];

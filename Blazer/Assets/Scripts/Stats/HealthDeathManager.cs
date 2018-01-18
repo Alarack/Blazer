@@ -7,6 +7,7 @@ public class HealthDeathManager : MonoBehaviour {
 
     public bool cheat;
     public GameObject deathEffect;
+    public HealthBar healthBar;
 
     protected Entity owner;
     protected LootManager lootManager;
@@ -41,12 +42,26 @@ public class HealthDeathManager : MonoBehaviour {
         if(stat == Constants.BaseStatType.Health) {
             //Debug.Log(owner.stats.GetStatModifiedValue(Constants.BaseStatType.Health) + " is the health of " + owner.gameObject.name);
 
-            if (owner.stats.GetStatModifiedValue(Constants.BaseStatType.Health) <= 0f) {
+            float currentHealth = owner.stats.GetStatModifiedValue(Constants.BaseStatType.Health);
+            float maxHealth = owner.stats.GetStatMaxValue(Constants.BaseStatType.Health);
+
+            UpdateHealthBar(currentHealth, maxHealth);
+
+            if (currentHealth <= 0f) {
                 if(!cheat)
                     Die(cause);
             }
         }
 
+    }
+
+    private void UpdateHealthBar(float currentHealth, float maxHealth) {
+        if (healthBar == null)
+            return;
+
+        float ratio = currentHealth / maxHealth;
+
+        healthBar.AdjustHealthBar(ratio);
     }
 
 

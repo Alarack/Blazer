@@ -37,6 +37,16 @@ public class StatCollection {
         return 0;
     }
 
+   public float GetStatMaxValue(Constants.BaseStatType statType) {
+        for (int i = 0; i < baseStats.Count; i++) {
+            if (baseStats[i].statType == statType) {
+                return baseStats[i].MaxValue;
+            }
+        }
+
+        return 0;
+    }
+
     public float GetStatMultipler(Constants.BaseStatType statType) {
         for (int i = 0; i < baseStats.Count; i++) {
             if (baseStats[i].statType == statType) {
