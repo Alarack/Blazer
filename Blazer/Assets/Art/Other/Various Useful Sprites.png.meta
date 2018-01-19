@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 6f7118e38fe1d1749a1a8a96a57b4640
-timeCreated: 1516326818
+timeCreated: 1516330223
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -97,9 +97,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 71
-        y: 162
+        y: 155
         width: 56
-        height: 19
+        height: 26
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -110,8 +110,8 @@ TextureImporter:
       name: Activate Prompt
       rect:
         serializedVersion: 2
-        x: 86
-        y: 149
+        x: 87
+        y: 138
         width: 27
         height: 12
       alignment: 0
