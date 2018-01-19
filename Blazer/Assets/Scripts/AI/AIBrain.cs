@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AIBrain : MonoBehaviour {
 
@@ -19,6 +20,8 @@ public class AIBrain : MonoBehaviour {
         Stunned = 3
     }
 
+    public Animator myAnim;
+    public Image healthbar;
     public EnemyState State { get; set; }
     public LayerMask whatIsEnemy;
     public float meleeCheckRadius;
@@ -53,8 +56,10 @@ public class AIBrain : MonoBehaviour {
         switch (State) {
             /*--Added this as a general AI practice--*/
             case EnemyState.None:
+                healthbar.color = Color.red;
                 switch (moveDir) {
                     case TargetDirection.None:
+                        healthbar.color = Color.cyan;
                         break;
                     case TargetDirection.Right:
                         if (movement.facingMod != 1) {
@@ -120,7 +125,8 @@ public class AIBrain : MonoBehaviour {
                 }
                 break;
             case EnemyState.Stunned:
-                Debug.Log("I am stunned");
+                myAnim.SetTrigger("BackToIdle");
+                healthbar.color = Color.cyan;
                 break;
             default:
 
