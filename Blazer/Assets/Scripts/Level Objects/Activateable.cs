@@ -15,7 +15,7 @@ public abstract class Activateable : MonoBehaviour {
     protected bool canActivate = false;
     public ActivateableType type;
 
-    void Update()
+    protected virtual void Update()
     {
         if (Input.GetKeyDown(KeyCode.F) && canActivate)
         {
