@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -21,6 +22,9 @@ public class GameManager : MonoBehaviour {
 
     [Header("Panels")]
     public PauseMenu pauseMenu;
+
+    [Header("Scene Changes")]
+    public string mainMenuScene;
 
     public static bool GamePaused { get; set; }
 
@@ -96,6 +100,10 @@ public class GameManager : MonoBehaviour {
         }
 
         return null;
+    }
+
+    public static void ReturnToMainMenu() {
+        SceneManager.LoadScene(gameManager.mainMenuScene);
     }
 
     public static List<DifficultyData.DifficultyEntry> GetDifficultyEntries() {

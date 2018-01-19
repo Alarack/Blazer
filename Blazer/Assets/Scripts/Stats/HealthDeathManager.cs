@@ -73,6 +73,11 @@ public class HealthDeathManager : MonoBehaviour {
 
         //Debug.Log(owner.gameObject + " has died");
 
+        if(owner.gameObject.tag == "Player") {
+            GameManager.ReturnToMainMenu();
+            return;
+        }
+
         if(lootManager != null) {
             lootManager.SpawnLoot();
         }
