@@ -115,7 +115,8 @@ public class Effect {
                 int count = parentAbility.targets.Count;
 
                 for (int i = 0; i < count; i++) {
-                    Apply(parentAbility.targets[i].gameObject);
+                    if(parentAbility.targets[i] != null)
+                        Apply(parentAbility.targets[i].gameObject);
                 }
 
                 //Debug.Log(effectName + " has no delivery");

@@ -32,6 +32,9 @@ public class PlayerAbilitySlot : MonoBehaviour {
     private void Update() {
         if(recovery != null)
             UpdateCooldown();
+        else if (dimmer.fillAmount != 0) {
+            dimmer.fillAmount = 0;
+        }
 
     }
 

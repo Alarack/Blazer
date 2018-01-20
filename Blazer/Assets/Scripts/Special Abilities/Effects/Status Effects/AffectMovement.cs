@@ -35,7 +35,7 @@ public class AffectMovement : Status {
                     return;
 
                 if (targetMovement is EntityMovement) {
-                    if (((EntityMovement)targetMovement).Grounded)
+                    if (((EntityMovement)targetMovement).Grounded || ((EntityMovement)targetMovement).Platformed)
                         target.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 }
 

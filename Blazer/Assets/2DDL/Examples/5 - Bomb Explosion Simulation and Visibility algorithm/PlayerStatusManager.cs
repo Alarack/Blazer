@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerStatusManager : MonoBehaviour {
 
-	[SerializeField] GUIText statustext;
+	[SerializeField] Text statustext;
 
 	public void player_onEnterWave(GameObject go){
 		//Filter by Hash

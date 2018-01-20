@@ -1,12 +1,13 @@
 ﻿namespace DynamicLight2D
 {
 	using UnityEngine;
+	using UnityEngine.UI;
 	using System.Collections;
 	
 	public class OcclusionEventsDelegate : MonoBehaviour {
 
 		[SerializeField] DynamicLight SightOfWar;
-		[SerializeField] GUIText status;
+		[SerializeField] Text status;
 
 		string text;
 
