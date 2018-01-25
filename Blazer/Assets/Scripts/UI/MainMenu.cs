@@ -5,19 +5,27 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 
-    public string mainScene;
+    public List<string> availableLevels = new List<string>();
 
-	void Start () {
-		
-	}
 
-	void Update () {
-		
-	}
+    void Start() {
 
+    }
+
+    void Update() {
+
+    }
+
+    public string LevelPicker(List<string> possibleChoices)
+    {
+        string scenePicked;
+        scenePicked = possibleChoices[Random.Range(0, possibleChoices.Count)];
+        
+        return scenePicked;
+    }
 
     public void PlayGame() {
-        SceneManager.LoadScene(mainScene);
+        SceneManager.LoadScene(LevelPicker(availableLevels));
     }
 
     public void QuitGame() {
