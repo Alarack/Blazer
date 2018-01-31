@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class NPCAbilityManager : AbilityManager {
 
-    public List<float> abilityWeights = new List<float>();
+    public List<float> abilityMaxRanges = new List<float>();
+    public List<float> abilityMinRanges = new List<float>();
+    public List<Detector> abilityDetector = new List<Detector>();
 
-    private List<NPCAbilityContainer> npcAbiliites = new List<NPCAbilityContainer>();
+    public List<NPCAbilityContainer> npcAbiliites = new List<NPCAbilityContainer>();
 
     public override void Initialize(Entity source) {
         base.Initialize(source);
 
         for(int i = 0; i < abilities.Count; i++) {
             try {
-                NPCAbilityContainer newAbility = new NPCAbilityContainer(abilities[i], abilityWeights[i]);
+                NPCAbilityContainer newAbility = new NPCAbilityContainer(abilities[i], abilityMaxRanges[i], abilityMinRanges[i]);
                 npcAbiliites.Add(newAbility);
                 //Debug.Log("Adding" + newAbility.ability.abilityName + " to list");
             }
             catch (System.IndexOutOfRangeException) {
-                Debug.LogError("Ability and Ability Weights don't have the same number of entries");
+                Debug.LogError("Differing number of entires");
                 throw new System.IndexOutOfRangeException();
                 
             }
@@ -58,27 +60,18 @@ public class NPCAbilityManager : AbilityManager {
             //Debug.Log( targetAbility.source.entityName + " " + targetAbility.source.SessionID + " is activating an ability");
             //targetAbility = null;
         }
-
-
-
-
-
     }
-
-
-
-
-
-
 
     [System.Serializable]
     public class NPCAbilityContainer {
         public SpecialAbility ability;
-        public float useWeight;
+        public float maxUseRange;
+        public float minUseRange;
 
-        public NPCAbilityContainer(SpecialAbility ability, float useWeight) {
+        public NPCAbilityContainer(SpecialAbility ability, float maxUseRange, float minUseRange) {
             this.ability = ability;
-            this.useWeight = useWeight;
+            this.maxUseRange = maxUseRange;
+            this.minUseRange = minUseRange;
         }
 
 

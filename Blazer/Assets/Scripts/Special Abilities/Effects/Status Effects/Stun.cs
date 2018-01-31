@@ -15,7 +15,7 @@ public class Stun : Status {
 
     public void InitializeStun()
     {
-        targetBrain.State = AIBrain.EnemyState.Stunned;
+        targetBrain.gameObject.GetComponent<AIStateMachine>().ChangeState(AIStateMachine.AIState.Stunned, true);
     }
 
     protected override void CleanUp()
@@ -27,7 +27,7 @@ public class Stun : Status {
             //Destroy(this);
             return;
         }
-        targetBrain.State = AIBrain.EnemyState.None;
+        targetBrain.myStateMachine.myState = AIStateMachine.AIState.Alerted;
 
         base.CleanUp();
     }
