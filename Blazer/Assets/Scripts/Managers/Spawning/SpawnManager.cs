@@ -58,19 +58,25 @@ public class SpawnManager : MonoBehaviour {
     }
 
     private void Spawn() {
+        List<SpawnZone> useableSpawnZones = new List<SpawnZone>();
+        for (int i = 0; i < spawnZones.Count; i++)
+        {
+            if (spawnZones[i].isActive)
+            {
+                useableSpawnZones.Add(spawnZones[i]);
+            }
+        }
 
         if (spawnCount >= maxSpawn)
             return;
 
         int randomSpawnIndex = Random.Range(0, spawns.Count);
-        int randomLocIndex = Random.Range(0, spawnZones.Count);
+        int randomLocIndex = Random.Range(0, useableSpawnZones.Count);
 
-        GameObject activeSpawn = Instantiate(spawns[randomSpawnIndex], spawnZones[randomLocIndex].GetSpawnLocation(), Quaternion.identity) as GameObject;
+        GameObject activeSpawn = Instantiate(spawns[randomSpawnIndex], useableSpawnZones[randomLocIndex].GetSpawnLocation(), Quaternion.identity) as GameObject;
         Entity activeEntity = activeSpawn.GetComponent<Entity>();
 
         currentSpawns.Add(activeEntity);
         spawnCount++;
-
     }
-
 }
