@@ -11,7 +11,6 @@ public class AbilityManager : MonoBehaviour {
     protected Entity source;
     protected List<SpecialAbility> abilities = new List<SpecialAbility>();
 
-
     public virtual void Initialize(Entity source) {
         this.source = source;
 

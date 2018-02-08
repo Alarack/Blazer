@@ -24,8 +24,6 @@ public class NPCAbilityManager : AbilityManager {
             }
             //playerAbilities.Add(newAbility);
         }
-
-
     }
 
 
