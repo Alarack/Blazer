@@ -5,21 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 
+    public List<string> availableLevels = new List<string>();
+
+
+    void Start() {
+
+    }
+
+    void Update() {
+
+    }
+
     public string mainScene;
-    public GameObject itemInfoPanel;
-    public InfoGatherer infoGatherer;
-
-	void Start () {
-		
-	}
-
-	void Update () {
-		
-	}
-
 
     public void PlayGame() {
-        SceneManager.LoadScene(mainScene);
+        SceneManager.LoadScene(LevelPicker(availableLevels));
     }
 
     public void QuitGame() {
@@ -33,3 +33,7 @@ public class MainMenu : MonoBehaviour {
         
     }
 }
+
+    public string mainScene;
+    public GameObject itemInfoPanel;
+    public InfoGatherer infoGatherer;

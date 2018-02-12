@@ -16,12 +16,20 @@ public abstract class EntityMovement : BaseMovement {
     public LayerMask whatIsPlatform;
     public bool Grounded { get; protected set; }
     public bool Platformed { get; protected set; }
+    public bool IsClimbing { get; protected set; }
+    public bool canClimb;
+    public float ascendSpeed;
+    public float descendSpeed;
+
+    [HideInInspector]
+    public GameObject currentLadder;
 
     [Header("Sprite Pivot Hack")]
     public bool useSpritePivotHack;
     protected Vector2 spriteOffset;
 
     protected Entity owner;
+    public Entity Owner { get; protected set; }
 
 
     protected override void Awake () {
@@ -131,6 +139,22 @@ public abstract class EntityMovement : BaseMovement {
         }
     }
 
+    /*--This is where any entity, whether it be player or enemy, starts and ends climbing. It sorta acts like a state machine--*/
+    public void ClimbBeginning(GameObject ladder)
+    {
+        IsClimbing = true;
+        transform.position = new Vector3(ladder.transform.position.x, transform.position.y, transform.position.z);
+        myBody.gravityScale = 0;
+        currentSpeed = 0;
+        myBody.velocity = Vector2.zero;
+        owner.MyAnimator.SetTrigger("ClimbingStart");
+    }
+    public void ClimbEnd()
+    {
+        myBody.gravityScale = 1;
+        IsClimbing = false;
+        owner.MyAnimator.SetTrigger("ClimbingEnd");
+    }
 
     protected void Fallthrough(bool ignore)
     {
