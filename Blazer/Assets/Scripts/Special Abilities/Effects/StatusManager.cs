@@ -20,7 +20,7 @@ public class StatusManager : MonoBehaviour {
     }
 
     private void Update() {
-        for(int i = 0; i < statusEntries.Count; i++) {
+        for (int i = 0; i < statusEntries.Count; i++) {
             statusEntries[i].ManagedUpdate();
         }
     }
@@ -29,14 +29,14 @@ public class StatusManager : MonoBehaviour {
         int count = statusManager.statusEntries.Count;
         StatusEntry targetEntry = null;
 
-        for(int i = 0; i < count; i++) {
-            if(statusManager.statusEntries[i].target == target) {
+        for (int i = 0; i < count; i++) {
+            if (statusManager.statusEntries[i].target == target) {
                 targetEntry = statusManager.statusEntries[i];
                 break;
             }
         }
 
-        if(targetEntry != null) {
+        if (targetEntry != null) {
             targetEntry.AddStatus(status, sourceEffect, sourceAbility);
             return;
         }
@@ -50,20 +50,40 @@ public class StatusManager : MonoBehaviour {
         int count = statusManager.statusEntries.Count;
         StatusEntry targetEntry = null;
 
-        for (int i =0; i < count; i++) {
-            if(statusManager.statusEntries[i].target == target) {
+        for (int i = 0; i < count; i++) {
+            if (statusManager.statusEntries[i].target == target) {
                 targetEntry = statusManager.statusEntries[i];
                 //statusManager.statusEntries.Remove(statusManager.statusEntries[i]);
                 break;
             }
         }
 
-        if(targetEntry != null) {
+        if (targetEntry != null) {
             targetEntry.RemoveStatus(targetStatus);
-            if(targetEntry.GetStatusCount() < 1) {
+            if (targetEntry.GetStatusCount() < 1) {
                 statusManager.statusEntries.Remove(targetEntry);
             }
         }
+    }
+
+    public static bool IsTargetAlreadyAffected(Entity target, Status status, SpecialAbility parentAbility) {
+        int count = statusManager.statusEntries.Count;
+        StatusEntry targetEntry = null;
+
+        for(int i = 0; i < count; i++) {
+            if (statusManager.statusEntries[i].target == target) {
+                targetEntry = statusManager.statusEntries[i];
+                //statusManager.statusEntries.Remove(statusManager.statusEntries[i]);
+                break;
+            }
+        }
+
+        if (targetEntry != null) {
+            return targetEntry.IsTargetAlreadyAffected(target, status, parentAbility);
+        }
+
+        return false;
+
     }
 
 
@@ -85,12 +105,32 @@ public class StatusManager : MonoBehaviour {
             return statusContainer.activeStatusList.Count;
         }
 
+        public bool IsTargetAlreadyAffected(Entity target, Status status, SpecialAbility sourceAbility) {
+            if (this.target != target)
+                return false;
+
+            List<Status> existingStatus = statusContainer.GetStatusListByType(status.statusType);
+            int count = existingStatus.Count;
+
+            if (count < 1)
+                return false;
+
+            for (int i = 0; i < count; i++) {
+                if (existingStatus[i].IsFromSameSource(sourceAbility)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+
         public void AddStatus(Status status, EffectStatus sourceEffect, SpecialAbility sourceAbility) {
             List<Status> existingStatus = statusContainer.GetStatusListByType(status.statusType);
 
             int count = existingStatus.Count;
 
-            if(existingStatus.Count > 0) {
+            if (existingStatus.Count > 0) {
                 for (int i = 0; i < count; i++) {
                     if (existingStatus[i].IsFromSameSource(sourceAbility)) {
                         switch (sourceEffect.stackMethod) {
@@ -155,8 +195,8 @@ public class StatusManager : MonoBehaviour {
 
             int count = activeStatusList.Count;
 
-            for(int i = 0; i < count; i++) {
-                if(activeStatusList[i].statusType == type) {
+            for (int i = 0; i < count; i++) {
+                if (activeStatusList[i].statusType == type) {
                     results.Add(activeStatusList[i]);
                 }
             }

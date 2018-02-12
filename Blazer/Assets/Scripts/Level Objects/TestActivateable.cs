@@ -12,7 +12,7 @@ public class TestActivateable : Activateable {
         base.Update();
         if (canActivate)
         {
-            Debug.Log("Wut");
+            //Debug.Log("Wut");
             myImage.enabled = true;
         }
         

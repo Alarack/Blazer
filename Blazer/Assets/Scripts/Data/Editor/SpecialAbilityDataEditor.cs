@@ -197,6 +197,7 @@ public class SpecialAbilityDataEditor : Editor {
                     break;
 
                 case Constants.StatusEffectType.StaticStatAdjustment:
+                case Constants.StatusEffectType.DurationalStatAdjustment:
                     statusAttack.statType = EditorHelper.EnumPopup("Stat Type", statusAttack.statType);
                     switch (statusAttack.statType) {
                         case Constants.BaseStatType.BaseDamage:
