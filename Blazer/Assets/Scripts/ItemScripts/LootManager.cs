@@ -18,6 +18,15 @@ public class LootManager : MonoBehaviour {
 
         ItemData item = GameManager.GetItemPools().GetItem(pool);
 
+        for (int i = 0; i < 10; i++) {
+            if(item == null) {
+                item = GameManager.GetItemPools().GetItem(pool);
+            }
+            else {
+                break;
+            }
+        }
+
         if (item == null)
             return;
 

@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class BaseEnemyMovement : EntityMovement {
 
-    /*--Removed pacer functionality for the chasing functionality--*/
-    //public float paceTime = 2f;
-
-    //protected Timer paceTimer;
-
     protected AIBrain brain;
 
     /*--Changed this to public for my purposes--*/
@@ -18,10 +13,6 @@ public class BaseEnemyMovement : EntityMovement {
         base.Initialize();
 
         brain = GetComponent<AIBrain>();
-        brain.State = AIBrain.EnemyState.None;
-
-        /*--Removed pacer functionality for the chasing functionality--*/
-        //paceTimer = new Timer("Pace Timer", paceTime, true, Flip);
     }
 
 
@@ -34,21 +25,21 @@ public class BaseEnemyMovement : EntityMovement {
         //Debug.Log(brain.State);
         //Debug.Log(facingMod);
 
-        switch (brain.State) {
-            case AIBrain.EnemyState.Walking:
-                currentSpeed = maxSpeed * facingMod;
-                //Walk();
-                break;
+        //switch (brain.State) {
+        //    case AIBrain.EnemyState.Walking:
+        //        currentSpeed = maxSpeed * facingMod;
+        //        //Walk();
+        //        break;
 
-            case AIBrain.EnemyState.None:
-                currentSpeed = 0f;
+        //    case AIBrain.EnemyState.Alert:
+        //        currentSpeed = 0f;
 
-                break;
+        //        break;
 
-            default:
-                currentSpeed = 0f;
-                break;
-        }
+        //    default:
+        //        currentSpeed = 0f;
+        //        break;
+        //}
 
 
 
@@ -73,7 +64,6 @@ public class BaseEnemyMovement : EntityMovement {
 
     protected override void Move() {
         myBody.velocity = new Vector2(currentSpeed, myBody.velocity.y);
-
 
     }
 

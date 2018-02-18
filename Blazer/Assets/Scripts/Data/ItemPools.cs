@@ -55,9 +55,24 @@ public class ItemPools : ScriptableObject {
         for (int i = 0; i < pools.Count; i++) {
             if (pools[i].itemPool == pool) {
                 ItemPoolCategory target = pools[i];
-                int randomIndex = Random.Range(0, target.items.Count);
 
-                return target.items[randomIndex];
+                List<ItemData> unlockedItems = new List<ItemData>();
+
+                int itemCount = target.items.Count;
+
+                for(int j = 0; i < itemCount; j++) {
+                    if (target.items[j].unlocked) {
+                        unlockedItems.Add(target.items[j]);
+                    }
+                }
+
+                if(unlockedItems.Count < 1) {
+                    return null;
+                }
+
+                int randomIndex = Random.Range(0, unlockedItems.Count);
+
+                return unlockedItems[randomIndex];
             }
         }
 

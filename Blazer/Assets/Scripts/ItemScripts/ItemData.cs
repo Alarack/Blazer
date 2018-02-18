@@ -20,6 +20,7 @@ public class ItemData : ScriptableObject  {
 
 
     public ItemIDs.ItemID itemID;
+    public bool unlocked;
     public ItemType itemType;
     public ItemRarity itemRarity;
     public Constants.ItemPool itemPoolCategory;

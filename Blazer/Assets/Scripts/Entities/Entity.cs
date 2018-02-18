@@ -61,7 +61,7 @@ public class Entity : MonoBehaviour {
 
         AIBrain testBrain = GetComponent<AIBrain>();
         if(testBrain != null) {
-            testBrain.Initialize();
+            //testBrain.Initialize();
         }
 
 

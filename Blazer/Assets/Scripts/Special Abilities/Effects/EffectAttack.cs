@@ -121,7 +121,7 @@ public class EffectAttack : Effect {
         else
             damage = effectDamage;
 
-        Debug.Log(damage + " is being dealt to " + target.gameObject.name);
+        //Debug.Log(damage + " is being dealt to " + target.gameObject.name);
 
         Entity targetEntity = target.GetComponent<Entity>();
 

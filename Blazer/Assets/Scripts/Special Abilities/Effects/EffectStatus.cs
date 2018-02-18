@@ -30,6 +30,9 @@ public class EffectStatus : Effect {
     public float statAdjustmentValue;
     public StatCollection.StatModificationType modType;
 
+    //Durational Stat Adjustment
+
+
     protected Effect onCompleteEffect;
 
     public EffectStatus() {
@@ -150,30 +153,7 @@ public class EffectStatus : Effect {
                 break;
 
             case Constants.StatusEffectType.DamageOverTime:
-                //DamageOverTime[] existingDots = target.GetComponents<DamageOverTime>();
 
-                //for(int i = 0; i < existingDots.Length; i++) {
-                //    DamageOverTime existingDot = existingDots[i];
-
-                //    if (existingDot.IsFromSameSource(parentAbility)) {
-                //        switch (stackMethod) {
-                //            case Constants.StatusStackingMethod.None:
-                //                return;
-
-                //            case Constants.StatusStackingMethod.LimitedStacks:
-                //                if (existingDot.stackCount < maxStack) {
-                //                    existingDot.Stack();
-                //                }
-                //                else {
-                //                    existingDot.RefreshDuration();
-                //                }
-                //                return;
-
-                //            case Constants.StatusStackingMethod.StacksWithOtherAbilities:
-                //                return;
-                //        }
-                //    }
-                //}
 
                 float damage;
                 if (scaleFromBaseDamage)
@@ -191,9 +171,24 @@ public class EffectStatus : Effect {
                 break;
 
             case Constants.StatusEffectType.StaticStatAdjustment:
-                StatCollection.StatModifer mod = new StatCollection.StatModifer(statAdjustmentValue, modType);
+                StatCollection.StatModifer modStatic = new StatCollection.StatModifer(statAdjustmentValue, modType);
 
-                CombatManager.ApplyTrackedStatMod(Source, target.GetComponent<Entity>(), statType, mod);
+                Debug.Log("Stat " + statType + " is being adjusted by " + statAdjustmentValue);
+
+                CombatManager.ApplyTrackedStatMod(Source, target.GetComponent<Entity>(), statType, modStatic);
+
+                break;
+
+            case Constants.StatusEffectType.DurationalStatAdjustment:
+                //StatCollection.StatModifer modDur = new StatCollection.StatModifer(statAdjustmentValue, modType);
+
+                Debug.Log("Setting durational stuff");
+
+                DurationalStatChange newDurationalStatChange = new DurationalStatChange();
+                newDurationalStatChange.Initialize(target, duration, interval, statusType, parentAbility, maxStack);
+                newDurationalStatChange.InitializeDurationalStatChange(statType, modType, statAdjustmentValue);
+
+                StatusManager.AddStatus(target.GetComponent<Entity>(), newDurationalStatChange, this, parentAbility);
 
                 break;
         }

@@ -38,7 +38,7 @@ public class AIDetectionArray : MonoBehaviour {
     {
         if(collision.gameObject == target)
         {
-            Debug.Log("None");
+            //Debug.Log("None");
             target = null;
             myBrain.moveDir = AIBrain.TargetDirection.None;
         }

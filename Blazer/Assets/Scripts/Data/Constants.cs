@@ -15,6 +15,7 @@ public class Constants {
         AttackSpeed = 7,
         RotateSpeed = 8,
         Lifetime = 9,
+        Armor = 10,
     }
 
     public enum EntityFacing {
@@ -63,6 +64,7 @@ public class Constants {
         AffectMovement = 4,
         DamageOverTime = 5,
         StaticStatAdjustment = 6,
+        DurationalStatAdjustment = 7,
     }
 
     public enum StatusStackingMethod {
@@ -87,6 +89,7 @@ public class Constants {
         None = 0,
         Applied = 1,
         Removed = 2,
+        DamageTaken = 3
     }
 
     public enum ItemPool {

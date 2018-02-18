@@ -45,7 +45,6 @@ public class PlayerController : EntityMovement {
             if (Input.GetButtonDown("Jump"))
             {
                 ClimbEnd();
-                owner.MyAnimator.SetTrigger("Jumping");
                 isJumping = true;
             }
         }

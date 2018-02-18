@@ -30,3 +30,16 @@ public class TestActivateable : Activateable {
         DisableActivateable();
     }
 }
+
+    protected override void Update()
+    {
+        base.Update();
+        if (canActivate)
+        {
+            myImage.enabled = true;
+        }
+        
+        if(!canActivate)
+        {
+            myImage.enabled = false;
+        }

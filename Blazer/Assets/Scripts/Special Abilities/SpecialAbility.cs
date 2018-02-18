@@ -96,6 +96,10 @@ public class SpecialAbility {
                 Grid.EventManager.RegisterListener(Constants.GameEvent.StatChanged, OnDamageDealt);
                 break;
 
+            case Constants.SpecialAbilityActivationMethod.DamageTaken:
+                Grid.EventManager.RegisterListener(Constants.GameEvent.StatChanged, OnDamageTaken);
+                break;
+
             case Constants.SpecialAbilityActivationMethod.EffectApplied:
                 Grid.EventManager.RegisterListener(Constants.GameEvent.EffectApplied, OnEffectApplied);
                 break;
@@ -132,6 +136,31 @@ public class SpecialAbility {
 
 
         Activate();
+    }
+
+    private void OnDamageTaken(EventData data) {
+        Constants.BaseStatType stat = (Constants.BaseStatType)data.GetInt("Stat");
+        //Entity target = data.GetMonoBehaviour("Target") as Entity;
+        Entity cause = data.GetMonoBehaviour("Cause") as Entity;
+        Entity target = data.GetMonoBehaviour("Target") as Entity;
+        float value = data.GetFloat("Value");
+
+        if (cause == source)
+            return;
+
+        if (target != source)
+            return;
+
+        if (stat != Constants.BaseStatType.Health)
+            return;
+
+        if (value > 0)
+            return;
+
+
+        Debug.Log("Activating an on-damage-taken ability");
+        Activate();
+
     }
 
     private void OnEffectApplied(EventData data) {

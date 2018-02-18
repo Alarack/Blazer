@@ -22,9 +22,18 @@ public class CombatManager : MonoBehaviour {
 
     public static void ApplyUntrackedStatMod(Entity causeOfChagne, Entity targetOfChagnge, Constants.BaseStatType stat, float value, StatCollection.StatModificationType modType = StatCollection.StatModificationType.Additive) {
 
-        targetOfChagnge.stats.ApplyUntrackedMod(stat, value, causeOfChagne, modType);
 
-        combatManager.SendStatChangeEvent(causeOfChagne, targetOfChagnge, stat, value);
+        float armor =  targetOfChagnge.stats.GetStatModifiedValue(Constants.BaseStatType.Armor);
+
+        Debug.Log(armor + " is the armor of " + targetOfChagnge.entityName);
+
+        float damage = Mathf.Clamp(value + armor, value, 0f);
+
+        //Debug.Log(damage + " is net damage");
+
+        targetOfChagnge.stats.ApplyUntrackedMod(stat, damage, causeOfChagne, modType);
+
+        combatManager.SendStatChangeEvent(causeOfChagne, targetOfChagnge, stat, damage);
         
         //EventData data = new EventData();
 
@@ -36,7 +45,7 @@ public class CombatManager : MonoBehaviour {
         //Grid.EventManager.SendEvent(Constants.GameEvent.StatChanged, data);
 
         if(stat == Constants.BaseStatType.Health && value < 0f) {
-            VisualEffectManager.MakeFloatingText(Mathf.Abs(value).ToString(), targetOfChagnge.transform.position);
+            VisualEffectManager.MakeFloatingText(Mathf.Abs(damage).ToString(), targetOfChagnge.transform.position);
         }
 
     }
@@ -55,7 +64,7 @@ public class CombatManager : MonoBehaviour {
     public static void RemoveTrackedStatMod(Entity targetOfChange, Constants.BaseStatType stat, StatCollection.StatModifer mod) {
         targetOfChange.stats.RemoveTrackedMod(stat, mod);
 
-        //Debug.Log("Removing a mod");
+        Debug.Log("Removing a mod: " + stat + " value of " + mod.value);
 
         combatManager.SendStatChangeEvent(null, targetOfChange, stat, mod.value);
     }
