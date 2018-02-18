@@ -93,15 +93,15 @@ public class SpecialAbility {
     public void RegisterListeners() {
         switch (activationMethod) {
             case Constants.SpecialAbilityActivationMethod.DamageDealt:
-                Grid.EventManager.RegisterListener(Constants.GameEvent.StatChanged, OnDamageDealt);
+                EventGrid.EventManager.RegisterListener(Constants.GameEvent.StatChanged, OnDamageDealt);
                 break;
 
             case Constants.SpecialAbilityActivationMethod.DamageTaken:
-                Grid.EventManager.RegisterListener(Constants.GameEvent.StatChanged, OnDamageTaken);
+                EventGrid.EventManager.RegisterListener(Constants.GameEvent.StatChanged, OnDamageTaken);
                 break;
 
             case Constants.SpecialAbilityActivationMethod.EffectApplied:
-                Grid.EventManager.RegisterListener(Constants.GameEvent.EffectApplied, OnEffectApplied);
+                EventGrid.EventManager.RegisterListener(Constants.GameEvent.EffectApplied, OnEffectApplied);
                 break;
         }
     }

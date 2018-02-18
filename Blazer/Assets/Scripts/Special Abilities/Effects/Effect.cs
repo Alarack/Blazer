@@ -70,7 +70,7 @@ public class Effect {
         data.AddMonoBehaviour("Target", target);
         data.AddInt("EffectType", (int)effectType);
 
-        Grid.EventManager.SendEvent(Constants.GameEvent.EffectApplied, data);
+        EventGrid.EventManager.SendEvent(Constants.GameEvent.EffectApplied, data);
 
     }
 

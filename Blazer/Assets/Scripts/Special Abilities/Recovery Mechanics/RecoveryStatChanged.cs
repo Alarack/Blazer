@@ -16,7 +16,7 @@ public class RecoveryStatChanged : SpecialAbilityRecovery {
     private int currentNumber;
 
     protected override void RegisterListeners() {
-        Grid.EventManager.RegisterListener(Constants.GameEvent.StatChanged, OnStatChanged);
+        EventGrid.EventManager.RegisterListener(Constants.GameEvent.StatChanged, OnStatChanged);
 
     }
 

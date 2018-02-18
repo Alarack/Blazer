@@ -79,7 +79,7 @@ public class CombatManager : MonoBehaviour {
         data.AddFloat("Value", value);
 
         //Debug.Log("Event Sent: " + stat.ToString() + " :: " + value);
-        Grid.EventManager.SendEvent(Constants.GameEvent.StatChanged, data);
+        EventGrid.EventManager.SendEvent(Constants.GameEvent.StatChanged, data);
 
 
     }

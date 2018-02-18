@@ -23,8 +23,8 @@ public class SpawnManager : MonoBehaviour {
     public void Initialize() {
         spawnTimer = new Timer("Spawn Timer", spawnInterval, true, Spawn);
 
-        Grid.EventManager.RegisterListener(Constants.GameEvent.EntityDied, OnEntityDeath);
-        Grid.EventManager.RegisterListener(Constants.GameEvent.DifficultyChange, OnDifficultyChange);
+        EventGrid.EventManager.RegisterListener(Constants.GameEvent.EntityDied, OnEntityDeath);
+        EventGrid.EventManager.RegisterListener(Constants.GameEvent.DifficultyChange, OnDifficultyChange);
     }
 
     private void Update() {

@@ -24,11 +24,11 @@ public class HealthDeathManager : MonoBehaviour {
     }
 
     protected virtual void RegisterListeners() {
-        Grid.EventManager.RegisterListener(Constants.GameEvent.StatChanged, OnStatChanged);
+        EventGrid.EventManager.RegisterListener(Constants.GameEvent.StatChanged, OnStatChanged);
     }
 
     public virtual void RemoveListeners() {
-        Grid.EventManager.RemoveMyListeners(this);
+        EventGrid.EventManager.RemoveMyListeners(this);
     }
 
     protected void OnStatChanged(EventData data) {
@@ -86,7 +86,7 @@ public class HealthDeathManager : MonoBehaviour {
         data.AddMonoBehaviour("Target", owner);
         data.AddMonoBehaviour("Cause", cause);
 
-        Grid.EventManager.SendEvent(Constants.GameEvent.EntityDied, data);
+        EventGrid.EventManager.SendEvent(Constants.GameEvent.EntityDied, data);
 
 
         Destroy(owner.gameObject);

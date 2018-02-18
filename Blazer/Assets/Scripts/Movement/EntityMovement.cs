@@ -43,7 +43,7 @@ public abstract class EntityMovement : BaseMovement {
     protected override void RegisterListeners() {
         base.RegisterListeners();
 
-        Grid.EventManager.RegisterListener(Constants.GameEvent.StatChanged, OnStatChanged);
+        EventGrid.EventManager.RegisterListener(Constants.GameEvent.StatChanged, OnStatChanged);
     }
 
     

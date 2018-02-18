@@ -28,7 +28,7 @@ public abstract class BaseMovement : MonoBehaviour {
     }
 
     public virtual void RemoveMyListeners() {
-        Grid.EventManager.RemoveMyListeners(this);
+        EventGrid.EventManager.RemoveMyListeners(this);
     }
 
     public virtual void UpdateBaseStats() {

@@ -44,7 +44,7 @@ public class GameDifficulty : MonoBehaviour {
             EventData data = new EventData();
             data.AddInt("DifficultyValue", (int)Difficulty);
 
-            Grid.EventManager.SendEvent(Constants.GameEvent.DifficultyChange, data);
+            EventGrid.EventManager.SendEvent(Constants.GameEvent.DifficultyChange, data);
 
             Debug.Log("Difficulty Increased to: " + Difficulty);
         }
