@@ -103,6 +103,10 @@ public class SpecialAbility {
             case Constants.SpecialAbilityActivationMethod.EffectApplied:
                 EventGrid.EventManager.RegisterListener(Constants.GameEvent.EffectApplied, OnEffectApplied);
                 break;
+
+            case Constants.SpecialAbilityActivationMethod.EntityKilled:
+                EventGrid.EventManager.RegisterListener(Constants.GameEvent.EntityDied, OnEntityKilled);
+                break;
         }
     }
 
@@ -118,7 +122,7 @@ public class SpecialAbility {
 
     private void OnDamageDealt(EventData data) {
         Constants.BaseStatType stat = (Constants.BaseStatType)data.GetInt("Stat");
-        //Entity target = data.GetMonoBehaviour("Target") as Entity;
+        Entity target = data.GetMonoBehaviour("Target") as Entity;
         Entity cause = data.GetMonoBehaviour("Cause") as Entity;
         float value = data.GetFloat("Value");
 
@@ -134,8 +138,24 @@ public class SpecialAbility {
             return;
 
 
+        //Debug.Log(abilityName + " is activating on damage dealt");
+        AddTarget(target);
+
 
         Activate();
+    }
+
+    private void OnEntityKilled(EventData data) {
+        Entity cause = data.GetMonoBehaviour("Cause") as Entity;
+        Entity target = data.GetMonoBehaviour("Target") as Entity;
+
+        if (cause != source)
+            return;
+
+
+        AddTarget(target);
+        Activate();
+
     }
 
     private void OnDamageTaken(EventData data) {
@@ -158,7 +178,7 @@ public class SpecialAbility {
             return;
 
 
-        Debug.Log("Activating an on-damage-taken ability");
+        //Debug.Log("Activating an on-damage-taken ability");
         Activate();
 
     }
@@ -223,10 +243,11 @@ public class SpecialAbility {
         if (procChance < 1f && !ProcRoll())
             return false;
 
-        Debug.Log(abilityName + " has been activated");
+        //Debug.Log(abilityName + " has been activated");
+
         if (sequencedAbilities.Count < 1) {
             for (int i = 0; i < effects.Count; i++) {
-                targets.Clear();
+                //targets.Clear();
                 effects[i].Activate();
             }
 
@@ -259,6 +280,8 @@ public class SpecialAbility {
 
         if(useDuration > 0f)
             InUse = true;
+
+        targets.Clear();
 
     }
 

@@ -50,7 +50,7 @@ public class Ladder : MonoBehaviour {
 
     {
 
-        Debug.Log(myClimbers.Count + " is the number of current climbers");
+        //Debug.Log(myClimbers.Count + " is the number of current climbers");
 
         //Debug.Log(Vector2.Distance(transform.position, climber.transform.position));
 
@@ -58,7 +58,7 @@ public class Ladder : MonoBehaviour {
 
         {
 
-            Debug.Log(climber.climbObject.name + " " + climber.climberLocation);
+            //Debug.Log(climber.climbObject.name + " " + climber.climberLocation);
 
         }
 

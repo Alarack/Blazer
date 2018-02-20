@@ -70,7 +70,7 @@ public class Status {
         StatusManager.RemoveStatus(targetEntity, this);
 
         if(onCompleteEffect != null) {
-            Debug.Log("Sending On Complete effect");
+            //Debug.Log("Sending On Complete effect");
             onCompleteEffect.Activate();
         }
 

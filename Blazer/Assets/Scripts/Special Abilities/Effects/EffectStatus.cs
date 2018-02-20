@@ -168,6 +168,8 @@ public class EffectStatus : Effect {
 
                 StatusManager.AddStatus(target.GetComponent<Entity>(), newDot, this, parentAbility); //HERE IS THE TEST LINE
 
+                Debug.Log("Applying " + damage + " over time");
+
                 break;
 
             case Constants.StatusEffectType.StaticStatAdjustment:

@@ -25,7 +25,7 @@ public class CombatManager : MonoBehaviour {
 
         float armor =  targetOfChagnge.stats.GetStatModifiedValue(Constants.BaseStatType.Armor);
 
-        Debug.Log(armor + " is the armor of " + targetOfChagnge.entityName);
+        //Debug.Log(armor + " is the armor of " + targetOfChagnge.entityName);
 
         float damage = Mathf.Clamp(value + armor, value, 0f);
 
