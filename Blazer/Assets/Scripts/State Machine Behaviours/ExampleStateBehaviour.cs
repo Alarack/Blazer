@@ -11,6 +11,7 @@ public class ExampleStateBehaviour : StateMachineBehaviour {
 
     public AnimatorStateType stateType;
     public string stateName;
+    [Range(0f, 1f)]
     public float hitBoxDeliveryTime;
 
     private bool hitBoxDelivered;
