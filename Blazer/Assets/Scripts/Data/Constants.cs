@@ -16,6 +16,9 @@ public class Constants {
         RotateSpeed = 8,
         Lifetime = 9,
         Armor = 10,
+        Money= 11,
+        Keys = 12,
+        DamageReduction = 13,
     }
 
     public enum EntityFacing {

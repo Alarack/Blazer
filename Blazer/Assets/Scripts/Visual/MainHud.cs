@@ -6,6 +6,7 @@ public class MainHud : MonoBehaviour {
 
     public static MainHud mainHud;
     public PlayerQuickBar quickBar;
+    public GameResourceDisplay resourceDisplay;
 
 
     private void Awake() {
@@ -13,6 +14,10 @@ public class MainHud : MonoBehaviour {
             mainHud = this;
         else
             Destroy(this);
+    }
+
+    private void Start() {
+        resourceDisplay.Initialize();
     }
 
     public static void SetPlayerSlot(SpecialAbility ability, int index) {

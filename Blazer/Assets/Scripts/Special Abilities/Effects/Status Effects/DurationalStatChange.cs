@@ -38,16 +38,14 @@ public class DurationalStatChange : Status {
     }
 
     protected override void CleanUp() {
-        base.CleanUp();
-
-        
-
         int count = mods.Count;
 
         for(int i = 0; i < count; i++) {
             Debug.Log("Cleaning durational stuff");
             CombatManager.RemoveTrackedStatMod(targetEntity, targetStat, mods[i]);
         }
+
+        base.CleanUp();
     }
 
 

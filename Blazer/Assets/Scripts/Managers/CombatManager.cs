@@ -8,44 +8,55 @@ public class CombatManager : MonoBehaviour {
 
 
 
-	void Awake () {
+    void Awake() {
 
-        if(combatManager == null) {
+        if (combatManager == null) {
             combatManager = this;
         }
         else {
             Destroy(gameObject);
         }
-	}
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.M)) {
+            ApplyUntrackedStatMod(null, GameManager.GetPlayer(), Constants.BaseStatType.Money, 1f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.K)) {
+            ApplyUntrackedStatMod(null, GameManager.GetPlayer(), Constants.BaseStatType.Keys, 1f);
+        }
+    }
 
 
 
     public static void ApplyUntrackedStatMod(Entity causeOfChagne, Entity targetOfChagnge, Constants.BaseStatType stat, float value, StatCollection.StatModificationType modType = StatCollection.StatModificationType.Additive) {
 
+        float sendableValue = 0f;
 
-        float armor =  targetOfChagnge.stats.GetStatModifiedValue(Constants.BaseStatType.Armor);
+        if (stat == Constants.BaseStatType.Health) {
+            float armor = targetOfChagnge.stats.GetStatModifiedValue(Constants.BaseStatType.Armor);
+            //Debug.Log(armor + " is the armor of " + targetOfChagnge.entityName);
+            sendableValue = Mathf.Clamp(value + armor, value, 0f);
 
-        //Debug.Log(armor + " is the armor of " + targetOfChagnge.entityName);
+            float damageReduction = targetOfChagnge.stats.GetStatModifiedValue(Constants.BaseStatType.DamageReduction);
 
-        float damage = Mathf.Clamp(value + armor, value, 0f);
+            float convertedDR = Mathf.Clamp(  Mathf.Abs(damageReduction - 1f), 0f, 1f );
 
-        //Debug.Log(damage + " is net damage");
+            sendableValue *= convertedDR;
 
-        targetOfChagnge.stats.ApplyUntrackedMod(stat, damage, causeOfChagne, modType);
+        }
+        else {
+            sendableValue = value;
+        }
 
-        combatManager.SendStatChangeEvent(causeOfChagne, targetOfChagnge, stat, damage);
-        
-        //EventData data = new EventData();
 
-        //data.AddMonoBehaviour("Cause", causeOfChagne);
-        //data.AddMonoBehaviour("Target", targetOfChagnge);
-        //data.AddInt("Stat", (int)stat);
-        //data.AddFloat("Value", value);
+        targetOfChagnge.stats.ApplyUntrackedMod(stat, sendableValue, causeOfChagne, modType);
 
-        //Grid.EventManager.SendEvent(Constants.GameEvent.StatChanged, data);
+        combatManager.SendStatChangeEvent(causeOfChagne, targetOfChagnge, stat, sendableValue);
 
-        if(stat == Constants.BaseStatType.Health && value < 0f) {
-            VisualEffectManager.MakeFloatingText(Mathf.Abs(damage).ToString(), targetOfChagnge.transform.position);
+        if (stat == Constants.BaseStatType.Health && value < 0f) {
+            VisualEffectManager.MakeFloatingText(Mathf.Abs(sendableValue).ToString(), targetOfChagnge.transform.position);
         }
 
     }
