@@ -34,22 +34,14 @@ public class Effect {
     public EffectDeliveryProjectile projectileDelivery = new EffectDeliveryProjectile();
     public EffectDeliveryMelee meleeDelivery = new EffectDeliveryMelee();
 
+    protected ExampleStateBehaviour[] animatorStateBehaviours;
+
     public virtual void Initialize(SpecialAbility parentAbility) {
         this.parentAbility = parentAbility;
 
-        //switch (deliveryMethod) {
-        //    case Constants.EffectDeliveryMethod.Melee:
-        //        meleeDelivery = new EffectDeliveryMelee();
-        //        break;
+        animatorStateBehaviours = parentAbility.source.MyAnimator.GetBehaviours<ExampleStateBehaviour>();
+        InitializeAnimatorStates();
 
-        //    case Constants.EffectDeliveryMethod.Projectile:
-        //        projectileDelivery = new EffectDeliveryProjectile();
-        //        break;
-
-        //    case Constants.EffectDeliveryMethod.Raycast:
-        //        rayCastDelivery = new EffectDeliveryRaycast();
-        //        break;
-        //}
 
         //Debug.Log(effectName + " has been initialized");
 
@@ -57,6 +49,14 @@ public class Effect {
             eventDict.Add(eventOptions[i].option, eventOptions[i].sendEvent);
         }
 
+    }
+
+    private void InitializeAnimatorStates() {
+        int count = animatorStateBehaviours.Length;
+
+        for(int i = 0; i < count; i++) {
+            animatorStateBehaviours[i].Initialize(parentAbility.source);
+        }
     }
 
     public virtual void ManagedUpdate() {
@@ -113,6 +113,8 @@ public class Effect {
             case Constants.EffectDeliveryMethod.None:
 
                 int count = parentAbility.targets.Count;
+
+                Debug.Log(parentAbility.abilityName + " has " + count + " targets");
 
                 for (int i = 0; i < count; i++) {
                     if(parentAbility.targets[i] != null)

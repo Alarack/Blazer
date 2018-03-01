@@ -124,7 +124,7 @@ public class EffectStatus : Effect {
 
                 newStatus.Initialize(target, duration, interval, statusType, parentAbility);
 
-                StatusManager.AddStatus(target.GetComponent<Entity>(), newStatus, this, parentAbility); //HERE IS THE TEST LINE
+                StatusManager.AddStatus(target.GetComponent<Entity>(), newStatus, this, parentAbility); 
                 break;
 
             case Constants.StatusEffectType.AffectMovement:
@@ -140,7 +140,7 @@ public class EffectStatus : Effect {
                 newAffectMovement.Initialize(target, duration, interval, statusType, parentAbility, maxStack, onCompleteEffect);
                 newAffectMovement.InitializeAffectMovement(affectMoveType, affectMoveValue, knockbackVector);
 
-                StatusManager.AddStatus(target.GetComponent<Entity>(), newAffectMovement, this, parentAbility); //HERE IS THE TEST LINE
+                StatusManager.AddStatus(target.GetComponent<Entity>(), newAffectMovement, this, parentAbility); 
                 break;
 
             case Constants.StatusEffectType.Stun:
@@ -166,7 +166,9 @@ public class EffectStatus : Effect {
                 newDot.Initialize(target, duration, interval, statusType, parentAbility, maxStack);
                 newDot.InitializeDamageOverTime(damage, parentAbility.source);
 
-                StatusManager.AddStatus(target.GetComponent<Entity>(), newDot, this, parentAbility); //HERE IS THE TEST LINE
+                StatusManager.AddStatus(target.GetComponent<Entity>(), newDot, this, parentAbility); 
+
+                Debug.Log("Applying " + damage + " over time");
 
                 break;
 

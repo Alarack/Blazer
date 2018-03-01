@@ -102,6 +102,18 @@ public class GameManager : MonoBehaviour {
         return null;
     }
 
+    public static Entity GetPlayer() {
+        int count = allEntities.Count;
+
+        for (int i = 0; i < count; i++) {
+            if (allEntities[i].gameObject.tag == "Player") {
+                return allEntities[i];
+            }
+        }
+
+        return null;
+    }
+
     public static void ReturnToMainMenu() {
         SceneManager.LoadScene(gameManager.mainMenuScene);
     }
