@@ -4,223 +4,119 @@ using UnityEngine;
 
 public class Ladder : MonoBehaviour {
 
-    public float ladderLength;
+    public GameObject ladderTopObj;
+    public GameObject ladderBotObj;
+
+    public float ladderTop;
+    public float ladderBot;
 
     private List<Climber> myClimbers = new List<Climber>();
 
-
-
     public class Climber
-
     {
-
         public GameObject climbObject;
+        public Vector2 climberPoint;
 
-        public float climberLocation;
-
-
-
-        public Climber(GameObject climbObject, float climberLocation)
-
+        public Climber(GameObject climbObject, Vector2 climberPoint)
         {
-
             this.climbObject = climbObject;
-
-            this.climberLocation = climberLocation;
-
+            this.climberPoint = climberPoint;
         }
-
     }
-
-
-
     private void Start()
-
     {
-
-
-
+        ladderBot = ladderBotObj.transform.position.y;
+        ladderTop = ladderTopObj.transform.position.y;
     }
-
-
-
-
-
     private void FixedUpdate()
-
     {
-
-        //Debug.Log(myClimbers.Count + " is the number of current climbers");
-
-        //Debug.Log(Vector2.Distance(transform.position, climber.transform.position));
-
-        foreach (Climber climber in myClimbers)
-
-        {
-
-            //Debug.Log(climber.climbObject.name + " " + climber.climberLocation);
-
-        }
-
     }
-
-
-
     public void GrabLadder(GameObject attemptedToGrab)
-
     {
-
-        Climber tempClimb = new Climber(attemptedToGrab, TransformToLadderLocation(attemptedToGrab));
-
+        Debug.Log("Grabbed Ladder" + attemptedToGrab.GetComponent<Rigidbody2D>().velocity);
+        attemptedToGrab.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        Climber tempClimb = new Climber(attemptedToGrab, attemptedToGrab.GetComponent<EntityMovement>().climbPoint.position);
         //Debug.Log(attemptedToGrab + "attempted to grab ladder");
-
         myClimbers.Add(tempClimb);
-
-        attemptedToGrab.GetComponent<AttemptToClimb>().myClimber = tempClimb;
-
+        attemptedToGrab.GetComponent<Rigidbody2D>().gravityScale = 0;
+        attemptedToGrab.GetComponent<EntityMovement>().myClimber = tempClimb;
+        attemptedToGrab.GetComponent<EntityMovement>().isClimbing = true;
     }
 
 
-
-    public void Climb(Climber myClimber, GameObject me)
-
+    public void ClimbUp(Climber myClimber)
     {
-
-        if (TransformToLadderLocation(me) <= ladderLength && TransformToLadderLocation(me) >= 0)
-
+        //Debug.Log(myClimber.climberPoint.y + " " + ladderBotEnd.position.y + " " + ladderTopEnd.position.y);
+        if (myClimber.climberPoint.y <= ladderTop && myClimber.climberPoint.y >= ladderBot)
         {
-
-            myClimber.climberLocation = TransformToLadderLocation(me);
-
+            myClimber.climbObject.GetComponent<Rigidbody2D>().position = new Vector2(transform.position.x, myClimber.climbObject.transform.position.y);
         }
-
-        else if (TransformToLadderLocation(me) > ladderLength)
-
+        else if (myClimber.climberPoint.y > ladderTop)
         {
-
-            LetGoLadder();
-
+            LetGoLadder(myClimber.climbObject);
         }
-
-        else if (TransformToLadderLocation(me) < 0)
-
+        myClimber.climberPoint = myClimber.climbObject.GetComponent<EntityMovement>().climbPoint.position;
+    }
+    public void ClimbDown(Climber myClimber)
+    {
+        //Debug.Log(myClimber.climberPoint.y + " " + ladderBotEnd.position.y + " " + ladderTopEnd.position.y);
+        if (myClimber.climberPoint.y <= ladderTop && myClimber.climberPoint.y >= ladderBot)
         {
-
-            LetGoLadder();
-
+            //myClimber.climbObject.GetComponent<Rigidbody2D>().position = new Vector2(transform.position.x, myClimber.climbObject.transform.position.y);
         }
-
-        //Debug.Log(climbObject + "should be climbing");
-
+        else if (myClimber.climberPoint.y < ladderBot)
+        {
+            LetGoLadder(myClimber.climbObject);
+        }
+        myClimber.climberPoint = myClimber.climbObject.GetComponent<EntityMovement>().climbPoint.position;
+    }
+    public void ClimbHold(Climber myClimber)
+    {
+        myClimber.climbObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        myClimber.climberPoint = myClimber.climbObject.GetComponent<EntityMovement>().climbPoint.position;
     }
 
 
-
-    public float TransformToLadderLocation(GameObject climbObject)
-
+    private void OnTriggerEnter2D(Collider2D other)
     {
-
-        float transformLocation = Vector2.Distance(climbObject.transform.localPosition, transform.position);
-
-        float ladderLocation = 0;
-
-
-
-        //Debug.Log(climbObject + "" + transformLocation);
-
-        if (transformLocation != 0)
-
+        if(other.gameObject.GetComponent<EntityMovement>() != null && other.gameObject.GetComponent<EntityMovement>().climbPoss)
         {
-
-            if (Mathf.Min(climbObject.transform.position.y, transform.position.y) == climbObject.transform.position.y)
-
+            if (other.gameObject.transform.position.y < ladderTop && other.gameObject.transform.position.y >= ladderBot)
             {
-
-                ladderLocation = (ladderLength / 2f) - transformLocation;
-
-                //Debug.Log(ladderLocation);
-
+                other.gameObject.GetComponent<EntityMovement>().myLadder = this;
+                other.gameObject.GetComponent<EntityMovement>().canClimb = true;
             }
-
-            else if (Mathf.Min(climbObject.transform.position.y, transform.position.y) == transform.position.y)
-
-            {
-
-                ladderLocation = transformLocation + (ladderLength / 2f);
-
-                //Debug.Log(ladderLocation);
-
-
-
-            }
-
         }
-
-        else
-
-        {
-
-            ladderLocation = (ladderLength / 2f);
-
-            //Debug.Log(ladderLocation);
-
-        }
-
-
-
-        return ladderLocation;
-
     }
-
-
-
-    //private void OnTriggerStay2D(Collider2D other)
-
-    //{
-
-    //    if (validUserTags.Contains(other.gameObject.tag))
-
-    //    {
-
-    //        other.gameObject.GetComponent<EntityMovement>().canClimb = true;
-
-    //        other.gameObject.GetComponent<EntityMovement>().currentLadder = this.gameObject;
-
-    //    }
-
-    //}
-
-
-
-    //private void OnTriggerExit2D(Collider2D other)
-
-    //{
-
-    //    if (validUserTags.Contains(other.gameObject.tag))
-
-    //    {
-
-    //        other.gameObject.GetComponent<EntityMovement>().ClimbEnd();
-
-    //        other.gameObject.GetComponent<EntityMovement>().canClimb = false;
-
-    //        other.gameObject.GetComponent<EntityMovement>().currentLadder = null;
-
-    //        other.gameObject.GetComponent<EntityMovement>().ClimbEnd();
-
-    //    }
-
-    //}
-
-
-
-    public void LetGoLadder()
-
+    private void OnTriggerStay2D(Collider2D other)
     {
+        if (other.gameObject.GetComponent<EntityMovement>() != null)
+        {
+            if (other.gameObject.GetComponent<EntityMovement>().climbPoss)
+            {
+                other.gameObject.GetComponent<EntityMovement>().myLadder = this;
+                other.gameObject.GetComponent<EntityMovement>().canClimb = true;
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.GetComponent<EntityMovement>() != null)
+        {
+            if(other.gameObject.GetComponent<EntityMovement>().isClimbing == true)
+            {
+                LetGoLadder(other.gameObject);
+            }
+            other.gameObject.GetComponent<EntityMovement>().myLadder = null;
+            other.gameObject.GetComponent<EntityMovement>().canClimb = false;
 
+        }
+    }
+    public void LetGoLadder(GameObject attemptedToLetGo)
+    {
+        attemptedToLetGo.GetComponent<EntityMovement>().isClimbing = false;
+        attemptedToLetGo.GetComponent<Rigidbody2D>().gravityScale = 1f;
+        attemptedToLetGo.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         Debug.Log("A climber has let go of ladder");
-
     }
-
 }
-

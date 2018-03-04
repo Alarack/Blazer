@@ -22,18 +22,70 @@ public class PlayerController : EntityMovement {
 
 
     private void Update() {
-        currentSpeed = Input.GetAxisRaw("Horizontal") * maxSpeed;
+        if (!isClimbing)
+        {
+            currentSpeed = Input.GetAxisRaw("Horizontal") * maxSpeed;
+            if (currentSpeed != 0f && !owner.MyAnimator.GetBool("Walking"))
+            {
+                owner.MyAnimator.SetBool("Walking", true);
+            }
+            else if (currentSpeed == 0f && owner.MyAnimator.GetBool("Walking"))
+            {
+                owner.MyAnimator.SetBool("Walking", false);
+            }
 
-        if (currentSpeed != 0f && !owner.MyAnimator.GetBool("Walking")) {
-            owner.MyAnimator.SetBool("Walking", true);
+            if (Platformed && Input.GetAxisRaw("Vertical") < 0)
+            {
+                isFallingThrough = true;
+            }
+            if (canClimb && Input.GetAxisRaw("Vertical") > 0 && climbPoint.position.y <= (myLadder.ladderTop - 0.01f))
+            {
+                myLadder.GrabLadder(gameObject);
+            }
+            if (canClimb && Input.GetAxisRaw("Vertical") < 0 && climbPoint.position.y >= (myLadder.ladderBot + 0.01f))
+            {
+                myLadder.GrabLadder(gameObject);
+            }
         }
-        else if (currentSpeed == 0f && owner.MyAnimator.GetBool("Walking")) {
-            owner.MyAnimator.SetBool("Walking", false);
+        if (isClimbing)
+        {
+            if (Input.GetAxisRaw("Vertical") > 0)
+            {
+                if (climbPoint.position.y > (myLadder.ladderTop - 0.01f))
+                {
+                    myLadder.LetGoLadder(gameObject);
+                }
+                else
+                {
+                    Debug.Log("Climbing Up");
+                    myLadder.ClimbUp(myClimber);
+                    myBody.position = new Vector2(myLadder.transform.position.x, myBody.position.y);
+                    myBody.velocity = new Vector2(0f, ascendSpeed);
+                }
+            }
+            if (Input.GetAxisRaw("Vertical") < 0)
+            {
+                if (climbPoint.position.y < (myLadder.ladderBot + 0.01f))
+                {
+                    myLadder.LetGoLadder(gameObject);
+                }
+                else
+                {
+                    Debug.Log("Climbing Down");
+                    myLadder.ClimbDown(myClimber);
+                    myBody.position = new Vector2(myLadder.transform.position.x, myBody.position.y);
+                    myBody.velocity = new Vector2(0f, -descendSpeed);
+                }
+            }
+            if (Input.GetAxisRaw("Vertical") == 0)
+            {
+                //Debug.Log("Clinging On");
+                myLadder.ClimbHold(myClimber);
+                myBody.position = new Vector2(myLadder.transform.position.x, myBody.position.y);
+                myBody.velocity = Vector2.zero;
+            }
         }
 
-        if (Platformed && Input.GetAxisRaw("Vertical") < 0) {
-            isFallingThrough = true;
-        }
 
         CheckFacing();
         TryJump();
@@ -61,8 +113,15 @@ public class PlayerController : EntityMovement {
 
 
     private void TryJump() {
-        if (Input.GetButtonDown("Jump") && (Grounded || Platformed)) {
-            owner.MyAnimator.SetTrigger("Jumping");
+        if (Input.GetButtonDown("Jump") && (Grounded || Platformed || isClimbing)) {
+            if (isClimbing)
+            {
+                myLadder.LetGoLadder(gameObject);
+            }
+            if (Grounded || Platformed)
+            {
+                owner.MyAnimator.SetTrigger("Jumping");
+            }
             isJumping = true;
         }
     }
@@ -72,7 +131,6 @@ public class PlayerController : EntityMovement {
             myBody.AddForce(Vector2.up * jumpForce);
             isJumping = false;
         }
-
     }
 
     private void DisableFallthrough() {
