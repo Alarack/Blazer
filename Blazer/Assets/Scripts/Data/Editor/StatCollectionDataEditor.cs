@@ -45,7 +45,10 @@ public class StatCollectionDataEditor : Editor {
 
             case Constants.BaseStatType.BaseDamage:
                entry.maxValue = EditorGUILayout.FloatField("Base Damage", entry.maxValue) * -1;
+                break;
 
+            case Constants.BaseStatType.DamageReduction:
+                entry.maxValue = EditorHelper.PercentFloatField("Damage Reduction", entry.maxValue);
                 break;
 
             default:

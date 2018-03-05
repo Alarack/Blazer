@@ -28,13 +28,17 @@ public class Entity : MonoBehaviour {
     protected EntityMovement movement;
     protected HealthDeathManager healthDeathManager;
 
+    private void Awake() {
+        Initialize();
+    }
 
     void Start() {
-        Initialize();
+
     }
 
     public void Initialize() {
         SessionID = IDFactory.GenerateEntityID();
+        GameManager.RegisterEntity(this);
 
         stats = new StatCollection();
         stats.Initialize(statTemplate);
@@ -65,7 +69,7 @@ public class Entity : MonoBehaviour {
         }
 
 
-        GameManager.RegisterEntity(this);
+        
     }
 
     public void UnregisterListeners() {
