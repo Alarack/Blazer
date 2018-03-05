@@ -21,6 +21,25 @@ public abstract class EntityMovement : BaseMovement {
     public bool useSpritePivotHack;
     protected Vector2 spriteOffset;
 
+    [HideInInspector]
+    /*--climbPoss is whether an entity has the ability to climb overall
+     * canClimb is whether an entity that can climb can climb at that moment
+     * isClimbing is for determining whether an entity is already climbing something--*/
+    public bool climbPoss = true;
+    public bool canClimb;
+
+    public float ascendSpeed;
+    public float descendSpeed;
+
+    [HideInInspector]
+    public bool isClimbing = false;
+    [HideInInspector]
+    public Ladder.Climber myClimber;
+
+    public Transform climbPoint;
+
+    public Ladder myLadder;
+
     protected Entity owner;
 
 
