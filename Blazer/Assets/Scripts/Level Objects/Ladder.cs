@@ -49,7 +49,7 @@ public class Ladder : MonoBehaviour {
         //Debug.Log(myClimber.climberPoint.y + " " + ladderBotEnd.position.y + " " + ladderTopEnd.position.y);
         if (myClimber.climberPoint.y <= ladderTop && myClimber.climberPoint.y >= ladderBot)
         {
-            myClimber.climbObject.GetComponent<Rigidbody2D>().position = new Vector2(transform.position.x, myClimber.climbObject.transform.position.y);
+            myClimber.climbObject.transform.position = new Vector2(transform.position.x, myClimber.climbObject.transform.position.y);
         }
         else if (myClimber.climberPoint.y > ladderTop)
         {
